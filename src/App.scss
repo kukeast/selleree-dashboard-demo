@@ -1,0 +1,440 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+
+$white : #FFFFFF;
+$black : #222222;
+
+$gray1 : #F7F7FA;
+$gray2 : #EBEBF0;
+$gray3 : #DFDFE5;
+$gray4 : #C1C1C9;
+$gray5 : #85858C;
+$gray6 : #535358;
+
+$main2 : #E8E8FF;
+$main3: #D9D9FF;
+$main6 : #2C29BC;
+$main : #403DD5;
+
+
+
+*{
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+p{
+    padding: 0;
+    margin: 0;
+}
+
+.ContainerWrapper{
+    background-color: $white;
+    min-width: 1140px;
+    .Container{
+        width: 1140px;
+        padding: 0 40px;
+        box-sizing: border-box;
+        margin-left: auto;
+        margin-right: auto; 
+    }
+    &.setting-date > div{
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-between;
+    }
+    &.mt20{
+        margin-top: 20px;
+    }
+    &.bottom-line{
+        border-bottom: 1px solid $gray2;
+    }
+    &:last-child{
+        margin-bottom: 80px;
+    }
+}
+
+.Tab{
+    padding: 12px 0;
+    display: inline-flex;
+
+    color: $gray5;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+
+    &.selected{
+        padding: 12px 0 10px;
+        border-bottom: 2px solid $main;
+        color: $main;
+        font-weight: 800;
+        &:hover{
+            color: $main;
+        }
+    }
+    &:hover{
+        color: $black;
+    }
+    & + & {
+        margin-left: 30px;
+    }
+}
+
+.Header{
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    margin: 36px 0 16px;
+
+    h1{
+        font-size: 20px;
+        color: $black;
+        margin: 0;
+        line-height: 22px;
+    }
+    p{
+        font-size: 12px;
+        font-weight: 800;
+        line-height: 16px;
+        color: $gray4;
+    }
+}
+
+.Dim{
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    &.hide{
+        display: none;
+    }
+}
+.DatePickerWrapper{
+    display: inline-block;
+    position: relative;
+    z-index: 999;
+    .DatePicker{
+        position: absolute;
+        left: 0;
+        top: 50px;
+        display: inline-flex;
+        flex-flow: column;
+        border-radius: 16px;
+        background-color: $white;
+        box-shadow: 0px 4px 24px 0px rgba(34, 34, 34, 0.1);
+        .Button{
+            margin: 0 12px 12px;
+        }
+        &.hide{
+            display: none;
+        }
+    }
+}
+
+
+.Button{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 14px;
+    color: $black;
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+
+    background-color: $gray1;
+    
+    & + & {
+        margin-left: 2px;
+    }
+
+    &:hover{
+        background-color: $gray2;
+    }
+
+    &.primary{
+        background-color: $main;
+        color: $white;
+        font-weight: 800;
+        &:hover{
+            background-color: $main6;
+        }
+    }
+    &.selected{
+        background-color: $main2;
+        color: $main;
+        &:hover{
+            background-color: $main3;
+        }
+    }
+}
+.ButtonGroup{
+    display: inline-block;
+    .Button:first-child{
+        border-radius: 8px 0 0 8px;
+    }
+    .Button{
+        border-radius: 0;
+    }
+    .Button:last-child{
+        border-radius: 0 8px 8px 0;
+    }
+}
+
+.Chart{
+    z-index: 99;
+    height: 480px;
+    border-radius: 8px;
+    border: 1px solid $gray2;
+}
+.Cell{
+    font-size: 14px;
+    color: $black;
+    text-align: center;
+    width: 100%;
+    min-width: 80px;
+    padding: 18px 16px;
+    border-bottom: 1px solid $gray1;
+
+    cursor: pointer;
+    box-sizing: border-box;
+
+    &:hover{
+        background-color: $gray1;
+        border-color: $black;
+    }
+    &.selected{
+        background-color: $main2;
+        color: $main;
+        border-color: $main;
+        &:hover{
+            background-color: $main3;
+        }
+    }
+}
+.Table{
+    &.fit{
+        .TableBodyWrapper .TableBody{
+            width: 100%;
+            display: grid;
+        }
+        .shadow{
+            display: none;
+        }
+    }
+    position: relative;
+    display: flex;
+    .TableTitle{
+        display: flex;
+        flex-direction: column;
+        width: 100px;
+        flex-shrink: 0;
+        .Cell{
+            width: 100px;
+            font-weight: 500;
+            color: $black;
+            cursor: default;
+            text-align: center;
+            &:hover{
+                background-color: $white;
+                border-color: $gray1;
+            }
+            &:first-child{
+                background-color: $gray1;
+                border-radius: 8px 0 0 8px;
+                height: 48px;
+                padding: 16px 8px;
+                &:hover{
+                    border-color: $gray1;
+                }   
+            }
+        }
+    }
+    .TableBodyWrapper{
+        display: flex;
+        width: 960px;
+        overflow-x: auto;
+        .TableBody{
+            display: flex;
+            .Column:last-child{
+                .Cell:first-child{
+                    border-radius: 0 8px 8px 0;
+                }
+            }
+            .Cell:first-child{
+                background-color: $gray1;
+                font-size: 12px;
+                font-weight: 800;
+                color: $gray6;
+                padding: 16px 8px;
+                cursor: default;
+                &:hover{
+                border-color: $gray1;
+                }   
+            }
+        }
+    }
+    .shadow{
+        position: absolute;
+        top: 0;
+        width: 10px;
+        height: 100%;
+        &.hide{
+            opacity: 0;
+        }
+        &.left{
+            left: 100px;
+            background: linear-gradient(90deg, rgba(32, 32, 32, 0.05) 0%, rgba(32,32,32, 0) 100%);
+        }
+        &.right{
+            right: 0;
+            background: linear-gradient(90deg, rgba(32,32,32, 0) 0%, rgba(32, 32, 32, 0.05) 100%);
+        }
+    }
+}
+.Products{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px 20px;
+}
+.updateTime{
+    margin: 30px 0 0;
+    text-align: center;
+    color: $gray5;
+}
+.Product{
+    transition: 0.2s;
+    &:hover{
+        transform: translateY(-10px);
+    }
+    .image{
+        width: 100%;
+        padding-top: 100%;
+        background-color: $gray2;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 8px;
+    }
+    .storeName{
+        font-size: 12px;
+        font-weight: bold;
+        color: $main;
+        margin-top: 10px;
+    }
+    .itemName, .price{
+        font-size: 16px;
+        color: $black;
+        margin-top: 6px;
+    }
+    .price{
+        margin-top: 4px;
+    }
+    .tags{
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+        p{
+            display: inline-block;
+            padding: 4px 6px;
+            font-size: 14px;
+            border-radius: 8px;
+        }
+        .imageCount{
+            background-color: rgba(66, 133, 244, 0.1);
+            color: #4285F4;
+        }
+        .private{
+            background-color: $gray1;
+            color: $gray6;
+        }
+        .delete{
+            background-color: rgba(246, 30, 82, 0.1);
+            color: #F61E52;
+        }
+    }
+}
+
+.Shopggus{
+    display: flex;  
+    flex-direction: column;
+    vertical-align: top;
+    gap: 16px;
+    .Shopggu{
+        &:hover{
+            transform: translateY(-10px);
+        }
+        transition: 0.2s;
+        background-color: $white;
+        box-shadow: 0px 4px 24px 0px #22222210;
+        border-radius: 8px;
+        padding: 20px;
+        & > div{
+            display: flex;
+            justify-content: space-between;
+            .order{
+                font-size: 15px;
+                color: $gray6;
+            }
+            .date{
+                font-size: 13px;
+                color: $gray5;
+            }
+        }
+        .store{
+            font-size: 20px;
+            font-weight: bold;
+            color: $main;
+            margin-top: 6px;
+        }
+    }
+}
+.dashboard{
+    h2{
+        margin: 20px 0;
+        font-size: 20px;
+    }
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+    gap: 30px;
+}
+
+
+.apexcharts-canvas{
+    margin: 20px auto;
+}
+
+.apexcharts-tooltip {
+    background: $white;
+    color: $black;
+    padding: 14px 16px;
+    border-radius : 8px !important;
+    box-shadow: 0px 4px 24px 0px rgba(34, 34, 34, 0.1) !important;
+    border: 0 !important;
+    .apexcharts-tooltip-series-group{
+        padding: 0;
+        .apexcharts-tooltip-y-group{
+            padding: 0;
+        }
+    }
+    .apexcharts-tooltip-series-group.apexcharts-active{
+        padding: 0;
+    }
+    .apexcharts-tooltip-series-group:nth-child(2){
+        padding: 6px 0 0 0;
+    }
+    .apexcharts-tooltip-marker{
+        width: 8px;
+        height: 8px;
+    }
+}
+.apexcharts-legend-marker{
+    margin-right: 12px !important;
+}
+.apexcharts-legend-series{
+    margin: 0px 12px !important;
+}

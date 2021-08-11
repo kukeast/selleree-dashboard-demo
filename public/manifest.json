@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "셀러리 통계",
+  "name": "셀러리 통계: 동국이의 두번째 작업",
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,8 +18,5 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "start_url": "."
 }
