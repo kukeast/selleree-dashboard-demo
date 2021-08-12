@@ -9,7 +9,7 @@ import * as dateFns from "date-fns";
 import NewChart from '../component/data-display/NewChart';
 
 async function getTable(dateRange) {
-  const response = await axios.post('http://172.16.72.154:8080/table/seller', {
+  const response = await axios.post('http://localhost:8080/table/seller', {
     startDate: dateFns.format(dateRange.startDate, 'yyyy.M.d'),
     endDate: dateFns.format(dateRange.endDate, 'yyyy.M.d'),
   });
@@ -17,7 +17,7 @@ async function getTable(dateRange) {
 }
 
 async function getChart(dateRange, dateCycle, segmentAndEvent) {
-  const response = await axios.post('http://172.16.72.154:8080/chart/seller', {
+  const response = await axios.post('http://localhost:8080/chart/seller', {
     startDate: dateFns.format(dateRange.startDate, 'yyyy.M.d'),
     endDate: dateFns.format(dateRange.endDate, 'yyyy.M.d'),
     cycle : dateCycle,
