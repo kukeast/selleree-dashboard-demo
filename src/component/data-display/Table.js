@@ -2,26 +2,22 @@ import React, { useEffect, useRef, useState } from 'react'
 import classNames from 'classnames'
 import Column from './Column'
 
-function Table ({titles, dataSet, type, callback}) {
+function Table ({titles, dataSet, type, refresh, callback}) {
     //count select cells
-    const [selectCell , setSelectCell] = useState(0)
-    // const changeSelected = (id) => {
-    //     if(!selectCell.includes(id) && selectCell.length < 5){
-    //         setSelectCell(selectCell.concat(id))
-    //     }else if(selectCell.includes(id) && selectCell.length > 1){
-    //         setSelectCell(selectCell.filter(num => num !== id))
-    //     }
-    // }
+    const [selectCell , setSelectCell] = useState([0])
     const changeSelected = (id) => {
-        if(selectCell !== id){
-            setSelectCell(id)  
+        if(!selectCell.includes(id) && selectCell.length < 5){
+            setSelectCell(selectCell.concat(id))
+            callback(id)
+        }else if(selectCell.includes(id) && selectCell.length > 1){
+            setSelectCell(selectCell.filter(num => num !== id))
+            callback(id)
         }
     }
     
     useEffect(() => {
-        callback(selectCell)
-        // eslint-disable-next-line
-    }, [selectCell])
+        setSelectCell([0])
+    }, [refresh])
 
     //scroll action
     const scrollElem = useRef()

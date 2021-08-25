@@ -30,6 +30,11 @@ p{
     margin: 0;
 }
 
+button{
+    appearance: none;
+    border: none;
+}
+
 .ContainerWrapper{
     background-color: $white;
     min-width: 1140px;
@@ -169,6 +174,14 @@ p{
         color: $main;
         &:hover{
             background-color: $main3;
+        }
+    }
+    &:disabled{
+        color: $gray4;
+        opacity: 0.5;
+        cursor: initial;
+        &:hover{
+            background-color: $gray1;
         }
     }
 }
@@ -421,11 +434,10 @@ p{
             padding: 0;
         }
     }
-    .apexcharts-tooltip-series-group.apexcharts-active{
-        padding: 0;
-    }
-    .apexcharts-tooltip-series-group:nth-child(2){
-        padding: 6px 0 0 0;
+    
+    .apexcharts-tooltip-series-group{
+        margin: 4px 0;
+        padding: 0 !important;
     }
     .apexcharts-tooltip-marker{
         width: 8px;

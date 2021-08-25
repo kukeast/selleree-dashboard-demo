@@ -15,7 +15,7 @@ function Column ({data, header, onClick, selectCell, id}) {
                     key={index} 
                     id={(id * 10) + index}
                     onClick={onClick}
-                    className={classNames('Cell', { selected : selectCell === ((id * 10) + index)})}
+                    className={classNames('Cell', { selected : selectCell.includes((id * 10) + index)})}
                 />
             ))}
         </div>

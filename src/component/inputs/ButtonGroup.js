@@ -22,6 +22,7 @@ function ButtonGroup ({buttons, callback}) {
                         button={button} 
                         key={button.id}
                         currentButton={currentButton}
+                        disabled={button.disabled}
                         onClick={changeSelected}
                     />)
                 )

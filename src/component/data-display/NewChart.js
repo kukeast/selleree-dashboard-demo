@@ -1,10 +1,9 @@
 import React from "react";
 import Chart from "react-apexcharts";
 
-function NewChart ({data}) {
-    const categories = data.categories
-    const chartData = data.data
-    
+function NewChart ({data, categories}) {
+    const chartCategories = categories
+    const chartData = data
     const state = {
         options: {
             colors : ['#403DD5','#F61E52', '#13CA72', '#FFC32A', '#1D85FF'],
@@ -47,7 +46,7 @@ function NewChart ({data}) {
         series: []
     };
     state.series = chartData
-    state.options.xaxis.categories = categories
+    state.options.xaxis.categories = chartCategories
 
     return (
         <div className="Chart">

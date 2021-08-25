@@ -4,7 +4,7 @@ import '../../App.scss'
 
 function Button ({button, onClick, currentButton}) {
     return(
-        <div 
+        <button 
             className={classNames(
                 "Button", 
                 button.type, 
@@ -15,10 +15,11 @@ function Button ({button, onClick, currentButton}) {
                     ? onClick(button.id) 
                     : undefined 
                 }
+            disabled={button.disabled}
         >
             {button.withIcon && <img src={button.iconSrc} alt="button"/> }
             {button.title}
-        </div>
+        </button>
     )
 }
 Button.defaultProps = {

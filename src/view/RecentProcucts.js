@@ -8,12 +8,12 @@ import Products from '../component/data-display/Products';
 import Shopggus from '../component/data-display/Shopggus';
 
 async function getProduct() {
-    const response = await axios.get('http://localhost:8080/products');
+    const response = await axios.get('http://172.16.72.154:8080/products');
     return response.data;
 }
 
 async function getShopggu() {
-    const response = await axios.get('http://localhost:8080/shopggus');
+    const response = await axios.get('http://172.16.72.154:8080/shopggus');
     return response.data;
 }
 
