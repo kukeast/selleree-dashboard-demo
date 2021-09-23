@@ -12,14 +12,16 @@ function DatePicker ({callback}) {
     //submit date range
     const [submitDate, setSubmitDate] = useState([
         {
-            startDate: new Date('2021.7.1'),
+            // startDate: new Date('2021.8.1'),
+            startDate: new Date().setDate(new Date().getDate() - 13),
             endDate: new Date()
         }
     ]);
     //library date range
     const [date, setDate] = useState([
         {
-            startDate: new Date('2021.7.1'),
+            //startDate: new Date('2021.8.1'),
+            startDate: new Date().setDate(new Date().getDate() - 13),
             endDate: new Date(),
             key: 'selection'
         }
