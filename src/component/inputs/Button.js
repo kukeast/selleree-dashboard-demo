@@ -1,31 +1,31 @@
 import React from 'react'
-import classNames from 'classnames'
-import '../../App.scss'
+import styled from 'styled-components';
+import { COLOR } from '../../constants/color';
 
-function Button ({button, onClick, currentButton}) {
+const Wrapper = styled.button`
+    font-size: 14px;
+    color: ${COLOR.black};
+    background-color: ${COLOR.gray1};
+
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+
+    :hover{
+        background-color: ${COLOR.gray2};
+    }
+    :active{
+        background-color: ${COLOR.gray1};
+    }
+`
+
+function Button ({ onClick, children}) {
     return(
-        <button 
-            className={classNames(
-                "Button", 
-                button.type, 
-                {"selected" : currentButton === button.id}
-            )}
-            onClick={() => 
-                button.status !== 'selected' 
-                    ? onClick(button.id) 
-                    : undefined 
-                }
-            disabled={button.disabled}
-        >
-            {button.withIcon && <img src={button.iconSrc} alt="button"/> }
-            {button.title}
-        </button>
+        <Wrapper onClick={onClick}>
+            {children}
+        </Wrapper>
     )
 }
-Button.defaultProps = {
-    button : {
-    },
-    onClick : undefined,
-    currentButton : 0
-}
+
 export default Button

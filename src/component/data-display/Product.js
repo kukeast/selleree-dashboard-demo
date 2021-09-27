@@ -58,7 +58,7 @@ const Tags = styled.div`
 
 function Product ({url, storeName, itemName, price, imageCount, visibility, deleted, href}) {
     var backgroundImage = {
-        backgroundImage: "url(" + url + ")"
+        backgroundImage: "url(" + url + "?w=600)"
     };
     return(
         <Wrapper className="Product" href={href} target="_blank" rel="noreferrer">
@@ -75,4 +75,4 @@ function Product ({url, storeName, itemName, price, imageCount, visibility, dele
     )
 }
 
-export default Product
+export default React.memo(Product)

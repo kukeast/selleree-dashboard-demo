@@ -8,7 +8,7 @@ const Wrapper = styled.a`
     }
     transition: 0.2s;
     background-color: ${COLOR.white};
-    box-shadow: 0px 4px 24px 0px #22222210;
+    box-shadow: 0px 4px 24px 0px #22222215;
     border-radius: 8px;
     padding: 20px;
     & > div{

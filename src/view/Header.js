@@ -10,11 +10,11 @@ function Header () {
             title : "대시보드",
             path : "/"
         },
-        // {
-        //     id : 2,
-        //     title : "상품",
-        //     path : "/product"
-        // },
+        {
+            id : 2,
+            title : "상품",
+            path : "/product"
+        },
         // {
         //     id : 3,
         //     title : "셀러 & 상점 통계",

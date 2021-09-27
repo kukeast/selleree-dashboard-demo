@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import useAsync from '../hooks/useAsync';
 import Container from '../component/layout/Container';
-import DatePicker from '../component/inputs/DatePicker';
-import ButtonGroup from '../component/inputs/ButtonGroup';
-import Table from '../component/data-display/Table';
+import DatePicker from '../component/not-used/DatePicker';
+import ButtonGroup from '../component/not-used/ButtonGroup';
+import Table from '../component/not-used/Table';
 import * as dateFns from "date-fns";
-import NewChart from '../component/data-display/NewChart';
+import NewChart from '../component/not-used/NewChart';
 
 async function getTable(dateRange) {
   const response = await axios.post('http://localhost:8080/table/seller', {
