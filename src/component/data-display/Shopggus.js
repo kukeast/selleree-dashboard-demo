@@ -1,20 +1,27 @@
 import React from 'react'
 import Shopggu from './Shopggu'
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+    display: flex;  
+    flex-direction: column;
+    vertical-align: top;
+    gap: 16px;
+`
 
 function Shopggus ({shopggusData}) {
-    
     return(
-        <div className="Shopggus">
-            {shopggusData.map((shopggu, index) => (
+        <Wrapper>
+            {shopggusData.map((shopggu) => (
                 <Shopggu
-                    key={index}
+                    key={shopggu['store-name']+shopggu['order']}
                     href= {"https://" + shopggu["store-name"] + ".selleree.shop/"}
                     storeName={shopggu['store-name']}
                     order={shopggu['order']}
                     date={shopggu['date']}
                 />
             ))}
-        </div>
+        </Wrapper>
     )
 }
 
