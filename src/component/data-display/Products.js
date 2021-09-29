@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios';
-import styled from 'styled-components';
 import useAsync from '../../hooks/useAsync';
+import styled from 'styled-components';
 import Product from './Product'
 import Button from '../inputs/Button';
-
-
-async function getProduct(limit) {
-    const response = await axios.get(`http://localhost:8080/api/products/${limit}`);
-    return response.data;
-}
+import { getProduct } from '../../hooks/api';
 
 const Wrapper = styled.div`
     display: grid;

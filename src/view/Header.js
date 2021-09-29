@@ -15,11 +15,6 @@ function Header () {
             title : "상품",
             path : "/product"
         },
-        // {
-        //     id : 3,
-        //     title : "셀러 & 상점 통계",
-        //     path : "/statistics"
-        // }
     ]
     return(
         <Container className="bottom-line">

@@ -13,4 +13,7 @@ export const COLOR = {
     main3 : '#D9D9FF',
     main6 : '#2C29BC',
     main : '#403DD5',
+    red:  '#F61E52',
+    blue: '#1D85FF',
+
 }

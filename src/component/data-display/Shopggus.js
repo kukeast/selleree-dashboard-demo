@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import axios from 'axios';
 import styled from 'styled-components';
 import useAsync from '../../hooks/useAsync';
 import Shopggu from './Shopggu'
+import { getShopggu } from '../../hooks/api';
 
-async function getShopggu() {
-    const response = await axios.get('http://localhost:8080/api/shopggus');
-    return response.data;
-}
+
 
 const Wrapper = styled.div`
     display: flex;  
