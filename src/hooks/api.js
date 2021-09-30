@@ -10,8 +10,13 @@ export async function getTodayChart(name) {
     return response.data;
 }
 
-export async function getProduct(limit) {
+export async function getProducts(limit) {
     const response = await axios.get(`http://localhost:8080/api/products/${limit}`);
+    return response.data;
+}
+
+export async function getOrders(limit) {
+    const response = await axios.get(`http://localhost:8080/api/orders/${limit}`);
     return response.data;
 }
 

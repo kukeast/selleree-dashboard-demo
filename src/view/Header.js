@@ -13,7 +13,12 @@ function Header () {
         {
             id : 2,
             title : "상품",
-            path : "/product"
+            path : "/products"
+        },
+        {
+            id : 3,
+            title : "주문",
+            path : "/orders"
         },
     ]
     return(

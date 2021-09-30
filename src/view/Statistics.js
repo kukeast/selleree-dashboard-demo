@@ -70,7 +70,9 @@ function Statistics ({repatch}) {
                 result.push(data[index][0].count)
                 if(data[index][1]){
                     result.push(data[index][0].count - data[index][1].count)
-                }   
+                }else{
+                    result.push(data[index][0].count)
+                }
             }else{
                 result.push(0)
                 result.push(-data[index][0].count)

@@ -14,6 +14,9 @@ const Wrapper = styled.div`
     &.mt20{
         margin-top: 20px;
     }
+    &.mt30{
+        margin-top: 30px;
+    }
     &.bottom-line{
         border-bottom: 1px solid ${COLOR.gray2};
     }

@@ -61,11 +61,12 @@ function Product ({url, storeName, itemName, price, imageCount, visibility, dele
         backgroundImage: "url(" + url + "?w=600)"
     };
     return(
-        <Wrapper className="Product" href={href} target="_blank" rel="noreferrer">
+        <Wrapper href={href} target="_blank" rel="noreferrer">
             <Image style={backgroundImage}/>
             <StoreName>{storeName}</StoreName>
             <ItemName>{itemName}</ItemName>
-            <Price>{price.slice(0,-3) + "원"}</Price>
+            <Price>{price.slice(0,-3).toString()
+    .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원"}</Price>
             <Tags>
                 <p className="imageCount"><span>{imageCount}</span>장</p>
                 {visibility === "PRIVATE" && <p className="private">비공개</p>}

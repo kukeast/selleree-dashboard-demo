@@ -3,7 +3,7 @@ import useAsync from '../../hooks/useAsync';
 import styled from 'styled-components';
 import Product from './Product'
 import Button from '../inputs/Button';
-import { getProduct } from '../../hooks/api';
+import { getProducts } from '../../hooks/api';
 
 const Wrapper = styled.div`
     display: grid;
@@ -21,7 +21,7 @@ const ButtonWrapper = styled.div`
 function Products ({column, repatch}) {
     const [limit, setLimit] = useState(20)
     const [productList, setProductList] = useState([])
-    const [products, repatchProducts] = useAsync(() => getProduct(limit),[limit])
+    const [products, repatchProducts] = useAsync(() => getProducts(limit),[limit])
     
     useEffect(() => {
         if(products.data){
