@@ -3,20 +3,20 @@ import styled from 'styled-components';
 import { COLOR } from '../../constants/color';
 
 const Wrapper = styled.button`
-    font-size: 14px;
-    color: ${COLOR.black};
-    background-color: ${COLOR.gray1};
+    font-size: 15px;
+    color: ${COLOR.white};
+    background-color: ${COLOR.main};
 
-    padding: 12px 16px;
-    border-radius: 8px;
+    padding: 16px 16px;
+    border-radius: 12px;
     cursor: pointer;
     transition: 0.3s;
 
     :hover{
-        background-color: ${COLOR.gray2};
+        background-color: ${COLOR.main6};
     }
     :active{
-        background-color: ${COLOR.gray1};
+        background-color: ${COLOR.main};
     }
 `
 

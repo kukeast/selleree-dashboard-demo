@@ -1,6 +1,36 @@
 import React from 'react'
+import { parseISO, format }from "date-fns";
 import styled from 'styled-components'
 import { COLOR } from '../../constants/color'
+
+const FinancialStatus ={
+    WAITING : {
+        color: COLOR.yellow,
+        text: '결제 대기'
+    },
+    COMPLETE : {
+        color: COLOR.blue,
+        text: '결제 완료'
+    },
+    CANCELED : {
+        color: COLOR.gray4,
+        text: '주문 취소'
+    }
+}
+const FulfillmentStatus ={
+    WAITING : {
+        color: COLOR.yellow,
+        text: '배송 대기'
+    },
+    COMPLETE : {
+        color: COLOR.green,
+        text: '배송 완료'
+    },
+    WILL_NOT : {
+        color: COLOR.gray4,
+        text: '배송 안 함'
+    }
+}
 
 const Wrapper = styled.a`
     display: flex;
@@ -12,7 +42,7 @@ const Wrapper = styled.a`
     background-color: ${COLOR.white};
     border-bottom: 1px solid ${COLOR.gray1};
     padding: 20px 16px;
-    font-size: 16px;
+    font-size: 15px;
     color: ${COLOR.black};
     align-items: center;
 `
@@ -24,20 +54,30 @@ const Image = styled.div`
     background-color: ${COLOR.gray2};
     margin-right: 16px;
 `
-const Default = styled.div`
-    flex: 1;
-    text-align: center;
+const CreatedAt = styled.div`
+    flex: 1.5;
 `
 const Price = styled.div`
     flex: 1;
     text-align: right;
-    color: ${COLOR.main};
 `
 const Title = styled.div`
     flex: 4;
 `
 const Name = styled.div`
     flex: 1;
+`
+const Financial = styled.div`
+    text-align: right;
+    flex: 1;
+    font-weight: bold;
+    color: ${props => FinancialStatus[props.status].color};
+`
+const Fulfillment = styled.div`
+    text-align: right;
+    flex: 1;
+    font-weight: bold;
+    color: ${props => FulfillmentStatus[props.status].color};
 `
 
 function Order ({order}) {
@@ -51,13 +91,13 @@ function Order ({order}) {
     };
     return(
         <Wrapper href={"https://" + order.identifier + ".selleree.shop/"} target="_blank" rel="noreferrer">
+            <CreatedAt>{format(parseISO(order.created_at), 'H시 m분 s초')}</CreatedAt>
             <Image style={backgroundImage}/>
             <Title>{order.title}</Title>
             <Name>{order.name}</Name>
-            <Default>{order.quantity}</Default>
-            <Default>{order.buyer_name}</Default>
-            <Default>{order.bank_account_holder}</Default>
             <Price>{totalPrice}원</Price>
+            <Financial status={order.financial_status}>{FinancialStatus[order.financial_status].text}</Financial>
+            <Fulfillment status={order.fulfillment_status}>{FulfillmentStatus[order.fulfillment_status].text}</Fulfillment>
         </Wrapper>
     )
 }

@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const url = window.location.hostname
+// const url = "localhost"
 
 export async function getToday() {
     const response = await axios.get(`http://${url}:8080/api/today`);

@@ -9,9 +9,12 @@ const Wrapper = styled.div`
     color: ${COLOR.gray5};
     align-items: center;
 `
-const Default = styled.div`
-    flex: 1;
-    text-align: center;
+const Image = styled.div`
+    width: 60px;
+    margin-right: 16px;
+`
+const CreatedAt = styled.div`
+    flex: 1.5;
 `
 const Price = styled.div`
     flex: 1;
@@ -20,24 +23,28 @@ const Price = styled.div`
 const Title = styled.div`
     flex: 4;
 `
-const Image = styled.div`
-    width: 60px;
-    margin-right: 16px;
-`
 const Name = styled.div`
+    flex: 1;
+`
+const Financial = styled.div`
+    text-align: right;
+    flex: 1;
+`
+const Fulfillment = styled.div`
+    text-align: right;
     flex: 1;
 `
 
 function OrdersHeader () {
     return(
         <Wrapper>
+            <CreatedAt>주문 시간</CreatedAt>
             <Image>상품</Image>
             <Title></Title>
             <Name>상점 이름</Name>
-            <Default>수량</Default>
-            <Default>주문자</Default>
-            <Default>예금주</Default>
             <Price>결제 금액</Price>
+            <Financial>결제 상태</Financial>
+            <Fulfillment>배송 상태</Fulfillment>
         </Wrapper>
     )
 }
