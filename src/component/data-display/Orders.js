@@ -7,13 +7,17 @@ import { getOrders } from '../../hooks/api';
 import Order from './Order';
 import OrdersHeader from './OrdersHeader';
 import { COLOR } from '../../constants/color';
+import TextButton from '../inputs/TextButton';
 
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
 `
+const SortWrapper = styled.div`
+    text-align: center;
+`
 const ButtonWrapper = styled.div`
-    margin-top: 30px;
+    margin-top: 20px;
     text-align: center;
     *{
         width: 100%;
@@ -22,16 +26,17 @@ const ButtonWrapper = styled.div`
 const DateWrapper = styled.div`
     padding: 8px;
     font-size: 14px;
-    color: ${COLOR.gray6};
+    color: ${COLOR.gray5};
     text-align: center;
-    background-color: ${COLOR.gray2};
+    background-color: ${COLOR.gray1};
     border-radius: 8px;
 `
 
 function Orders () {
     const [limit, setLimit] = useState(10)
+    const [sortBy, setSortBy] = useState("created_at")
     const [orderList, setOrderList] = useState([])
-    const [orders] = useAsync(() => getOrders(limit),[limit])
+    const [orders] = useAsync(() => getOrders(limit, sortBy),[limit, sortBy])
     
     useEffect(() => {
         if(orders.data){
@@ -41,18 +46,24 @@ function Orders () {
 
     return(
         <>
-            <OrdersHeader/>
+            <SortWrapper>
+                <TextButton icon='sort' onClick={() => setSortBy(prev => prev === "created_at" ? "last_modified_at" : "created_at")}>
+                    {sortBy === "created_at" ? "최근 생성 순" : "최근 업데이트 순"}
+                </TextButton>
+            </SortWrapper>
+            <OrdersHeader sortBy={sortBy}/>
             <Wrapper>
                 {orderList.map((order, index) => (
                     <div key={order.id}>
                         {index === 0 
-                            ? <DateWrapper>{format(parseISO(orderList[index].created_at), 'M월 d일')}</DateWrapper>
-                            : format(parseISO(orderList[index-1].created_at), 'M월 d일') === format(parseISO(orderList[index].created_at), 'M월 d일')
+                            ? <DateWrapper>{format(parseISO(orderList[index][sortBy]), 'M월 d일')}</DateWrapper>
+                            : format(parseISO(orderList[index-1][sortBy]), 'M월 d일') === format(parseISO(orderList[index][sortBy]), 'M월 d일')
                             ? null
-                            : <DateWrapper>{format(parseISO(orderList[index].created_at), 'M월 d일')}</DateWrapper>
+                            : <DateWrapper>{format(parseISO(orderList[index][sortBy]), 'M월 d일')}</DateWrapper>
                         }
                         <Order
                             order={order}
+                            sortBy={sortBy}
                         />
                     </div>
                 ))}

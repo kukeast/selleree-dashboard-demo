@@ -35,13 +35,15 @@ const FulfillmentStatus ={
 const Wrapper = styled.a`
     display: flex;
     &:hover{
+
         background-color: ${COLOR.gray1};
         border-radius: 8px;
     }
     transition: 0.2s;
     background-color: ${COLOR.white};
-    border-bottom: 1px solid ${COLOR.gray1};
-    padding: 20px 16px;
+    //border-bottom: 1px solid ${COLOR.gray1};
+    margin: 10px 0;
+    padding: 10px 16px;
     font-size: 15px;
     color: ${COLOR.black};
     align-items: center;
@@ -80,7 +82,7 @@ const Fulfillment = styled.div`
     color: ${props => FulfillmentStatus[props.status].color};
 `
 
-function Order ({order}) {
+function Order ({order, sortBy}) {
     const defaultShippingFee = parseInt(order.default_shipping_fee)
     const extraShippingFee = parseInt(order.extra_shipping_fee)
     const price = parseInt(order.price)
@@ -91,7 +93,7 @@ function Order ({order}) {
     };
     return(
         <Wrapper href={"https://" + order.identifier + ".selleree.shop/"} target="_blank" rel="noreferrer">
-            <CreatedAt>{format(parseISO(order.created_at), 'H시 m분 s초')}</CreatedAt>
+            <CreatedAt>{format(parseISO(order[sortBy]), 'H시 m분 s초')}</CreatedAt>
             <Image style={backgroundImage}/>
             <Title>{order.title}</Title>
             <Name>{order.name}</Name>

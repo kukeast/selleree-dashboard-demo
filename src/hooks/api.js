@@ -18,8 +18,10 @@ export async function getProducts(limit) {
     return response.data;
 }
 
-export async function getOrders(limit) {
-    const response = await axios.get(`http://${url}:8080/api/orders/${limit}`);
+export async function getOrders(limit, sortBy) {
+    const response = await axios.post(`http://${url}:8080/api/orders/${limit}`, {
+        sortBy : sortBy
+    });
     return response.data;
 }
 
