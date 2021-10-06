@@ -35,13 +35,11 @@ const FulfillmentStatus ={
 const Wrapper = styled.a`
     display: flex;
     &:hover{
-
         background-color: ${COLOR.gray1};
         border-radius: 8px;
     }
     transition: 0.2s;
     background-color: ${COLOR.white};
-    //border-bottom: 1px solid ${COLOR.gray1};
     margin: 10px 0;
     padding: 10px 16px;
     font-size: 15px;

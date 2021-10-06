@@ -8,6 +8,7 @@ import Order from './Order';
 import OrdersHeader from './OrdersHeader';
 import { COLOR } from '../../constants/color';
 import TextButton from '../inputs/TextButton';
+import SkeletonOrder from './SkeletonOrder';
 
 const Wrapper = styled.div`
     display: flex;
@@ -44,6 +45,14 @@ function Orders () {
         }
     }, [orders])
 
+    const skeleton = () => {
+        const result = [];
+        for (let i = 0; i < 16; i++) {
+            result.push(<SkeletonOrder/>);
+        }
+        return result;
+    };
+
     return(
         <>
             <SortWrapper>
@@ -53,7 +62,7 @@ function Orders () {
             </SortWrapper>
             <OrdersHeader sortBy={sortBy}/>
             <Wrapper>
-                {orderList.map((order, index) => (
+                {!orders.loading ? orderList.map((order, index) => (
                     <div key={order.id}>
                         {index === 0 
                             ? <DateWrapper>{format(parseISO(orderList[index][sortBy]), 'M월 d일')}</DateWrapper>
@@ -66,7 +75,7 @@ function Orders () {
                             sortBy={sortBy}
                         />
                     </div>
-                ))}
+                )): skeleton()}
             </Wrapper>
             <ButtonWrapper>
                 <Button onClick={() => setLimit(prev => prev + 10)}>더 보기</Button>

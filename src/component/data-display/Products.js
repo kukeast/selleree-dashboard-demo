@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Product from './Product'
 import Button from '../inputs/Button';
 import { getProducts } from '../../hooks/api';
+import SkeletonProduct from './SkeletonProduct';
 
 const Wrapper = styled.div`
     display: grid;
@@ -27,6 +28,7 @@ function Products ({column, repatch}) {
         if(products.data){
             setProductList(products.data.data)
         }
+        console.log(products)
     }, [products])
 
     useEffect(() => {
@@ -34,10 +36,18 @@ function Products ({column, repatch}) {
         // eslint-disable-next-line
     }, [repatch])
 
+    const skeleton = () => {
+        const result = [];
+        for (let i = 0; i < 20; i++) {
+            result.push(<SkeletonProduct/>);
+        }
+        return result;
+    };
+    
     return(
         <>
             <Wrapper column={column}>
-                {productList.map((product) => (
+                {productList[0] ? productList.map((product) => (
                     <Product
                         key={product["item-id"]}
                         url={product["url"]}
@@ -49,7 +59,7 @@ function Products ({column, repatch}) {
                         deleted={product["deleted"]}
                         href= {"https://" + product["store-id"] + ".selleree.shop/products/" + product["item-id"]}
                     />
-                ))}
+                )): skeleton()}
             </Wrapper>
             <ButtonWrapper>
                 <Button onClick={() => setLimit(prev => prev + 20)}>더 보기</Button>

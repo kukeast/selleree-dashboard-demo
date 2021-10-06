@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import useAsync from '../../hooks/useAsync';
 import Shopggu from './Shopggu'
 import { getShopggu } from '../../hooks/api';
+import SkeletonShopggu from './SkeletonShopggu';
 
 
 
@@ -28,9 +29,17 @@ function Shopggus ({repatch}) {
         // eslint-disable-next-line
     }, [repatch])
 
+    const skeleton = () => {
+        const result = [];
+        for (let i = 0; i < 16; i++) {
+            result.push(<SkeletonShopggu/>);
+        }
+        return result;
+    }
+
     return(
         <Wrapper>
-            {shopgguList.map((shopggu) => (
+            {shopgguList[0] ? shopgguList.map((shopggu) => (
                 <Shopggu
                     key={shopggu['store-name']+shopggu['order']}
                     href= {"https://" + shopggu["store-name"] + ".selleree.shop/"}
@@ -38,7 +47,7 @@ function Shopggus ({repatch}) {
                     order={shopggu['order']}
                     date={shopggu['date']}
                 />
-            ))}
+            )): skeleton()}
         </Wrapper>
     )
 }
