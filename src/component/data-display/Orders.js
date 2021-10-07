@@ -48,7 +48,7 @@ function Orders () {
     const skeleton = () => {
         const result = [];
         for (let i = 0; i < 16; i++) {
-            result.push(<SkeletonOrder/>);
+            result.push(<SkeletonOrder key={i}/>);
         }
         return result;
     };
@@ -78,7 +78,7 @@ function Orders () {
                 )): skeleton()}
             </Wrapper>
             <ButtonWrapper>
-                <Button onClick={() => setLimit(prev => prev + 10)}>더 보기</Button>
+                {orderList[0] && <Button onClick={() => setLimit(prev => prev + 10)}>더 보기</Button>}
             </ButtonWrapper>
         </>
     )

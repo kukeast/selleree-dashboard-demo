@@ -32,7 +32,7 @@ function Shopggus ({repatch}) {
     const skeleton = () => {
         const result = [];
         for (let i = 0; i < 16; i++) {
-            result.push(<SkeletonShopggu/>);
+            result.push(<SkeletonShopggu key={i}/>);
         }
         return result;
     }

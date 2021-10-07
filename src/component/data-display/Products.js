@@ -28,7 +28,6 @@ function Products ({column, repatch}) {
         if(products.data){
             setProductList(products.data.data)
         }
-        console.log(products)
     }, [products])
 
     useEffect(() => {
@@ -39,7 +38,7 @@ function Products ({column, repatch}) {
     const skeleton = () => {
         const result = [];
         for (let i = 0; i < 20; i++) {
-            result.push(<SkeletonProduct/>);
+            result.push(<SkeletonProduct key={i}/>);
         }
         return result;
     };
