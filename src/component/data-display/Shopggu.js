@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import { parseISO, format }from "date-fns";
 import { COLOR } from '../../constants/color';
 
 const Wrapper = styled.a`
@@ -36,7 +37,7 @@ function Shopggu ({href, storeName, order, date}) {
         <Wrapper href={href} target="_blank" rel="noreferrer">
             <div>
                 <p className="order">{order + 1}번째 발행</p>
-                <p className="date">{date}</p>
+                <p className="date">{format(parseISO(date), 'M월 d일 H시 m분 s초')}</p>
             </div>
             <p className="store">{storeName}</p>
         </Wrapper>
