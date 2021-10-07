@@ -56,7 +56,7 @@ const LoadingDiv = styled.div`
 
 function Button ({ isLoading, onClick, children}) {
     return(
-        <Wrapper onClick={!isLoading && onClick}>
+        <Wrapper onClick={!isLoading ? onClick : null}>
             {isLoading 
                 ? <LoadingWrapper>
                     <LoadingDiv/>
