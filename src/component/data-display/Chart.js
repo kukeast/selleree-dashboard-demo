@@ -1,8 +1,12 @@
 import React from "react";
-import Chart from "react-apexcharts";
+import ApexChart from "react-apexcharts";
 import styled from "styled-components";
+import Loading from "./Loading";
 
 const Wrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 99;
     height: 400px;
     border-radius: 8px;
@@ -11,12 +15,10 @@ const Wrapper = styled.div`
     margin: 20px 0;
 `
 
-function NewChart ({data, categories}) {
-    const chartCategories = categories
-    const chartData = data
+function Chart ({data, categories, color, isLoading}) {
     const state = {
         options: {
-            colors : ['#403DD5','#F61E52', '#13CA72', '#FFC32A', '#1D85FF'],
+            colors : [],
             chart: {
                 fontFamily: 'Spoqa Han Sans Neo, sans-serif',
                 id: "basic-bar",
@@ -55,26 +57,28 @@ function NewChart ({data, categories}) {
         },
         series: []
     };
-    state.series = chartData
-    state.options.xaxis.categories = chartCategories
-
+    state.series = data
+    state.options.xaxis.categories = categories
+    state.options.colors = [color]
     return (
         <Wrapper>
-            <div className="app">
-                <div className="row">
-                <div className="mixed-chart">
-                    <Chart
-                    options={state.options}
-                    series={state.series}
-                    type="line"
-                    width="1080"
-                    height="380"
-                    />
+            {isLoading ? <Loading color={color}/>:
+                <div className="app">
+                    <div className="row">
+                    <div className="mixed-chart">
+                        <ApexChart
+                            options={state.options}
+                            series={state.series}
+                            type="line"
+                            width="1080"
+                            height="380"
+                        />
+                    </div>
+                    </div>
                 </div>
-                </div>
-            </div>
+            }
         </Wrapper>
     );
 }
 
-export default NewChart;
+export default Chart;

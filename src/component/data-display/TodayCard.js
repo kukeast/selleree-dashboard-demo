@@ -15,7 +15,7 @@ const Card = styled.div`
     padding: 20px 20px 16px;
     cursor: pointer;
     ${props => props.select 
-        ? css`border: 2px solid ${COLOR.main};`
+        ? css`border: 2px solid ${props => props.color};`
         : css`border: 2px solid ${COLOR.white};`
     }
 `
@@ -40,7 +40,7 @@ const GrowthCountWrapper = styled.span`
         ? css`color: ${COLOR.red};`
         : props.count < 0
         ? css`color: ${COLOR.blue};`
-        : css`color: ${COLOR.gray6};`
+        : css`color: ${COLOR.gray5};`
     }
 `
 
@@ -51,7 +51,7 @@ function GrowthCount ({count}) {
                 ? <Icon size="16" color={COLOR.red} name="increase"/>
                 : count < 0
                 ? <Icon size="16" color={COLOR.blue} name="decrease"/>
-                : <Icon size="16" color={COLOR.gray6} name="medium"/>
+                : <Icon size="16" color={COLOR.gray5} name="medium"/>
             }
             <span>{count ? Math.abs(count) : 0}</span>
         </GrowthCountWrapper>
@@ -60,7 +60,7 @@ function GrowthCount ({count}) {
 
 function TodayCard ({icon, title, color, count, growthCount, select, onClick}) {
     return(
-        <Card select={select} onClick={onClick}>
+        <Card select={select} onClick={onClick} color={color}>
             <Icon
                 size={24}
                 color={color}

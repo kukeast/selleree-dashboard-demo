@@ -4,7 +4,7 @@ import * as dateFns from "date-fns";
 import { getToday, getTodayChart } from '../hooks/api';
 import useAsync from '../hooks/useAsync';
 
-import NewChart from '../component/data-display/NewChart'
+import Chart from '../component/data-display/Chart'
 import TodayCard from '../component/data-display/TodayCard';
 import { COLOR } from '../constants/color';
 
@@ -102,9 +102,11 @@ function Statistics ({repatch}) {
                     />
                 ))}
             </CardWrapper>
-            <NewChart 
+            <Chart 
                 data={chartData.data}
                 categories={chartData.categories}
+                color={cards[select].color}
+                isLoading={chart.loading}
             />
         </>
     )
