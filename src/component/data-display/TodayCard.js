@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { COLOR } from '../../constants/color'
-import { ICON } from '../../constants/icon'
+import Icon from './Icon'
 
 const Card = styled.div`
     flex: 1;
@@ -48,20 +48,24 @@ function GrowthCount ({count}) {
     return(
         <GrowthCountWrapper count={count}>  
             {count > 0
-                ? ICON.increase
+                ? <Icon size="16" color={COLOR.red} name="increase"/>
                 : count < 0
-                ? ICON.decrease
-                : ICON.medium
+                ? <Icon size="16" color={COLOR.blue} name="decrease"/>
+                : <Icon size="16" color={COLOR.gray6} name="medium"/>
             }
             <span>{count ? Math.abs(count) : 0}</span>
         </GrowthCountWrapper>
     )
 }
 
-function TodayCard ({icon, title, count, growthCount, select, onClick}) {
+function TodayCard ({icon, title, color, count, growthCount, select, onClick}) {
     return(
         <Card select={select} onClick={onClick}>
-            {ICON[icon]}
+            <Icon
+                size={24}
+                color={color}
+                name={icon}
+            />
             <CardTitle>{title}</CardTitle>
             <Count>
                 {count ? count : 0}

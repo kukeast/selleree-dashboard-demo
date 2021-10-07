@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import { COLOR } from '../../constants/color';
-import { ICON } from '../../constants/icon';
+import Icon from '../data-display/Icon';
 
 const Wrapper = styled.button`
     display: inline-flex;
@@ -25,10 +25,10 @@ const Wrapper = styled.button`
     }
 `
 
-function TextButton ({ onClick, icon,  children }) {
+function TextButton ({ onClick, icon, children }) {
     return(
         <Wrapper onClick={onClick}>
-            {icon && ICON[icon]}
+            {icon && <Icon size={20} color={COLOR.main} name={icon}/>}
             {children}
         </Wrapper>
     )

@@ -6,6 +6,7 @@ import useAsync from '../hooks/useAsync';
 
 import NewChart from '../component/data-display/NewChart'
 import TodayCard from '../component/data-display/TodayCard';
+import { COLOR } from '../constants/color';
 
 const CardWrapper = styled.div`
     display: flex;
@@ -29,21 +30,25 @@ function Statistics ({repatch}) {
             icon: 'home',
             title: '오늘 상점 개설',
             dataName: 'store',
+            color: COLOR.main,
         },
         {
             icon: 'tag',
             title: '오늘 상품 등록',
             dataName: 'item',
+            color: COLOR.green
         },
         {
             icon: 'cart',
             title: '오늘 주문',
             dataName: 'order',
+            color: COLOR.yellow
         },
         {
             icon: 'heart',
             title: '오늘 샵꾸 발행',
             dataName: 'published',
+            color: COLOR.red
         }
     ]
     useEffect(() => {
@@ -89,6 +94,7 @@ function Statistics ({repatch}) {
                         key={Card.title}
                         icon={Card.icon}
                         title={Card.title}
+                        color={Card.color}
                         count={getTodayCount(todayData, index)[0]}
                         growthCount={getTodayCount(todayData, index)[1]}
                         select={select === index && true}
