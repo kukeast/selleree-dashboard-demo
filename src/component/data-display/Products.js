@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 const ButtonWrapper = styled.div`
     margin-top: 30px;
     text-align: center;
-    *{
+    > *{
         width: 100%;
     }
 `
@@ -61,7 +61,7 @@ function Products ({column, repatch}) {
                 )): skeleton()}
             </Wrapper>
             <ButtonWrapper>
-                <Button onClick={() => setLimit(prev => prev + 20)}>더 보기</Button>
+                <Button onClick={() => setLimit(prev => prev + 20)} isLoading={products.loading}>20개 더 보기</Button>
             </ButtonWrapper>
         </>
     )

@@ -20,7 +20,7 @@ const SortWrapper = styled.div`
 const ButtonWrapper = styled.div`
     margin-top: 20px;
     text-align: center;
-    *{
+    > *{
         width: 100%;
     }
 `
@@ -53,16 +53,21 @@ function Orders () {
         return result;
     };
 
+    const switchOrderSort = () => {
+        setOrderList([])
+        setSortBy(prev => prev === "created_at" ? "last_modified_at" : "created_at")
+    }
+
     return(
         <>
             <SortWrapper>
-                <TextButton icon='sort' onClick={() => setSortBy(prev => prev === "created_at" ? "last_modified_at" : "created_at")}>
+                <TextButton icon='sort' onClick={switchOrderSort}>
                     {sortBy === "created_at" ? "최근 생성 순" : "최근 업데이트 순"}
                 </TextButton>
             </SortWrapper>
             <OrdersHeader sortBy={sortBy}/>
             <Wrapper>
-                {!orders.loading ? orderList.map((order, index) => (
+                {orderList[0] ? orderList.map((order, index) => (
                     <div key={order.id}>
                         {index === 0 
                             ? <DateWrapper>{format(parseISO(orderList[index][sortBy]), 'M월 d일')}</DateWrapper>
@@ -78,7 +83,7 @@ function Orders () {
                 )): skeleton()}
             </Wrapper>
             <ButtonWrapper>
-                {orderList[0] && <Button onClick={() => setLimit(prev => prev + 10)}>더 보기</Button>}
+                <Button onClick={() => setLimit(prev => prev + 10)} isLoading={orders.loading}>10개 더 보기</Button>
             </ButtonWrapper>
         </>
     )
