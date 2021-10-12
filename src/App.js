@@ -1,17 +1,19 @@
 import './App.scss'
-import Header from './view/Header';
 import Dashboard from './view/Dashboard';
 import { Route } from 'react-router-dom'
 import ProductList from './view/ProductList';
 import OrderList from './view/OrderList';
+import LogIn from './view/LogIn';
+import PrivateRoute from './view/PrivateRoute';
 
 function App() {
   return (
     <>
-      <Header/>
-      <Route path="/" component={Dashboard} exact/>
-      <Route path="/products" component={ProductList} exact/>
-      <Route path="/orders" component={OrderList} exact/>
+      <button onClick={ () => localStorage.clear()}>ddd</button>
+      <PrivateRoute path="/" component={Dashboard} exact/>
+      <PrivateRoute path="/products" component={ProductList} exact/>
+      <PrivateRoute path="/orders" component={OrderList} exact/>
+      <Route path="/login" component={LogIn} exact/>
     </>
   );
 }

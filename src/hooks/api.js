@@ -4,6 +4,11 @@ const url = "sellereeback.ngrok.io"
 // const url = window.location.hostname
 // const url = "localhost"
 
+export async function logIn(values) {
+    const response = await axios.post(`https://${url}/api/login`, values);
+    return response.data;
+}
+
 export async function getToday() {
     const response = await axios.get(`https://${url}/api/today`);
     return response.data;

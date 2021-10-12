@@ -62,6 +62,7 @@ function Statistics ({repatch}) {
             setChartData(chart.data.data)
         }
     }, [chart])
+    
     useEffect(() => {
         repatchToday()
         repatchChart()
