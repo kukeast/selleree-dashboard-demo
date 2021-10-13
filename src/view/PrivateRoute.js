@@ -1,14 +1,14 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import useLocalStorage from '../hooks/useLocalStorage';
+import { ValidToken } from '../hooks/token';
 import Header from './Header';
 
 function PrivateRoute ({ component: Component, ...rest }) {
-  const [tokens] = useLocalStorage("tokens", null)
-  return (
+    const refreshTokenValid = ValidToken("refresh-token")
+    return (
         <Route
             {...rest}
-            render = {props => tokens?(
+            render = {props => refreshTokenValid?(
                 <>
                     <Header/>
                     <Component {...props}/>

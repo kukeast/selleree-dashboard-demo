@@ -1,6 +1,6 @@
 import './App.scss'
 import Dashboard from './view/Dashboard';
-import { Route } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import ProductList from './view/ProductList';
 import OrderList from './view/OrderList';
 import LogIn from './view/LogIn';
@@ -9,11 +9,13 @@ import PrivateRoute from './view/PrivateRoute';
 function App() {
   return (
     <>
-      <button onClick={ () => localStorage.clear()}>ddd</button>
-      <PrivateRoute path="/" component={Dashboard} exact/>
-      <PrivateRoute path="/products" component={ProductList} exact/>
-      <PrivateRoute path="/orders" component={OrderList} exact/>
-      <Route path="/login" component={LogIn} exact/>
+      <button onClick={ () => localStorage.clear()}>clear localstorage</button>
+      <Switch>
+        <PrivateRoute path="/" component={Dashboard} exact/>
+        <PrivateRoute path="/products" component={ProductList}/>
+        <PrivateRoute path="/orders" component={OrderList}/>
+        <Route path="/login" component={LogIn}/>
+      </Switch>
     </>
   );
 }
