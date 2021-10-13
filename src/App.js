@@ -9,7 +9,7 @@ import PrivateRoute from './view/PrivateRoute';
 function App() {
   return (
     <>
-      <button onClick={ () => localStorage.clear()}>clear localstorage</button>
+      {/* <button onClick={ () => localStorage.clear()}>clear localstorage</button> */}
       <Switch>
         <PrivateRoute path="/" component={Dashboard} exact/>
         <PrivateRoute path="/products" component={ProductList}/>

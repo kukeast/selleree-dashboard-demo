@@ -66,6 +66,7 @@ Api.interceptors.response.use(
                 err.config.headers = { "Authorization" : `Bearer ${JSON.parse(window.localStorage.getItem("access-token"))}`}
                 // console.log(JSON.parse(window.localStorage.getItem("access-token")))
                 window.location.reload()
+                //return axios(err.config)
             })
         }
         return Promise.reject(err);
@@ -93,12 +94,12 @@ export async function logIn(user) {
 }
 
 export async function getToday() {
-    const response = await axios.get(`https://${url}/api/today`);
+    const response = await Api.get(`https://${url}/api/today`);
     return response.data;
 }
 
 export async function getTodayChart(name) {
-    const response = await axios.get(`https://${url}/api/today-chart/${name}`);
+    const response = await Api.get(`https://${url}/api/today-chart/${name}`);
     return response.data;
 }
 
@@ -108,13 +109,13 @@ export async function getProducts(limit) {
 }
 
 export async function getOrders(limit, sortBy) {
-    const response = await axios.post(`https://${url}/api/orders/${limit}`, {
+    const response = await Api.post(`https://${url}/api/orders/${limit}`, {
         sortBy : sortBy
     });
     return response.data;
 }
 
 export async function getShopggu() {
-    const response = await axios.get(`https://${url}/api/shopggus`);
+    const response = await Api.get(`https://${url}/api/shopggus`);
     return response.data;
 }
