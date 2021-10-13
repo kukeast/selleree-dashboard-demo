@@ -25,6 +25,7 @@ function TextField ({type, name, onChange, onKeyDown}) {
             name={name} 
             onChange={onChange} 
             onKeyDown={onKeyDown}
+            autoComplete= {type === "password" ? "username" : null}
         />
     )
 }

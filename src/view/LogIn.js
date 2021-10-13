@@ -7,7 +7,6 @@ import TextField from '../component/inputs/TextField';
 import styled from 'styled-components';
 import { COLOR } from '../constants/color';
 import Button from '../component/inputs/Button';
-import Title from '../component/data-display/Title';
 import Icon from '../component/data-display/Icon';
 
 const Wrapper = styled.div`
