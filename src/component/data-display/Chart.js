@@ -8,17 +8,16 @@ const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     z-index: 99;
-    height: 400px;
+    height: ${props => props.height + 20}px;
     border-radius: 8px;
     box-shadow: 0px 4px 24px 0px #22222215;
-    padding: 1px 0 20px;
     margin: 20px 0;
 `
 
-function Chart ({data, categories, color, isLoading}) {
+function Chart ({width, height, type, data, categories, color, isLoading}) {
     const state = {
         options: {
-            colors : [],
+            colors : [color],
             chart: {
                 fontFamily: 'Spoqa Han Sans Neo, sans-serif',
                 id: "basic-bar",
@@ -27,10 +26,16 @@ function Chart ({data, categories, color, isLoading}) {
                     tools: {
                         zoom: false
                     },
+                },
+            },
+            plotOptions: {
+                bar: {
+                   borderRadius: 4,
+                //    horizontal: true,
                 }
             },
             xaxis: {
-                categories: [1,2,3,4,55,55,44],
+                categories: categories,
                 tooltip:{
                     enabled : false
                 }
@@ -55,27 +60,18 @@ function Chart ({data, categories, color, isLoading}) {
                 }
             }
         },
-        series: []
+        series: data
     };
-    state.series = data
-    state.options.xaxis.categories = categories
-    state.options.colors = [color]
     return (
-        <Wrapper>
+        <Wrapper height={height}>
             {isLoading ? <Loading color={color}/>:
-                <div className="app">
-                    <div className="row">
-                    <div className="mixed-chart">
-                        <ApexChart
-                            options={state.options}
-                            series={state.series}
-                            type="line"
-                            width="1080"
-                            height="380"
-                        />
-                    </div>
-                    </div>
-                </div>
+                <ApexChart
+                    options={state.options}
+                    series={state.series}
+                    type={type}
+                    width={width}
+                    height={height}
+                />
             }
         </Wrapper>
     );

@@ -5,6 +5,7 @@ import ProductList from './view/ProductList';
 import OrderList from './view/OrderList';
 import LogIn from './view/LogIn';
 import PrivateRoute from './view/PrivateRoute';
+import Test from './view/Test';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <PrivateRoute path="/" component={Dashboard} exact/>
         <PrivateRoute path="/products" component={ProductList}/>
         <PrivateRoute path="/orders" component={OrderList}/>
+        <PrivateRoute path="/test" component={Test}/>
         <Route path="/login" component={LogIn}/>
       </Switch>
     </>

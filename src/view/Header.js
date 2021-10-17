@@ -20,6 +20,11 @@ function Header () {
             title : "주문",
             path : "/orders"
         },
+        {
+            id : 4,
+            title : "테스트",
+            path : "/test"
+        },
     ]
     return(
         <Container className="bottom-line">

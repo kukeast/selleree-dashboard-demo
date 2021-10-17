@@ -108,6 +108,9 @@ function Statistics ({repatch}) {
                 categories={chartData.categories}
                 color={cards[select].color}
                 isLoading={chart.loading}
+                width={1080}
+                height={380}
+                type="line"
             />
         </>
     )
