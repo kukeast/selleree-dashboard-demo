@@ -64,8 +64,10 @@ function Statistics ({repatch}) {
     }, [chart])
     
     useEffect(() => {
-        repatchToday()
-        repatchChart()
+        if(repatch){
+            repatchToday()
+            repatchChart()
+        }
         // eslint-disable-next-line
     }, [repatch])
 

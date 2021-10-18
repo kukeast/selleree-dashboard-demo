@@ -31,11 +31,11 @@ const ProductWrapper = styled.div`
 `
 
 function Dashboard () {
-    const [repatch, setRepatch] = useState(true)
+    const [repatch, setRepatch] = useState(0)
     const [updateTime, setUpdateTime] = useState(dateFns.format(new Date(), 'H시 m분 s초'))
     useEffect(() => {
         const interval = setInterval(()=>{
-            setRepatch(prev => !prev)
+            setRepatch(prev => prev + 1)
             setUpdateTime(dateFns.format(new Date(), 'H시 m분 s초'))
         },600000)
         return(
@@ -43,8 +43,6 @@ function Dashboard () {
         )
     })
     return(
-        <>
-        
         <Container>
             <UpdateTime>최근 업데이트 {updateTime}</UpdateTime>
             <Statistics repatch={repatch}/>
@@ -61,7 +59,6 @@ function Dashboard () {
                 </div>
             </Wrapper>
         </Container>
-        </>
     )
 }
 

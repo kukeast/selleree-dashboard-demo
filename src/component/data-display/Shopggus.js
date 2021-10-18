@@ -25,7 +25,9 @@ function Shopggus ({repatch}) {
     }, [shopggus])
 
     useEffect(() => {
-        repatchShopggus()
+        if(repatch){
+            repatchShopggus()
+        }
         // eslint-disable-next-line
     }, [repatch])
 

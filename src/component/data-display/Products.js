@@ -31,10 +31,12 @@ function Products ({column, repatch}) {
     }, [products])
 
     useEffect(() => {
-        repatchProducts()
+        if(repatch){
+            repatchProducts()
+        }
         // eslint-disable-next-line
     }, [repatch])
-
+    
     const skeleton = () => {
         const result = [];
         for (let i = 0; i < 20; i++) {
