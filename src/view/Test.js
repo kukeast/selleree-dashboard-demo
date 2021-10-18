@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import Chart from '../component/data-display/Chart';
+import FunnelTable from '../component/data-display/FunnelTable';
 import ButtonGroup from '../component/inputs/ButtonGroup';
 import Container from '../component/layout/Container';
 import { COLOR } from '../constants/color';
@@ -35,27 +36,32 @@ function Test () {
         console.log(dateRange)
     }
     return(
-        <Container>
-            <Buttons>
-                <ButtonGroup 
-                    buttons={buttons} 
-                    defaultSelected={4}
-                    callback={callbackDateRange}
+        <>
+            <Container>
+                <Buttons>
+                    <ButtonGroup 
+                        buttons={buttons} 
+                        defaultSelected={4}
+                        callback={callbackDateRange}
+                    />
+                </Buttons>
+                <Chart
+                    data={[{
+                        name: "Count",
+                        data: [200, 123, 94, 43, 23, 5]
+                    }]}
+                    categories={["가입", "상점 개설","결제 설정","상품 2개 이상 등록","주문 2건","최근 60일 주문 10건"]}
+                    color={COLOR.main}
+                    // isLoading={chart.loading}
+                    width={1080}
+                    height={460}
+                    type="bar"
                 />
-            </Buttons>
-            <Chart
-                data={[{
-                    name: "Count",
-                    data: [200, 123, 94, 43, 23, 5]
-                }]}
-                categories={["가입", "상점 개설","결제 설정","상품 2개 이상 등록","주문 2건 이상","최근 60일 주문 10건"]}
-                color={COLOR.main}
-                // isLoading={chart.loading}
-                width={1080}
-                height={460}
-                type="bar"
-            />
-        </Container>
+            </Container>
+            <Container className="mt30">
+                <FunnelTable/>
+            </Container>
+        </>
     )
 }
 
