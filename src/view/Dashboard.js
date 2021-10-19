@@ -36,13 +36,13 @@ function Dashboard () {
     const [updateTime, setUpdateTime] = useState(format(new Date(), 'H시 m분 s초'))
     useEffect(() => {
         const interval = setInterval(()=>{
-            reload()
+            refresh()
         },600000)
         return(
             ()=>clearInterval(interval)
         )
     })
-    const reload = () => {
+    const refresh = () => {
         setRepatch(prev => prev + 1)
         setUpdateTime(format(new Date(), 'H시 m분 s초'))
     }
@@ -51,7 +51,7 @@ function Dashboard () {
             <UpdateTime>
                 <TextButton 
                     icon="refresh"
-                    onClick={() => reload()}
+                    onClick={() => refresh()}
                 >
                     최근 업데이트 {updateTime}
                 </TextButton>
