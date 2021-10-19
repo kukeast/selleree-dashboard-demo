@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
-import * as dateFns from "date-fns";
+import {format} from "date-fns";
 import { COLOR } from '../constants/color';
 import Container from '../component/layout/Container'
 import Shopggus from '../component/data-display/Shopggus';
 import Products from '../component/data-display/Products';
 import Statistics from './Statistics';
+import TextButton from '../component/inputs/TextButton';
 
 const UpdateTime = styled.p`
     margin: 30px 0 0;
@@ -32,19 +33,30 @@ const ProductWrapper = styled.div`
 
 function Dashboard () {
     const [repatch, setRepatch] = useState(0)
-    const [updateTime, setUpdateTime] = useState(dateFns.format(new Date(), 'H시 m분 s초'))
+    const [updateTime, setUpdateTime] = useState(format(new Date(), 'H시 m분 s초'))
     useEffect(() => {
         const interval = setInterval(()=>{
-            setRepatch(prev => prev + 1)
-            setUpdateTime(dateFns.format(new Date(), 'H시 m분 s초'))
+            reload()
         },600000)
         return(
             ()=>clearInterval(interval)
         )
     })
+    const reload = () => {
+        setRepatch(prev => prev + 1)
+        setUpdateTime(format(new Date(), 'H시 m분 s초'))
+    }
     return(
         <Container>
-            <UpdateTime>최근 업데이트 {updateTime}</UpdateTime>
+            <UpdateTime>
+                <TextButton 
+                    icon="refresh"
+                    onClick={() => reload()}
+                >
+                    최근 업데이트 {updateTime}
+                </TextButton>
+            </UpdateTime>
+            {/* <UpdateTime>최근 업데이트 {updateTime}</UpdateTime> */}
             <Statistics repatch={repatch}/>
             <Wrapper>
                 <div>

@@ -166,6 +166,7 @@ function DatePicker ({ callback }) {
                     <RangeWrapper>
                         {rangeItems.map((item, index) => (
                             <RangeItem 
+                                key={index}
                                 onClick={() => setDefinedRange(item.days, index)}
                                 select={select === index}
                             >

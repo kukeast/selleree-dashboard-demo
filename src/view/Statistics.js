@@ -11,7 +11,7 @@ import { COLOR } from '../constants/color';
 const CardWrapper = styled.div`
     display: flex;
     gap: 20px;
-    margin-top: 30px;
+    margin-top: 20px;
 `
 
 function Statistics ({repatch}) {
