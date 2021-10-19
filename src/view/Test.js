@@ -2,49 +2,26 @@ import React from 'react'
 import styled from 'styled-components';
 import Chart from '../component/data-display/Chart';
 import FunnelTable from '../component/data-display/FunnelTable';
-import ButtonGroup from '../component/inputs/ButtonGroup';
+import DatePicker from '../component/inputs/DatePicker';
 import Container from '../component/layout/Container';
 import { COLOR } from '../constants/color';
 
-const Buttons = styled.div`
+const DatePickerWrapper = styled.div`
     margin-top: 30px;
     text-align: center;
 `
 
 function Test () {
-    const buttons = [
-        {
-            title: "오늘"
-        },
-        {
-            title: "어제"
-        },
-        {
-            title: "최근 7일"
-        },
-        {
-            title: "최근 14일"
-        },
-        {
-            title: "최근 30일"
-        },
-        {
-            title: "최근 90일"
-        },
-    ]
     const callbackDateRange = (dateRange) => {
-        console.log(dateRange)
+        // console.log(dateRange)
     }
+    
     return(
         <>
             <Container>
-                <Buttons>
-                    <ButtonGroup 
-                        buttons={buttons} 
-                        defaultSelected={4}
-                        callback={callbackDateRange}
-                    />
-                </Buttons>
+                <DatePickerWrapper>
+                    <DatePicker callback={callbackDateRange}/>
+                </DatePickerWrapper>
                 <Chart
                     data={[{
                         name: "Count",
