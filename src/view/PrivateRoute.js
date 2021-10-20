@@ -3,14 +3,14 @@ import { Redirect, Route } from 'react-router-dom';
 import { ValidToken } from '../hooks/token';
 import Header from './Header';
 
-function PrivateRoute ({ component: Component, ...rest }) {
+function PrivateRoute ({ component: Component, header, ...rest }) {
     const refreshTokenValid = ValidToken("refresh-token")
     return (
         <Route
             {...rest}
             render = {props => refreshTokenValid?(
                 <>
-                    <Header/>
+                    {header && <Header/>}
                     <Component {...props}/>
                 </>
             ) : ( 

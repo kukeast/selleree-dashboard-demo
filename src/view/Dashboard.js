@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
-import {format} from "date-fns";
+import { format } from "date-fns";
 import { COLOR } from '../constants/color';
 import Container from '../component/layout/Container'
 import Shopggus from '../component/data-display/Shopggus';
@@ -56,7 +56,6 @@ function Dashboard () {
                     최근 업데이트 {updateTime}
                 </TextButton>
             </UpdateTime>
-            {/* <UpdateTime>최근 업데이트 {updateTime}</UpdateTime> */}
             <Statistics repatch={repatch}/>
             <Wrapper>
                 <div>

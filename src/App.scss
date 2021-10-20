@@ -14,7 +14,9 @@ $main2 : #E8E8FF;
 $main3: #D9D9FF;
 $main6 : #2C29BC;
 $main : #403DD5;
-
+body{
+    margin: 0;
+}
 *{
     font-family: 'Spoqa Han Sans Neo', 'sans-serif';
 }
@@ -33,16 +35,6 @@ button{
     border: none;
 }
 
-.Dim{
-    position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    &.hide{
-        display: none;
-    }
-}
 .DatePickerWrapper{
     display: inline-block;
     position: relative;

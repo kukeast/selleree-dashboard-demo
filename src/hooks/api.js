@@ -69,6 +69,11 @@ export async function getOrders(limit, sortBy) {
     return response.data;
 }
 
+export async function getOrderDetail(orderId) {
+    const response = await Api.get(`https://${url}/api/order/${orderId}`);
+    return response.data;
+}
+
 export async function getShopggu() {
     const response = await Api.get(`https://${url}/api/shopggus`);
     return response.data;
