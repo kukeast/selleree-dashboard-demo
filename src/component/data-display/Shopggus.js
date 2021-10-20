@@ -5,8 +5,6 @@ import Shopggu from './Shopggu'
 import { getShopggu } from '../../hooks/api';
 import SkeletonShopggu from './SkeletonShopggu';
 
-
-
 const Wrapper = styled.div`
     display: flex;  
     flex-direction: column;
@@ -16,17 +14,17 @@ const Wrapper = styled.div`
 
 function Shopggus ({repatch}) {
     const [shopgguList, setShopgguList] = useState([])
-    const [shopggus, repatchShopggus] = useAsync(() => getShopggu())
+    const [response, repatchResponse] = useAsync(() => getShopggu())
 
     useEffect(() => {
-        if(shopggus.data){
-            setShopgguList(shopggus.data.data)
+        if(response.data){
+            setShopgguList(response.data.data)
         }
-    }, [shopggus])
+    }, [response])
 
     useEffect(() => {
         if(repatch){
-            repatchShopggus()
+            repatchResponse()
         }
         // eslint-disable-next-line
     }, [repatch])
@@ -44,7 +42,7 @@ function Shopggus ({repatch}) {
             {shopgguList[0] ? shopgguList.map((shopggu) => (
                 <Shopggu
                     key={shopggu['store-name']+shopggu['order']}
-                    href= {"https://" + shopggu["store-name"] + ".selleree.shop/"}
+                    href= {`https://${shopggu["store-name"]}.selleree.shop/`}
                     storeName={shopggu['store-name']}
                     order={shopggu['order']}
                     date={shopggu['date']}

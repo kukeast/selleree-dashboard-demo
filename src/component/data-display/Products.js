@@ -22,17 +22,17 @@ const ButtonWrapper = styled.div`
 function Products ({column, repatch}) {
     const [limit, setLimit] = useState(20)
     const [productList, setProductList] = useState([])
-    const [products, repatchProducts] = useAsync(() => getProducts(limit),[limit])
+    const [response, repatchResponse] = useAsync(() => getProducts(limit),[limit])
     
     useEffect(() => {
-        if(products.data){
-            setProductList(products.data.data)
+        if(response.data){
+            setProductList(response.data.data)
         }
-    }, [products])
+    }, [response])
 
     useEffect(() => {
         if(repatch){
-            repatchProducts()
+            repatchResponse()
         }
         // eslint-disable-next-line
     }, [repatch])
@@ -58,12 +58,12 @@ function Products ({column, repatch}) {
                         imageCount={product["image-count"]}
                         visibility={product["visibility"]}
                         deleted={product["deleted"]}
-                        href= {"https://" + product["store-id"] + ".selleree.shop/products/" + product["item-id"]}
+                        href={`https://${product["store-id"]}.selleree.shop/products/${product["item-id"]}`}
                     />
                 )): skeleton()}
             </Wrapper>
             <ButtonWrapper>
-                <Button onClick={() => setLimit(prev => prev + 20)} isLoading={products.loading}>20개 더 보기</Button>
+                <Button onClick={() => setLimit(prev => prev + 20)} isLoading={response.loading}>20개 더 보기</Button>
             </ButtonWrapper>
         </>
     )

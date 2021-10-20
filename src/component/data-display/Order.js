@@ -34,8 +34,6 @@ const FulfillmentStatus ={
         text: '배송 안 함'
     }
 }
-
-// const Wrapper = styled(Link)`
 const Wrapper = styled.div`
     display: flex;
     &:hover{
@@ -84,7 +82,6 @@ const Fulfillment = styled.div`
     font-weight: bold;
     color: ${props => FulfillmentStatus[props.status].color};
 `
-
 const ModalWrapper = styled.div`
     position: fixed;
     inset: 0;
@@ -133,6 +130,7 @@ function Portal (props) {
 }
 
 function Order ({order, sortBy}) {
+    const [isOpen, setIsOpen] = useState(false)
     const defaultShippingFee = parseInt(order.default_shipping_fee)
     const extraShippingFee = parseInt(order.extra_shipping_fee)
     const price = parseInt(order.price)
@@ -141,8 +139,6 @@ function Order ({order, sortBy}) {
     var backgroundImage = {
         backgroundImage: "url(" + order.image_url + "?w=300)"
     }
-
-    const [isOpen, setIsOpen] = useState(false)
     return(
         <>
             <Wrapper onClick={() => setIsOpen(true)}>

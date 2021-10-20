@@ -37,13 +37,13 @@ function Orders () {
     const [limit, setLimit] = useState(10)
     const [sortBy, setSortBy] = useState("created_at")
     const [orderList, setOrderList] = useState([])
-    const [orders] = useAsync(() => getOrders(limit, sortBy),[limit, sortBy])
+    const [response] = useAsync(() => getOrders(limit, sortBy),[limit, sortBy])
     
     useEffect(() => {
-        if(orders.data){
-            setOrderList(orders.data.data)
+        if(response.data){
+            setOrderList(response.data.data)
         }
-    }, [orders])
+    }, [response])
 
     const skeleton = () => {
         const result = [];
@@ -83,7 +83,7 @@ function Orders () {
                 )): skeleton()}
             </Wrapper>
             <ButtonWrapper>
-                <Button onClick={() => setLimit(prev => prev + 10)} isLoading={orders.loading}>10개 더 보기</Button>
+                <Button onClick={() => setLimit(prev => prev + 10)} isLoading={response.loading}>10개 더 보기</Button>
             </ButtonWrapper>
         </>
     )

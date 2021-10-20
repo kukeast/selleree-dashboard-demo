@@ -132,7 +132,7 @@ function OrderDetail ({orderId}) {
     const extraShippingFee = detail && parseInt(detail.extra_shipping_fee)
     const price = detail && parseInt(detail.price)
     const backgroundImage = detail && {
-        backgroundImage: "url(" + detail.image_url + "?w=300)"
+        backgroundImage: `url(${detail.image_url}?w=300)`
     };
     const href = detail && `https://${detail.identifier}.selleree.shop/products/${detail.item_id}`
 
@@ -199,7 +199,11 @@ function OrderDetail ({orderId}) {
                     </CardInfo>
                     <CardInfo>
                         <Label>배송지</Label>
-                        <Para>[{detail.zip_code}]{detail.address_line}{detail.address_detail_line && ", " + detail.address_detail_line}</Para>
+                        <Para>
+                            [{detail.zip_code}]
+                            {detail.address_line}
+                            {detail.address_detail_line && ", " + detail.address_detail_line}
+                        </Para>
                     </CardInfo>
                 </Card>
                 <Card>
