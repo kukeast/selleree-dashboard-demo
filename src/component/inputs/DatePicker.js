@@ -101,10 +101,10 @@ const rangeItems = [
 ]
 
 function DatePicker ({ callback }) {
-    const [select, setSelect] = useState(3)
+    const [select, setSelect] = useState(5)
     const [isShow, setIsShow] = useState(false)
     const [date, setDate] = useState({
-        startDate: sub(new Date(), {days: 29}),
+        startDate: sub(new Date(), {days: 89}),
         endDate: new Date(),
         key: 'selection'
     })

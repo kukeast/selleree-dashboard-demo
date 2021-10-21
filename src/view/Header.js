@@ -22,8 +22,8 @@ function Header () {
         },
         {
             id : 4,
-            title : "테스트",
-            path : "/test"
+            title : "판매자 퍼널",
+            path : "/funnel"
         },
     ]
     return(

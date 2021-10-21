@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { format }from "date-fns";
 
 const Api = axios.create()
 Api.interceptors.request.use(
@@ -76,5 +77,13 @@ export async function getOrderDetail(orderId) {
 
 export async function getShopggu() {
     const response = await Api.get(`https://${url}/api/shopggus`);
+    return response.data;
+}
+
+export async function getFunnel(dateRange) {
+    const response = await Api.post(`https://${url}/api/funnel`, {
+        startDate: format(dateRange.startDate, "yyyy.MM.dd"),
+        endDate: format(dateRange.endDate, "yyyy.MM.dd"),
+    });
     return response.data;
 }
