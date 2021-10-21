@@ -25,12 +25,12 @@ const Title = styled.div`
 const Rate = styled.div`
     flex: 1;
     text-align: center;
-    ${props => props.rate >= 80 && props.rate !== 100
+    ${props => props.rate >= 70
         ? css`
             color: ${COLOR.green6};
             font-weight: bold;
         ` 
-        : props.rate <= 20
+        : props.rate <= 30 && props.rate
         ? css`
             color: ${COLOR.red};
             font-weight: bold;
@@ -52,14 +52,14 @@ function FunnelRow ({data}) {
         <Wrapper>
             <Step>{data.step}</Step>
             <Title>{data.title}</Title>
-            <Rate rate={data.conversionRate}>
+            <Rate>
                 {data.conversionRate ? data.conversionRate + "%" : "-"}
             </Rate>
             <Rate>{data.bounceRate ? data.bounceRate + "%" : "-"}</Rate>
-            <Rate rate={data.previousStepConversionRate}>
-                {data.previousStepConversionRate ? data.previousStepConversionRate + "%" : "-"}
+            <Rate rate={data.previousConversionRate}>
+                {data.previousConversionRate ? data.previousConversionRate + "%" : "-"}
             </Rate>
-            <Rate>{data.previousStepBounceRate ? data.previousStepBounceRate + "%" : "-"}</Rate>
+            <Rate>{data.previousBounceRate ? data.previousBounceRate + "%" : "-"}</Rate>
             <Count>{count}</Count>
         </Wrapper>
     )
