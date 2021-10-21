@@ -4,12 +4,14 @@ import { Route, Switch } from 'react-router-dom'
 import ProductList from './view/ProductList';
 import OrderList from './view/OrderList';
 import LogIn from './view/LogIn';
-import PrivateRoute from './view/PrivateRoute';
+import PrivateRoute from './util/PrivateRoute';
 import SellerFunnel from './view/SellerFunnel';
+import GlobalStyle from './util/GlobalStyle';
 
 function App() {
   return (
     <>
+      <GlobalStyle/>
       <Switch>
         <PrivateRoute header path="/" component={Dashboard} exact/>
         <PrivateRoute header path="/products" component={ProductList}/>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { parseISO, format }from "date-fns";
-import useAsync from '../../hooks/useAsync';
+import useAsync from '../../util/useAsync';
 import styled from 'styled-components';
 import Button from '../inputs/Button';
-import { getOrders } from '../../hooks/api';
+import { getOrders } from '../../util/api';
 import Order from './Order';
 import OrdersHeader from './OrdersHeader';
 import { COLOR } from '../../constants/color';

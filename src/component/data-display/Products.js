@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import useAsync from '../../hooks/useAsync';
+import useAsync from '../../util/useAsync';
 import styled from 'styled-components';
 import Product from './Product'
 import Button from '../inputs/Button';
-import { getProducts } from '../../hooks/api';
+import { getProducts } from '../../util/api';
 import SkeletonProduct from './SkeletonProduct';
 
 const Wrapper = styled.div`

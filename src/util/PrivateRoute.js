@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { ValidToken } from '../hooks/token';
+import { ValidToken } from './token';
 import Header from './Header';
 
 function PrivateRoute ({ component: Component, header, ...rest }) {

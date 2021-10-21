@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import {sub} from "date-fns";
-import useAsync from '../hooks/useAsync';
+import useAsync from '../util/useAsync';
 import Chart from '../component/data-display/Chart';
 import FunnelTable from '../component/data-display/FunnelTable';
 import DatePicker from '../component/inputs/DatePicker';
 import Container from '../component/layout/Container';
 import { COLOR } from '../constants/color';
-import { getFunnel } from '../hooks/api';
+import { getFunnel } from '../util/api';
 
 const defaultFunnel = [
     {

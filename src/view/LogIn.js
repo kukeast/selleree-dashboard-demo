@@ -1,8 +1,8 @@
 import React from 'react'
-import { logIn } from '../hooks/api'
+import { logIn } from '../util/api'
 import { useState } from 'react/cjs/react.development'
 import { Redirect } from 'react-router-dom';
-import { ValidToken } from '../hooks/token'
+import { ValidToken } from '../util/token'
 import TextField from '../component/inputs/TextField';
 import styled from 'styled-components';
 import { COLOR } from '../constants/color';

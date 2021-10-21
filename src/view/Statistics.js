@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import * as dateFns from "date-fns";
-import { getToday, getTodayChart } from '../hooks/api';
-import useAsync from '../hooks/useAsync';
+import { getToday, getTodayChart } from '../util/api';
+import useAsync from '../util/useAsync';
 
 import Chart from '../component/data-display/Chart'
 import TodayCard from '../component/data-display/TodayCard';

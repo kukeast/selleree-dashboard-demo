@@ -20,3 +20,18 @@ export const COLOR = {
     green: '#3ABEA6',
     green6: '#00B65F',
 }
+
+export const dark = {
+    backgroundColor : '#111215',
+    card : '#16171A',
+    shadow: '0px 4px 24px 0px #00000012',
+    main: '#4b48ff',
+    white : '#111215',
+    gray1 : '#F7F7FA',
+    gray2 : '#1d1f24',
+    gray3 : '#222222',
+    gray4 : '#535358',
+    gray5 : '#85858C',
+    gray6 : '#C1C1C9',
+    black : '#EBEBF0',
+}

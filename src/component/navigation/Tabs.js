@@ -7,7 +7,6 @@ const Wrapper = styled.div`
     .Tab{
         padding: 12px 0;
         display: inline-flex;
-
         color: ${COLOR.gray5};
         font-size: 14px;
         font-weight: 500;

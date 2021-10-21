@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react/cjs/react.development'
 import { parseISO, format }from "date-fns";
 import styled from 'styled-components'
 import { COLOR } from '../constants/color'
-import { getOrderDetail } from '../hooks/api'
-import useAsync from '../hooks/useAsync'
+import { getOrderDetail } from '../util/api'
+import useAsync from '../util/useAsync'
 import SkeletonOrderDetail from '../component/data-display/SkeletonOrderDetail';
 const FinancialStatus ={
     WAITING : {
