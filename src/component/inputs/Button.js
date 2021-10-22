@@ -5,7 +5,7 @@ import Loading from '../data-display/Loading';
 
 const Wrapper = styled.button`
     font-size: 15px;
-    color: ${COLOR.white};
+    color: ${COLOR.buttonText};
     background-color: ${COLOR.main};
     line-height: 20px;
     padding: 16px 16px;
@@ -25,7 +25,7 @@ function Button ({ isLoading, onClick, children}) {
     return(
         <Wrapper onClick={!isLoading ? onClick : null}>
             {isLoading 
-                ? <Loading color={COLOR.white}/>
+                ? <Loading color={COLOR.buttonText}/>
                 :children
             }
         </Wrapper>

@@ -4,7 +4,7 @@ import { COLOR } from '../constants/color'
 const GlobalStyle = createGlobalStyle`
     body{
         margin: 0;
-        background-color: ${COLOR.white};
+        background-color: ${COLOR.backgroundColor};
     }
     *{
         font-family: 'Spoqa Han Sans Neo', 'sans-serif';

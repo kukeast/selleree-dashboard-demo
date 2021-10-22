@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { COLOR } from '../../constants/color'
 import Skeleton from './Skeleton'
 
 const Wrapper = styled.div`
@@ -15,7 +16,8 @@ const Header = styled.div`
 const Card = styled.div`
     padding: 20px;
     transition: 0.2s;
-    box-shadow: 0px 4px 24px 0px #22222215;
+    background-color: ${COLOR.card};
+    box-shadow: ${COLOR.shadow};
     border-radius: 8px;
     margin-bottom: 20px;
 `

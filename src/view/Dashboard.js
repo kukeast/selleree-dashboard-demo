@@ -25,8 +25,8 @@ const Wrapper = styled.div`
     gap: 20px;
 `
 const ProductWrapper = styled.div`
-    background-color: ${COLOR.white};
-    box-shadow: 0px 4px 24px 0px #22222215;
+    background-color: ${COLOR.card};
+    box-shadow: ${COLOR.shadow};
     border-radius: 8px;
     padding: 20px;
 `

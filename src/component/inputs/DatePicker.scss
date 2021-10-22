@@ -23,36 +23,6 @@ $main : #403DD5;
   margin: 12px 12px 0 12px;
 }
 
-.rdrDateDisplayItem{
-  border-radius: 8px;
-  background-color: $gray1;
-  padding: 0;
-  &:hover{
-    background-color: $gray2;
-  }
-  input{
-    cursor: pointer;
-    font-size: 14px;
-    height: 40px;
-    border: 0px;
-    background: transparent;
-    width: 100%;
-    color: $black;
-  }
-}
-
-.rdrDateDisplayItemActive{
-  background-color: $main2;
-  &:hover{
-    background-color: $main3;
-  }
-}
-
-.rdrDateDisplayItemActive{
-  input{
-    color: $main
-  }
-}
 
 .rdrMonthAndYearWrapper {
   align-items: center;
@@ -92,10 +62,6 @@ $main : #403DD5;
   padding: 0;
   border: 0;
   border-radius: 5px;
-  background: $gray1;
-  &:hover{
-    background: $gray2;
-  }
   i {
     display: block;
     width: 0;
@@ -107,11 +73,23 @@ $main : #403DD5;
     transform: translate(-3px, 0px);
   }
 }
+.rdrDateDisplayItem{
+  border-radius: 8px;
+  padding: 0;
+
+  input{
+    cursor: pointer;
+    font-size: 14px;
+    height: 40px;
+    border: 0px;
+    background: transparent;
+    width: 100%;
+  }
+}
 
 .rdrPprevButton {
   i {
     border-width: 4px 6px 4px 4px;
-    border-color: transparent rgb(52, 73, 94) transparent transparent;
     transform: translate(-3px, 0px);
   }
 }
@@ -120,7 +98,6 @@ $main : #403DD5;
   i {
     margin: 0 0 0 7px;
     border-width: 4px 4px 4px 6px;
-    border-color: transparent transparent transparent rgb(52, 73, 94);
     transform: translate(3px, 0px);
   }
 }
@@ -393,10 +370,6 @@ $main : #403DD5;
 }
 
 .rdrDayDisabled {
-  background-color: rgb(248, 248, 248);
-  .rdrDayNumber span{
-    color: #aeb9bf;
-  }
   .rdrInRange, .rdrStartEdge, .rdrEndEdge, .rdrSelected, .rdrDayStartPreview, .rdrDayInPreview, .rdrDayEndPreview{
     filter: grayscale(100%) opacity(60%);
   }

@@ -62,8 +62,8 @@ const OrderDate = styled.p`
 const Card = styled.div`
     padding: 20px;
     transition: 0.2s;
-    background-color: ${COLOR.white};
-    box-shadow: 0px 4px 24px 0px #22222215;
+    background-color: ${COLOR.card};
+    box-shadow: ${COLOR.shadow};
     border-radius: 8px;
     margin-bottom: 20px;
 `
@@ -72,8 +72,8 @@ const ItemCard = styled.a`
     align-items: center;
     padding: 20px;
     transition: 0.2s;
-    background-color: ${COLOR.white};
-    box-shadow: 0px 4px 24px 0px #22222215;
+    background-color: ${COLOR.card};
+    box-shadow: ${COLOR.shadow};
     border-radius: 8px;
     margin-bottom: 20px;
     &:hover{
@@ -112,7 +112,7 @@ const CardInfo = styled.div`
 `
 const Label = styled.p`
     font-size: 13px;
-    color: ${COLOR.gray6};
+    color: ${COLOR.gray5};
     margin-bottom: 4px;
 `
 const Financial = styled(Para)`

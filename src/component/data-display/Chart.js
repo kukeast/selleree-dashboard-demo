@@ -1,6 +1,7 @@
 import React from "react";
 import ApexChart from "react-apexcharts";
 import styled from "styled-components";
+import { COLOR } from "../../constants/color";
 import Loading from "./Loading";
 
 const Wrapper = styled.div`
@@ -10,8 +11,43 @@ const Wrapper = styled.div`
     z-index: 99;
     height: ${props => props.height + 20}px;
     border-radius: 8px;
-    box-shadow: 0px 4px 24px 0px #22222215;
+    background-color: ${COLOR.card};
+    box-shadow: ${COLOR.shadow};
     margin: 20px 0;
+
+    .apexcharts-canvas{
+        margin: 20px auto;
+    }
+
+    .apexcharts-tooltip {
+        background-color: ${COLOR.backgroundColor};
+        color: ${COLOR.black};
+        padding: 14px 16px;
+        border-radius : 8px !important;
+        box-shadow: ${COLOR.shadow} !important;
+        border: 0 !important;
+        .apexcharts-tooltip-series-group{
+            padding: 0;
+            .apexcharts-tooltip-y-group{
+                padding: 0;
+            }
+        }
+        
+        .apexcharts-tooltip-series-group{
+            margin: 4px 0;
+            padding: 0 !important;
+        }
+        .apexcharts-tooltip-marker{
+            width: 8px;
+            height: 8px;
+        }
+    }
+    .apexcharts-legend-marker{
+        margin-right: 12px !important;
+    }
+    .apexcharts-legend-series{
+        margin: 0px 12px !important;
+    }
 `
 
 function Chart ({width, height, type, data, categories, color, isLoading}) {
@@ -50,7 +86,7 @@ function Chart ({width, height, type, data, categories, color, isLoading}) {
                 }
             },
             grid: {
-                borderColor: '#f7f7fa'
+                borderColor: COLOR.gray2
             },
             legend:{
                 offsetY: "6",

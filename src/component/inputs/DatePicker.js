@@ -17,6 +17,55 @@ const Wrapper = styled.div`
     position: relative;
     text-align: center;
     z-index: 999;
+
+    .rdrDateDisplayItem{
+        background-color: ${COLOR.gray2};
+        &:hover{
+            background-color: ${COLOR.gray3};
+        }
+    input{
+        color: ${COLOR.black};
+    }
+    }
+
+    .rdrDateDisplayItemActive{
+        background-color: ${COLOR.main2};
+        &:hover{
+            background-color: ${COLOR.main3};
+        }
+    }
+
+    .rdrDateDisplayItemActive{
+        input{
+            color: ${COLOR.main};
+        }
+    }
+    .rdrNextPrevButton {
+        background: ${COLOR.gray2};
+        &:hover{
+            background: ${COLOR.gray3};
+        }
+    }
+    .rdrPprevButton {
+        i {
+            border-color: transparent ${COLOR.gray5} transparent transparent;
+        }
+    }
+
+    .rdrNextButton {
+        i {
+            border-color: transparent transparent transparent ${COLOR.gray5};
+        }
+    }
+    .rdrDayDisabled {
+        background-color: ${COLOR.gray1};
+        .rdrDayNumber span{
+            color: ${COLOR.gray5};
+        }
+    }
+    .rdrDayNumber span{
+        color: ${COLOR.black};
+    }
 `
 const PickerWrapper = styled.div`
     position: absolute;

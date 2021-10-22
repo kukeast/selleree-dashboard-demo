@@ -1,5 +1,3 @@
-@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
-
 $white : #FFFFFF;
 $black : #222222;
 
@@ -14,26 +12,6 @@ $main2 : #E8E8FF;
 $main3: #D9D9FF;
 $main6 : #2C29BC;
 $main : #403DD5;
-body{
-    margin: 0;
-}
-*{
-    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
-}
-a{
-    text-decoration: none;
-    color: inherit;
-}
-
-p{
-    padding: 0;
-    margin: 0;
-}
-
-button{
-    appearance: none;
-    border: none;
-}
 
 .DatePickerWrapper{
     display: inline-block;
@@ -116,12 +94,6 @@ button{
     }
 }
 
-.Chart{
-    z-index: 99;
-    height: 480px;
-    border-radius: 8px;
-    border: 1px solid $gray2;
-}
 .Cell{
     font-size: 14px;
     color: $black;
@@ -226,38 +198,4 @@ button{
             background: linear-gradient(90deg, rgba(32,32,32, 0) 0%, rgba(32, 32, 32, 0.05) 100%);
         }
     }
-}
-
-.apexcharts-canvas{
-    margin: 20px auto;
-}
-
-.apexcharts-tooltip {
-    background: $white;
-    color: $black;
-    padding: 14px 16px;
-    border-radius : 8px !important;
-    box-shadow: 0px 4px 24px 0px rgba(34, 34, 34, 0.1) !important;
-    border: 0 !important;
-    .apexcharts-tooltip-series-group{
-        padding: 0;
-        .apexcharts-tooltip-y-group{
-            padding: 0;
-        }
-    }
-    
-    .apexcharts-tooltip-series-group{
-        margin: 4px 0;
-        padding: 0 !important;
-    }
-    .apexcharts-tooltip-marker{
-        width: 8px;
-        height: 8px;
-    }
-}
-.apexcharts-legend-marker{
-    margin-right: 12px !important;
-}
-.apexcharts-legend-series{
-    margin: 0px 12px !important;
 }

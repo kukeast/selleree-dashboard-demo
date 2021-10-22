@@ -8,8 +8,8 @@ const Wrapper = styled.a`
         transform: translateY(-10px);
     }
     transition: 0.2s;
-    background-color: ${COLOR.white};
-    box-shadow: 0px 4px 24px 0px #22222215;
+    background-color: ${COLOR.card};
+    box-shadow: ${COLOR.shadow};
     border-radius: 8px;
     padding: 20px;
     & > div{

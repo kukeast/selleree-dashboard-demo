@@ -89,8 +89,7 @@ const ModalWrapper = styled.div`
 const Dim = styled.div`
     position: fixed;
     inset: 0;
-    background-color: ${COLOR.black};
-    opacity: 0.6;
+    background-color: ${COLOR.dim};
     cursor: pointer;
 `
 const Modal = styled.div`
@@ -101,9 +100,9 @@ const Modal = styled.div`
     top: 80px;
     bottom: 0;
     padding: 40px 0;
-    background-color: ${COLOR.white};
+    background-color: ${COLOR.backgroundColor};
     overflow: scroll;
-    border-radius: 16px;
+    border-radius: 16px 16px 0 0;
 `
 const Close = styled.div`
     position: fixed;

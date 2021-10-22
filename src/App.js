@@ -1,12 +1,11 @@
-import './App.scss'
-import Dashboard from './view/Dashboard';
 import { Route, Switch } from 'react-router-dom'
+import GlobalStyle from './util/GlobalStyle';
+import PrivateRoute from './util/PrivateRoute';
+import Dashboard from './view/Dashboard';
 import ProductList from './view/ProductList';
 import OrderList from './view/OrderList';
 import LogIn from './view/LogIn';
-import PrivateRoute from './util/PrivateRoute';
 import SellerFunnel from './view/SellerFunnel';
-import GlobalStyle from './util/GlobalStyle';
 
 function App() {
   return (
