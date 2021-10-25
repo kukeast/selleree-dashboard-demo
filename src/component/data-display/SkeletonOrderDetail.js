@@ -197,6 +197,7 @@ function SkeletonOrderDetail () {
             <SkeletonCard/>
             <SkeletonCard/>
             <SkeletonCard/>
+            <SkeletonCard/>
         </Wrapper>
     )
 }
