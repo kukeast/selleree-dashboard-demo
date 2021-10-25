@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { ValidToken } from './token';
-import Header from './Header';
+import Header from '../view/Header';
 
 function PrivateRoute ({ component: Component, header, ...rest }) {
     const refreshTokenValid = ValidToken("refresh-token")
