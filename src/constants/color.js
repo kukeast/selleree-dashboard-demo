@@ -62,4 +62,4 @@ const dark = {
     green6: '#00B65F',
 }
 
-export const COLOR = window.localStorage.getItem("theme") === "light" ? light : dark
+export const COLOR = window.localStorage.getItem("theme") === "dark" ? dark : light

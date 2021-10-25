@@ -8,6 +8,7 @@ import LogIn from './view/LogIn';
 import SellerFunnel from './view/SellerFunnel';
 
 function App() {
+  window.localStorage.setItem("theme", "light")
   return (
     <>
       <GlobalStyle/>
