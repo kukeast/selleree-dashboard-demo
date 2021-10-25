@@ -23,22 +23,17 @@ const defaultFunnel = [
     {
         id : 3,
         step : "3단계",
-        title : "결제 설정",
+        title : "판매 준비",
     },
     {
         id : 4,
         step : "4단계",
-        title : "상품 2개 이상 등록",
+        title : "주문 상태 변경 2개 이상",
     },
     {
         id : 5,
         step : "5단계",
-        title : "주문 상태 변경 2건",
-    },
-    {
-        id : 6,
-        step : "6단계",
-        title : "주문 상태 변경 10건",
+        title : "주문 상태 변경 10개 이상",
     },
 ]
 const DatePickerWrapper = styled.div`
@@ -93,7 +88,7 @@ function SellerFunnel () {
                         name: "Count",
                         data: funnelData,
                     }]}
-                    categories={["가입", "상점 개설","결제 설정","상품 2개 이상 등록","주문 상태 변경 2건","주문 상태 변경 10건"]}
+                    categories={["가입", "상점 개설","판매 준비","주문 상태 변경 2개 이상","주주문 상태 변경 10개 이상"]}
                     color={COLOR.main}
                     isLoading={response.loading}
                     width={1080}
