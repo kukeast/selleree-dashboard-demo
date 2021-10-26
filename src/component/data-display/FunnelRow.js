@@ -48,7 +48,7 @@ const Count = styled.div`
     text-align: right;
 `
 
-function FunnelRow ({data}) {
+function FunnelRow ({data, dateRange}) {
     const [isOpen, setIsOpen] = useState(false)
     const count = data.count.toString()
     .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
@@ -69,7 +69,10 @@ function FunnelRow ({data}) {
             </Wrapper>
             {isOpen &&
                 <Modal onClickClose={() => setIsOpen(false)}>
-                    <FunnelDetail funnelData={data}/>
+                    <FunnelDetail 
+                        funnelData={data}
+                        dateRange={dateRange}
+                    />
                 </Modal>
             }
         </>

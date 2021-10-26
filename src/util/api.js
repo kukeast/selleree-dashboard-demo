@@ -87,3 +87,12 @@ export async function getFunnel(dateRange) {
     });
     return response.data;
 }
+
+export async function getFunnelDetail(dateRange, step, limit) {
+    const response = await Api.post(`https://${url}/api/funnel-detail/${limit}`, {
+        startDate: format(dateRange.startDate, "yyyy.MM.dd"),
+        endDate: format(dateRange.endDate, "yyyy.MM.dd"),
+        step: step.toString()
+    });
+    return response.data;
+}

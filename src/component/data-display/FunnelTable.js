@@ -9,7 +9,7 @@ const Wrapper = styled.div`
     flex-direction: column;
 `
 
-function FunnelTable ({funnelData, isLoading}) {
+function FunnelTable ({funnelData, isLoading, dateRange}) {
     return(
         <>
             <FunnelHeader/>
@@ -18,6 +18,7 @@ function FunnelTable ({funnelData, isLoading}) {
                     <FunnelRow
                         key={data.id}
                         data={data}
+                        dateRange={dateRange}
                     />
                 )): 
                     <>

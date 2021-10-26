@@ -110,6 +110,7 @@ function SellerFunnel () {
                 <FunnelTable
                     funnelData={tableData}
                     isLoading={response.loading}
+                    dateRange={dateRange}
                 />
             </Container>
         </>
