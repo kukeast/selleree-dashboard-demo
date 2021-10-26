@@ -8,7 +8,6 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 99;
     height: ${props => props.height + 20}px;
     border-radius: 8px;
     background-color: ${COLOR.card};

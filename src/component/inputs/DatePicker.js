@@ -16,7 +16,6 @@ const Wrapper = styled.div`
     align-items: center;
     position: relative;
     text-align: center;
-    z-index: 999;
 
     .rdrDateDisplayItem{
         background-color: ${COLOR.gray2};
@@ -74,6 +73,7 @@ const PickerWrapper = styled.div`
     border-radius: 16px;
     background-color: ${COLOR.white};
     box-shadow: 0px 4px 24px 0px rgba(34, 34, 34, 0.1);
+    z-index: 1;
 `
 const Dim = styled.div`
     position: fixed;
