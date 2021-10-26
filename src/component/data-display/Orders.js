@@ -82,9 +82,11 @@ function Orders () {
                     </div>
                 )): skeleton()}
             </Wrapper>
-            <ButtonWrapper>
-                <Button onClick={() => setLimit(prev => prev + 10)} isLoading={response.loading}>10개 더 보기</Button>
-            </ButtonWrapper>
+            {orderList.length % 10 === 0 &&
+                <ButtonWrapper>
+                    <Button onClick={() => setLimit(prev => prev + 10)} isLoading={response.loading}>10개 더 보기</Button>
+                </ButtonWrapper>
+            }
         </>
     )
 }

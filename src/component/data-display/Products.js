@@ -62,9 +62,11 @@ function Products ({column, repatch}) {
                     />
                 )): skeleton()}
             </Wrapper>
-            <ButtonWrapper>
-                <Button onClick={() => setLimit(prev => prev + 20)} isLoading={response.loading}>20개 더 보기</Button>
-            </ButtonWrapper>
+            {productList.length % 10 === 0 &&
+                <ButtonWrapper>
+                    <Button onClick={() => setLimit(prev => prev + 20)} isLoading={response.loading}>20개 더 보기</Button>
+                </ButtonWrapper>
+            }
         </>
     )
 }
