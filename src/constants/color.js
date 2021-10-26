@@ -30,8 +30,8 @@ const light = {
     red:  '#F61E52',
     red1: '#FFF4F6',
     blue: '#1D85FF',
-    yellow: '#FFB627',
-    green: '#3ABEA6',
+    yellow: '#FFC32A',
+    green: '#13CA72',
     green6: '#00B65F',
 }
 
