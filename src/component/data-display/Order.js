@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 import { parseISO, format }from "date-fns";
 import styled from 'styled-components'
 import { COLOR } from '../../constants/color'
-import { createPortal } from 'react-dom';
 import OrderDetail from '../../view/OrderDetail';
-import Icon from './Icon';
+import Modal from './Modal';
 
 const FinancialStatus ={
     WAITING : {
@@ -82,51 +81,6 @@ const Fulfillment = styled.div`
     font-weight: bold;
     color: ${props => FulfillmentStatus[props.status].color};
 `
-const ModalWrapper = styled.div`
-    position: fixed;
-    inset: 0;
-`
-const Dim = styled.div`
-    position: fixed;
-    inset: 0;
-    background-color: ${COLOR.dim};
-    cursor: pointer;
-`
-const Modal = styled.div`
-    position: fixed;
-    margin: auto;
-    left: 0;
-    right: 0;
-    top: 80px;
-    bottom: 0;
-    padding: 40px 0;
-    background-color: ${COLOR.backgroundColor};
-    overflow: scroll;
-    border-radius: 16px 16px 0 0;
-`
-const Close = styled.div`
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 30px;
-    width: 40px;
-    height: 40px;
-    background-color: ${COLOR.white};
-    border-radius: 20px;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: 0.3s;
-    :hover{
-        background-color: ${COLOR.gray2};
-    }
-`
-
-function Portal (props) {
-    return createPortal(props.children, document.getElementById("portal"))
-}
 
 function Order ({order, sortBy}) {
     const [isOpen, setIsOpen] = useState(false)
@@ -150,17 +104,9 @@ function Order ({order, sortBy}) {
                 <Fulfillment status={order.fulfillment_status}>{FulfillmentStatus[order.fulfillment_status].text}</Fulfillment>
             </Wrapper>
             {isOpen && 
-                <Portal>
-                    <ModalWrapper>
-                        <Dim onClick={() => setIsOpen(false)}/>
-                        <Close onClick={() => setIsOpen(false)}>
-                            <Icon name="close" color={COLOR.gray5}/>
-                        </Close>
-                        <Modal>
-                            <OrderDetail orderId={order.id}/>
-                        </Modal>
-                    </ModalWrapper>
-                </Portal>
+                <Modal onClickClose={() => setIsOpen(false)}>
+                    <OrderDetail orderId={order.id}/> 
+                </Modal>
             }
         </>
     )

@@ -1,5 +1,4 @@
-import React from 'react'
-import { useEffect, useState } from 'react/cjs/react.development'
+import React, { useEffect, useState } from 'react'
 import { parseISO, format }from "date-fns";
 import styled from 'styled-components'
 import { COLOR } from '../constants/color'
