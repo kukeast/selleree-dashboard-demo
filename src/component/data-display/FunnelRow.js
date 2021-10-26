@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 import { COLOR } from '../../constants/color'
+import FunnelDetail from '../../view/FunnelDetail'
+import Modal from './Modal'
 
 const Wrapper = styled.div`
     display: flex;
@@ -15,6 +17,7 @@ const Wrapper = styled.div`
     font-size: 15px;
     color: ${COLOR.black};
     align-items: center;
+    cursor: pointer;
 `
 const Step = styled.div`
     flex: 1;
@@ -46,22 +49,30 @@ const Count = styled.div`
 `
 
 function FunnelRow ({data}) {
+    const [isOpen, setIsOpen] = useState(false)
     const count = data.count.toString()
     .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
     return(
-        <Wrapper>
-            <Step>{data.step}</Step>
-            <Title>{data.title}</Title>
-            <Rate>
-                {data.conversionRate ? data.conversionRate + "%" : "-"}
-            </Rate>
-            <Rate>{data.bounceRate ? data.bounceRate + "%" : "-"}</Rate>
-            <Rate rate={data.previousConversionRate}>
-                {data.previousConversionRate ? data.previousConversionRate + "%" : "-"}
-            </Rate>
-            <Rate>{data.previousBounceRate ? data.previousBounceRate + "%" : "-"}</Rate>
-            <Count>{count}</Count>
-        </Wrapper>
+        <>
+            <Wrapper onClick={() => setIsOpen(true)}>
+                <Step>{data.step}</Step>
+                <Title>{data.title}</Title>
+                <Rate>
+                    {data.conversionRate ? data.conversionRate + "%" : "-"}
+                </Rate>
+                <Rate>{data.bounceRate ? data.bounceRate + "%" : "-"}</Rate>
+                <Rate rate={data.previousConversionRate}>
+                    {data.previousConversionRate ? data.previousConversionRate + "%" : "-"}
+                </Rate>
+                <Rate>{data.previousBounceRate ? data.previousBounceRate + "%" : "-"}</Rate>
+                <Count>{count}</Count>
+            </Wrapper>
+            {isOpen &&
+                <Modal onClickClose={() => setIsOpen(false)}>
+                    <FunnelDetail funnelData={data}/>
+                </Modal>
+            }
+        </>
     )
 }
 
