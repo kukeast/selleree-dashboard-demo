@@ -92,6 +92,9 @@ const DateRangeWrapper = styled.div`
 const RangeWrapper = styled.div`
     width: 160px;
     margin: 12px 0;
+    @media screen and (max-width: 425px) {
+        display: none;
+    }
 `
 const RangeItem = styled.div`
     margin: 6px 12px;

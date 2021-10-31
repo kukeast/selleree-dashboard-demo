@@ -8,8 +8,14 @@ import SkeletonProduct from './SkeletonProduct';
 
 const Wrapper = styled.div`
     display: grid;
-    grid-template-columns: repeat(${props => props.column}, 1fr);
     gap: 40px 20px;
+    @media screen and (max-width: 768px) {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    @media screen and (max-width: 425px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    grid-template-columns: repeat(${props => props.column}, 1fr);
 `
 const ButtonWrapper = styled.div`
     margin-top: 30px;

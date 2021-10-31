@@ -8,7 +8,7 @@ import Icon from '../component/data-display/Icon';
 import Button from '../component/inputs/Button';
 import SkeletonFunnelDetail from '../component/data-display/SkeletonFunnelDetail';
 const Wrapper = styled.div`
-    width: 640px;
+    max-width: 640px;
     margin: auto;
 `
 const Header = styled.div`

@@ -7,7 +7,6 @@ const Wrapper = styled.div`
     font-size: 16px;
     color: ${COLOR.black};
     transition: 0.2s;
-
 `
 
 function SkeletonProduct () {
@@ -22,7 +21,7 @@ function SkeletonProduct () {
             />
             <Skeleton 
                 style={{
-                    width: "50px",
+                    maxWidth: "50px",
                     marginTop: "10px",
                     height: "15px",
                     borderRadius: "4px",
@@ -30,7 +29,7 @@ function SkeletonProduct () {
             />
             <Skeleton 
                 style={{
-                    width: "160px",
+                    maxWidth: "160px",
                     marginTop: "6px",
                     height: "21px",
                     borderRadius: "4px",
@@ -38,7 +37,7 @@ function SkeletonProduct () {
             />
             <Skeleton 
                 style={{
-                    width: "140px",
+                    maxWidth: "140px",
                     marginTop: "6px",
                     height: "21px",
                     borderRadius: "4px",
@@ -46,7 +45,7 @@ function SkeletonProduct () {
             />
             <Skeleton 
                 style={{
-                    width: "40px",
+                    maxWidth: "40px",
                     marginTop: "10px",
                     height: "26px",
                     borderRadius: "8px",

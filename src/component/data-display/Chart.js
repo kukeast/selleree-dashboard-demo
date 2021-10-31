@@ -3,21 +3,20 @@ import ApexChart from "react-apexcharts";
 import styled from "styled-components";
 import { COLOR } from "../../constants/color";
 import Loading from "./Loading";
-
-const Wrapper = styled.div`
+const LoadingWrapper = styled.div`
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: ${props => props.height + 20}px;
+    justify-content: center;
+`
+const Wrapper = styled.div`
     border-radius: 8px;
     background-color: ${COLOR.card};
     box-shadow: ${COLOR.shadow};
     margin: 20px 0;
-
-    .apexcharts-canvas{
-        margin: 20px auto;
+    padding: 20px 20px 0px 20px;
+    > div {
+        height: ${props => props.height}px;
     }
-
     .apexcharts-tooltip {
         background-color: ${COLOR.backgroundColor};
         color: ${COLOR.black};
@@ -49,7 +48,7 @@ const Wrapper = styled.div`
     }
 `
 
-function Chart ({width, height, type, data, categories, color, isLoading}) {
+function Chart ({height, type, data, categories, color, isLoading}) {
     const state = {
         options: {
             colors : [color],
@@ -66,7 +65,7 @@ function Chart ({width, height, type, data, categories, color, isLoading}) {
             plotOptions: {
                 bar: {
                    borderRadius: 4,
-                //    horizontal: true,
+                   horizontal: false,
                 }
             },
             xaxis: {
@@ -99,14 +98,19 @@ function Chart ({width, height, type, data, categories, color, isLoading}) {
     };
     return (
         <Wrapper height={height}>
-            {isLoading ? <Loading color={color}/>:
-                <ApexChart
-                    options={state.options}
-                    series={state.series}
-                    type={type}
-                    width={width}
-                    height={height}
-                />
+            {isLoading ? 
+                <LoadingWrapper>
+                    <Loading color={color}/>
+                </LoadingWrapper>
+                :
+                <div>
+                    <ApexChart
+                        options={state.options}
+                        series={state.series}
+                        type={type}
+                        height={height}
+                    />
+                </div>
             }
         </Wrapper>
     );

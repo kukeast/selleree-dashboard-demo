@@ -50,6 +50,12 @@ const DatePickerWrapper = styled.div`
     margin-top: 30px;
     text-align: center;
 `
+const FunnelWrapper = styled.div`
+    > div {
+        min-width: 960px;
+    }
+    overflow-x: scroll;
+`
 function SellerFunnel () {
     const [dateRange, setDateRange] = useState({
         startDate: sub(new Date(), {days: 89}),
@@ -101,17 +107,18 @@ function SellerFunnel () {
                     categories={["가입","상점 개설","결제 설정","상품 1개 이상 등록","주문 1개 이상","주문 상태 변경 2개 이상","주문 상태 변경 10개 이상"]}
                     color={COLOR.main}
                     isLoading={response.loading}
-                    width={1080}
                     height={460}
                     type="bar"
                 />
             </Container>
             <Container className="mt30">
-                <FunnelTable
-                    funnelData={tableData}
-                    isLoading={response.loading}
-                    dateRange={dateRange}
-                />
+                <FunnelWrapper>
+                    <FunnelTable
+                        funnelData={tableData}
+                        isLoading={response.loading}
+                        dateRange={dateRange}
+                    />
+                </FunnelWrapper>
             </Container>
         </>
     )

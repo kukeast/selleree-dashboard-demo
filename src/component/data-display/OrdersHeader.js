@@ -8,6 +8,7 @@ const Wrapper = styled.div`
     font-size: 14px;
     color: ${COLOR.gray5};
     align-items: center;
+    box-sizing: border-box;
 `
 const Image = styled.div`
     width: 60px;

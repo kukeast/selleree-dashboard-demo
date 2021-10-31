@@ -17,10 +17,13 @@ const Wrapper = styled.div`
     right: 0;
     top: 80px;
     bottom: 0;
-    padding: 40px 0;
+    padding: 40px;
     background-color: ${COLOR.backgroundColor};
     overflow: scroll;
     border-radius: 16px 16px 0 0;
+    @media screen and (max-width: 425px) {
+        padding: 20px;
+    }
 `
 const Close = styled.div`
     position: fixed;

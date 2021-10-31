@@ -13,6 +13,10 @@ import SkeletonOrder from './SkeletonOrder';
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
+    > div {
+        min-width: 960px;
+    }
+    overflow-x: scroll;
 `
 const SortWrapper = styled.div`
     text-align: center;
@@ -65,8 +69,8 @@ function Orders () {
                     {sortBy === "created_at" ? "최근 생성 순" : "최근 업데이트 순"}
                 </TextButton>
             </SortWrapper>
-            <OrdersHeader sortBy={sortBy}/>
             <Wrapper>
+                <OrdersHeader sortBy={sortBy}/>
                 {orderList[0] ? orderList.map((order, index) => (
                     <div key={order.id}>
                         {index === 0 

@@ -23,6 +23,9 @@ const Wrapper = styled.div`
     display: grid;
     grid-template-columns: 7fr 3fr;
     gap: 20px;
+    @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
 `
 const ProductWrapper = styled.div`
     background-color: ${COLOR.card};

@@ -34,7 +34,7 @@ const FulfillmentStatus ={
     }
 }
 const Wrapper = styled.div`
-    width: 640px;
+    max-width: 640px;
     margin: auto;
 `
 const Header = styled.div`

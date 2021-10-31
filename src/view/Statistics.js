@@ -9,9 +9,13 @@ import TodayCard from '../component/data-display/TodayCard';
 import { COLOR } from '../constants/color';
 
 const CardWrapper = styled.div`
-    display: flex;
+    display: grid;
     gap: 20px;
     margin-top: 20px;
+    @media screen and (max-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    grid-template-columns: repeat(4, 1fr);
 `
 
 function Statistics ({repatch}) {
