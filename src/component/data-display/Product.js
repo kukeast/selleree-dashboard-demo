@@ -19,6 +19,7 @@ const Image = styled.div`
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 8px;
+    border: 1px solid ${COLOR.gray2};
 `
 const StoreName = styled.p`
     font-size: 12px;
