@@ -58,7 +58,7 @@ const FunnelWrapper = styled.div`
 `
 function SellerFunnel () {
     const [dateRange, setDateRange] = useState({
-        startDate: sub(new Date(), {days: 89}),
+        startDate: new Date("2021.8.1"),
         endDate: new Date(),
     })
     const [response] = useAsync(() => getFunnel(dateRange), [dateRange])

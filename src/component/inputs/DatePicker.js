@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css'
 import './DatePicker.scss'
@@ -8,7 +8,6 @@ import styled, { css } from 'styled-components';
 import { COLOR } from '../../constants/color';
 import TextButton from './TextButton';
 import Button from './Button';
-import { useEffect } from 'react/cjs/react.development';
 
 const Wrapper = styled.div`
     display: inline-flex;
@@ -22,9 +21,9 @@ const Wrapper = styled.div`
         &:hover{
             background-color: ${COLOR.gray3};
         }
-    input{
-        color: ${COLOR.black};
-    }
+        input{
+            color: ${COLOR.black};
+        }
     }
 
     .rdrDateDisplayItemActive{
@@ -153,10 +152,10 @@ const rangeItems = [
 ]
 
 function DatePicker ({ callback }) {
-    const [select, setSelect] = useState(5)
+    const [select, setSelect] = useState(-1)
     const [isShow, setIsShow] = useState(false)
     const [date, setDate] = useState({
-        startDate: sub(new Date(), {days: 89}),
+        startDate: new Date("2021.8.1"),
         endDate: new Date(),
         key: 'selection'
     })
