@@ -14,24 +14,33 @@ const THEME = {
         backgroundColor : COLOR.main2,
         hover: COLOR.main3,
         active: COLOR.main2,
+    },
+    "mono" : {
+        color: COLOR.black,
+        backgroundColor : COLOR.gray2,
+        hover: COLOR.gray3,
+        active: COLOR.gray2,
     }
 }
-const SIZE = {
-    "medium" : {
+const SHAPE = {
+    "default" : {
         padding: "16px 18px",
+        borderRadius: "12px",
     },
-    "small" : {
-        padding: "10px 12px",
+    "pill" : {
+        padding: "10px 16px",
+        borderRadius: "20px",
     }
 }
 
 const Wrapper = styled.button`
     font-size: 15px;
+    font-weight: 500;
     color: ${props => THEME[props.type].color};
     background-color: ${props => THEME[props.type].backgroundColor};
     line-height: 20px;
-    padding: ${props => SIZE[props.size].padding};
-    border-radius: 12px;
+    padding: ${props => SHAPE[props.shape].padding};
+    border-radius: ${props => SHAPE[props.shape].borderRadius};
     cursor: pointer;
     transition: 0.3s;
     display: inline-flex;
@@ -46,11 +55,11 @@ const Wrapper = styled.button`
     }
 `
 
-function Button ({ type, size, isLoading, onClick, children }) {
+function Button ({ type, shape, isLoading, onClick, children }) {
     return(
-        <Wrapper type={type} size={size} onClick={!isLoading ? onClick : null}>
+        <Wrapper type={type} shape={shape} onClick={!isLoading ? onClick : null}>
             {isLoading 
-                ? <Loading color={COLOR.buttonText}/>
+                ? <Loading color={THEME[type].color}/>
                 :children
             }
         </Wrapper>
@@ -59,7 +68,7 @@ function Button ({ type, size, isLoading, onClick, children }) {
 
 Button.defaultProps = {
     type : "primary",
-    size: "medium",
+    shape: "default",
 }
 
 export default Button

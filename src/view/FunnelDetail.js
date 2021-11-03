@@ -147,6 +147,7 @@ function FunnelDetail ({funnelData, dateRange}) {
                     {sellers.length % 10 === 0 && 
                         <ButtonWrapper>
                             <Button 
+                                type="mono"
                                 onClick={() => setLimit(prev => prev + 10)} 
                                 isLoading={response.loading}
                             >
