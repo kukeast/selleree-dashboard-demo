@@ -25,7 +25,7 @@ const Title = styled.div`
     flex: 4;
 `
 const Name = styled.div`
-    flex: 1;
+    flex: 1.5;
 `
 const Financial = styled.div`
     text-align: right;
