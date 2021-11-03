@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
-import {sub} from "date-fns";
 import useAsync from '../util/useAsync';
 import Chart from '../component/data-display/Chart';
 import FunnelTable from '../component/data-display/FunnelTable';
