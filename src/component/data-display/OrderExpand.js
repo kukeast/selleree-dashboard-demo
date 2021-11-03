@@ -4,21 +4,42 @@ import styled from 'styled-components'
 import { COLOR } from '../../constants/color'
 import Button from '../inputs/Button';
 import Icon from './Icon';
-
 const Wrapper = styled.div`
-    display: flex;
     &:hover{
-        background-color: ${COLOR.gray1};
-        border-radius: 8px;
+        > div:nth-child(2), > div:nth-child(3){
+            height: 10px;
+            opacity: 1;
+        }
+        > div:nth-child(1){
+            background-color: ${COLOR.gray1};
+        }
     }
+    margin: 10px 0;
+    cursor: s-resize;
+`
+
+const OrderWrapper = styled.div`
+    position: relative;
+    display: flex;
+    border-radius: 8px;
     transition: 0.2s;
     background-color: ${COLOR.white};
-    margin: 10px 0;
     padding: 10px 16px;
     font-size: 15px;
     color: ${COLOR.black};
     align-items: center;
-    cursor: pointer;
+`
+const Card1 = styled.div`
+    background-color: ${COLOR.gray2};
+    height: 0px;
+    transition: 0.3s;
+    border-radius: 0 0 8px 8px;
+    margin: 0 15px;
+    opacity: 0;
+`
+const Card2 = styled(Card1)`
+    background-color: ${COLOR.gray3};
+    margin: 0 30px;
 `
 const Image = styled.div`
     width: 60px;
@@ -47,24 +68,23 @@ function OrderExpand ({order, sortBy, length, onClick}) {
         backgroundImage: "url(" + order.image_url + "?w=300)"
     }
     return(
-        <>
-            <Wrapper onClick={onClick}>
+        <Wrapper onClick={onClick}>
+            <OrderWrapper>
                 <CreatedAt>{format(parseISO(order[sortBy]), 'H시 m분 s초')}</CreatedAt>
                 <Image style={backgroundImage}/>
                 <Title>{order.title}</Title>
                 <Name>{order.name}</Name>
                 <More>
-                    <Button 
-                        onClick={onClick} 
-                        type="secondary"
-                        size="small"
-                    >
-                        {length}개 펼치기
+                    <Button type="secondary" shape="pill">
+                        {length}개
                         <Icon name="arrow_down" color={COLOR.main} size={16}/>
                     </Button>
                 </More>
-            </Wrapper>
-        </>
+            </OrderWrapper>
+            <Card1/>
+            {length > 2 && <Card2/>}
+            
+        </Wrapper>
     )
 }
 
