@@ -48,6 +48,7 @@ const Image = styled.div`
     border-radius: 8px;
     background-color: ${COLOR.gray2};
     margin-right: 16px;
+    border: 1px solid ${COLOR.gray2};
 `
 const CreatedAt = styled.div`
     flex: 1.5;
