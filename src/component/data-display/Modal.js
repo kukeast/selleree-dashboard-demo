@@ -9,6 +9,7 @@ const Dim = styled.div`
     inset: 0;
     background-color: ${COLOR.dim};
     cursor: pointer;
+    z-index: 9;
 `
 const Wrapper = styled.div`
     position: fixed;
@@ -21,6 +22,7 @@ const Wrapper = styled.div`
     background-color: ${COLOR.backgroundColor};
     overflow: scroll;
     border-radius: 16px 16px 0 0;
+    z-index: 9;
     @media screen and (max-width: 425px) {
         padding: 20px;
     }
@@ -40,6 +42,7 @@ const Close = styled.div`
     justify-content: center;
     cursor: pointer;
     transition: 0.3s;
+    z-index: 9;
     :hover{
         background-color: ${COLOR.gray2};
     }

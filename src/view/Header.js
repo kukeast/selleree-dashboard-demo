@@ -42,7 +42,7 @@ const HeaderWrapper = styled.div`
     `}
     width: 100%;
     background-color: ${COLOR.backgroundColor};
-    z-index: 99;
+    z-index: 9;
 `
 
 function Header () {

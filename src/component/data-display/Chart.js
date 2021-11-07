@@ -24,6 +24,7 @@ const Wrapper = styled.div`
         border-radius : 8px !important;
         box-shadow: ${COLOR.shadow} !important;
         border: 0 !important;
+        z-index: 6;
         .apexcharts-tooltip-series-group{
             padding: 0;
             .apexcharts-tooltip-y-group{
