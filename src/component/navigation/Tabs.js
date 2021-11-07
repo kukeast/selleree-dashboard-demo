@@ -8,10 +8,10 @@ const Wrapper = styled.div`
 `
 
 const TabWrapper = styled(NavLink)`
-    padding: 12px 0;
+    padding: 16px 0;
     display: inline-flex;
     color: ${COLOR.gray5};
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
     line-height: 20px;
     transition: 0.3s;

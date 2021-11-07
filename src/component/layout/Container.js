@@ -16,11 +16,8 @@ const Wrapper = styled.div`
     &.mt30{
         margin-top: 30px;
     }
-    &.bottom-line{
-        border-bottom: 1px solid ${COLOR.gray2};
-    }
-    &:last-child{
-        margin-bottom: 80px;
+    &.pt30{
+        padding-top: 30px;
     }
 `
 const Con = styled.div`
