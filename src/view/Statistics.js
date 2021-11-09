@@ -112,7 +112,7 @@ function Statistics ({repatch}) {
             <Chart 
                 data={chartData.data}
                 categories={chartData.categories}
-                color={cards[select].color}
+                color={[cards[select].color]}
                 isLoading={chart.loading}
                 width={1080}
                 height={380}

@@ -13,7 +13,7 @@ const Wrapper = styled.div`
     background-color: ${COLOR.card};
     box-shadow: ${COLOR.shadow};
     margin: 20px 0;
-    padding: 20px 20px 0px 20px;
+    padding: 20px 20px 10px 20px;
     > div {
         height: ${props => props.height}px;
     }
@@ -27,6 +27,7 @@ const Wrapper = styled.div`
         z-index: 6;
         .apexcharts-tooltip-series-group{
             padding: 0;
+            background-color: none !important;
             .apexcharts-tooltip-y-group{
                 padding: 0;
             }
@@ -49,10 +50,10 @@ const Wrapper = styled.div`
     }
 `
 
-function Chart ({height, type, data, categories, color, isLoading}) {
+function Chart ({height, type, data, categories=[], labels=[], color, isLoading}) {
     const state = {
         options: {
-            colors : [color],
+            colors : color,
             chart: {
                 fontFamily: 'Spoqa Han Sans Neo, sans-serif',
                 id: "basic-bar",
@@ -67,6 +68,9 @@ function Chart ({height, type, data, categories, color, isLoading}) {
                 bar: {
                    borderRadius: 4,
                    horizontal: false,
+                },
+                pie: {
+                    expandOnClick: false,
                 }
             },
             xaxis: {
@@ -82,18 +86,21 @@ function Chart ({height, type, data, categories, color, isLoading}) {
             tooltip:{
                 x:{
                     show: false
-                }
+                },
+                fillSeriesColor: false,
             },
             grid: {
                 borderColor: COLOR.gray2
             },
             legend:{
-                offsetY: "6",
+                position: 'bottom',
+                // offsetY: "6",    
                 markers: {
                     width: 8,
                     height: 8,
                 }
-            }
+            },
+            labels: labels           
         },
         series: data
     };
