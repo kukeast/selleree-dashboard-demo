@@ -224,21 +224,23 @@ function OrderDetail ({orderId}) {
                         <Para>{detail.payment_method === "CASH" ? "무통장 입금" : "카드 · 간편결제"}</Para>
                     </CardInfo>
                 </Card>
-                <Card>
-                    <Title>입금 계좌</Title>
-                    <CardInfo>
-                        <Label>예금주</Label>
-                        <Para>{detail.bank_account_holder}</Para>
-                    </CardInfo>
-                    <CardInfo>
-                        <Label>은행</Label>
-                        <Para>{detail.bank_name}</Para>
-                    </CardInfo>
-                    <CardInfo>
-                        <Label>계좌번호</Label>
-                        <Para>{detail.bank_account_number}</Para>
-                    </CardInfo>
-                </Card>
+                {detail.payment_method === "CASH" &&
+                    <Card>
+                        <Title>입금 계좌</Title>
+                        <CardInfo>
+                            <Label>예금주</Label>
+                            <Para>{detail.bank_account_holder}</Para>
+                        </CardInfo>
+                        <CardInfo>
+                            <Label>은행</Label>
+                            <Para>{detail.bank_name}</Para>
+                        </CardInfo>
+                        <CardInfo>
+                            <Label>계좌번호</Label>
+                            <Para>{detail.bank_account_number}</Para>
+                        </CardInfo>
+                    </Card>
+                }
             </> : <SkeletonOrderDetail/>}
         </Wrapper>
     )
