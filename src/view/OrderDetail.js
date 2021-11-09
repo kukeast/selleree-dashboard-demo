@@ -221,7 +221,7 @@ function OrderDetail ({orderId}) {
                     </CardInfo>
                     <CardInfo>
                         <Label>결제 방법</Label>
-                        <Para>무통장 입금</Para>
+                        <Para>{detail.payment_method === "CASH" ? "무통장 입금" : "카드 · 간편결제"}</Para>
                     </CardInfo>
                 </Card>
                 <Card>
