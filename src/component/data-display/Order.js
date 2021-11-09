@@ -62,7 +62,13 @@ const CreatedAt = styled.div`
 `
 const Price = styled.div`
     flex: 1;
-    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+`
+const PaymentMethod = styled.span`
+    font-size: 22px;
 `
 const Title = styled.div`
     flex: 4;
@@ -97,10 +103,14 @@ function Order ({order, sortBy}) {
         <>
             <Wrapper onClick={() => setIsOpen(true)}>
                 <CreatedAt>{format(parseISO(order[sortBy]), 'H시 m분 s초')}</CreatedAt>
+                
                 <Image style={backgroundImage}/>
                 <Title>{order.title}</Title>
                 <Name>{order.name}</Name>
-                <Price>{totalPrice}원</Price>
+                <Price>
+                    {totalPrice}원 
+                    <PaymentMethod>{order.payment_method === "CASH" ? "💸" : "💳"}</PaymentMethod>
+                </Price>
                 <Financial status={order.financial_status}>{FinancialStatus[order.financial_status].text}</Financial>
                 <Fulfillment status={order.fulfillment_status}>{FulfillmentStatus[order.fulfillment_status].text}</Fulfillment>
             </Wrapper>
