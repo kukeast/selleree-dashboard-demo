@@ -62,7 +62,6 @@ function SellerFunnel () {
     })
     const [response] = useAsync(() => getFunnel(dateRange), [dateRange])
     const [funnelData, setFunnelData] = useState([])
-    const [tableData, setTableData] = useState([])
 
     const roundToTwo = num => {
         return +(Math.round(num + "e+2")  + "e-2");
@@ -73,24 +72,18 @@ function SellerFunnel () {
     
     useEffect(() => {
         if(response.data){
-            setFunnelData(response.data.data)
-        }
-    }, [response])
-
-    useEffect(() => {
-        if(funnelData[0]){
-            setTableData(defaultFunnel.map((data,i) => (
+            setFunnelData(defaultFunnel.map((data,i) => (
                 {
                     ...data,
-                    count: funnelData[i],
-                    conversionRate: roundToTwo(funnelData[i] / funnelData[0] * 100),
-                    bounceRate: funnelData[i-1] ? roundToTwo(100 - funnelData[i] / funnelData[0] * 100) : null,
-                    previousConversionRate: funnelData[i-1] ? roundToTwo(funnelData[i] / funnelData[i-1] * 100) : null,
-                    previousBounceRate: funnelData[i-1] ? roundToTwo(100 - funnelData[i] / funnelData[i-1] * 100) : null,
+                    count: response.data.data[i],
+                    conversionRate: roundToTwo(response.data.data[i] / response.data.data[0] * 100),
+                    bounceRate: response.data.data[i-1] ? roundToTwo(100 - response.data.data[i] / response.data.data[0] * 100) : null,
+                    previousConversionRate: response.data.data[i-1] ? roundToTwo(response.data.data[i] / response.data.data[i-1] * 100) : null,
+                    previousBounceRate: response.data.data[i-1] ? roundToTwo(100 - response.data.data[i] / response.data.data[i-1] * 100) : null,
                 }
             )))
         }
-    }, [funnelData])
+    }, [response])
 
     return(
         <>
@@ -101,10 +94,10 @@ function SellerFunnel () {
                 <Chart
                     data={[{
                         name: "Count",
-                        data: funnelData,
+                        data: response.data ? response.data.data : [],
                     }]}
                     categories={["가입","상점 개설","결제 설정","상품 1개 이상 등록","주문 1개 이상","주문 상태 변경 2개 이상","주문 상태 변경 10개 이상"]}
-                    color={COLOR.main}
+                    color={[COLOR.main]}
                     isLoading={response.loading}
                     height={460}
                     type="bar"
@@ -113,7 +106,7 @@ function SellerFunnel () {
             <Container className="mt30">
                 <FunnelWrapper>
                     <FunnelTable
-                        funnelData={tableData}
+                        funnelData={funnelData}
                         isLoading={response.loading}
                         dateRange={dateRange}
                     />

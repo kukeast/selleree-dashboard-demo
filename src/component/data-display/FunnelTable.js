@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 
 function FunnelTable ({funnelData, isLoading, dateRange}) {
     return(
-        <>
+        <div>
             <FunnelHeader/>
             <Wrapper>
                 {!isLoading ? funnelData.map(data => (
@@ -31,7 +31,7 @@ function FunnelTable ({funnelData, isLoading, dateRange}) {
                     </>
                 }
             </Wrapper>
-        </>
+        </div>
     )
 }
 
