@@ -68,7 +68,7 @@ function SkeletonCard () {
     )
 }
 
-function SkeletonFunnelDetail () {
+function SkeletonSellers () {
     return(
         <Wrapper>
             <SkeletonCard/>
@@ -82,4 +82,4 @@ function SkeletonFunnelDetail () {
     )
 }
 
-export default SkeletonFunnelDetail
+export default SkeletonSellers

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import useAsync from '../util/useAsync';
 import Chart from '../component/data-display/Chart';
-import FunnelTable from '../component/data-display/FunnelTable';
+import Table from '../component/data-display/Table';
 import DatePicker from '../component/inputs/DatePicker';
 import Container from '../component/layout/Container';
 import { COLOR } from '../constants/color';
@@ -11,37 +11,37 @@ import { getFunnel } from '../util/api';
 const defaultFunnel = [
     {
         id : 1,
-        step : "1단계",
+        subtitle : "1단계",
         title : "가입",
     },
     {
         id : 2,
-        step : "2단계",
+        subtitle : "2단계",
         title : "상점 개설",
     },
     {
         id : 3,
-        step : "3단계",
+        subtitle : "3단계",
         title : "결제 설정",
     },
     {
         id : 4,
-        step : "4단계",
+        subtitle : "4단계",
         title : "상품 1개 이상 등록",
     },
     {
         id : 5,
-        step : "5단계",
+        subtitle : "5단계",
         title : "주문 1개 이상",
     },
     {
         id : 6,
-        step : "6단계",
+        subtitle : "6단계",
         title : "주문 상태 변경 2개 이상",
     },
     {
         id : 7,
-        step : "7단계",
+        subtitle : "7단계",
         title : "주문 상태 변경 10개 이상",
     },
 ]
@@ -89,7 +89,7 @@ function SellerFunnel () {
         <>
             <Container>
                 <DatePickerWrapper>
-                    <DatePicker callback={callbackDateRange}/>
+                    <DatePicker defaultDate="2021.8.1" callback={callbackDateRange}/>
                 </DatePickerWrapper>
                 <Chart
                     data={[{
@@ -105,8 +105,9 @@ function SellerFunnel () {
             </Container>
             <Container className="mt30">
                 <FunnelWrapper>
-                    <FunnelTable
-                        funnelData={funnelData}
+                    <Table
+                        type="seller-funnel"
+                        data={funnelData}
                         isLoading={response.loading}
                         dateRange={dateRange}
                     />
