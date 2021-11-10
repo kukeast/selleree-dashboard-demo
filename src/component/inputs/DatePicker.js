@@ -151,11 +151,11 @@ const rangeItems = [
     },
 ]
 
-function DatePicker ({ callback }) {
+function DatePicker ({ defaultDate, callback }) {
     const [select, setSelect] = useState(-1)
     const [isShow, setIsShow] = useState(false)
     const [date, setDate] = useState({
-        startDate: new Date("2021.8.1"),
+        startDate: new Date(defaultDate),
         endDate: new Date(),
         key: 'selection'
     })
