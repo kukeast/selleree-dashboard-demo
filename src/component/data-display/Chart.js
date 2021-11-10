@@ -8,6 +8,12 @@ const LoadingWrapper = styled.div`
     align-items: center;
     justify-content: center;
 `
+const Title = styled.p`
+    font-size: 18px;
+    font-weight: bold;
+    color: ${COLOR.black};
+    margin-top: 6px;
+`
 const Wrapper = styled.div`
     border-radius: 8px;
     background-color: ${COLOR.card};
@@ -50,7 +56,7 @@ const Wrapper = styled.div`
     }
 `
 
-function Chart ({height, type, data, categories=[], labels=[], color, isLoading}) {
+function Chart ({title, height, type, data, categories=[], labels=[], color, isLoading}) {
     const state = {
         options: {
             colors : color,
@@ -93,8 +99,7 @@ function Chart ({height, type, data, categories=[], labels=[], color, isLoading}
                 borderColor: COLOR.gray2
             },
             legend:{
-                position: 'bottom',
-                // offsetY: "6",    
+                position: 'bottom',  
                 markers: {
                     width: 8,
                     height: 8,
@@ -108,17 +113,20 @@ function Chart ({height, type, data, categories=[], labels=[], color, isLoading}
         <Wrapper height={height}>
             {isLoading ? 
                 <LoadingWrapper>
-                    <Loading color={color}/>
+                    <Loading color={color[0]}/>
                 </LoadingWrapper>
                 :
-                <div>
-                    <ApexChart
-                        options={state.options}
-                        series={state.series}
-                        type={type}
-                        height={height}
-                    />
-                </div>
+                <>
+                    {title && <Title>{title}</Title>}
+                    <div>
+                        <ApexChart
+                            options={state.options}
+                            series={state.series}
+                            type={type}
+                            height={height}
+                        />
+                    </div>
+                </>
             }
         </Wrapper>
     );
