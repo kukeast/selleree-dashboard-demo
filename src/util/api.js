@@ -88,11 +88,19 @@ export async function getFunnel(dateRange) {
     return response.data;
 }
 
-export async function getFunnelDetail(dateRange, step, limit) {
-    const response = await Api.post(`https://${url}/api/funnel-detail/${limit}`, {
+export async function getPaymentSetting(dateRange) {
+    const response = await Api.post(`https://${url}/api/payment-setting`, {
         startDate: format(dateRange.startDate, "yyyy.MM.dd"),
         endDate: format(dateRange.endDate, "yyyy.MM.dd"),
-        step: step.toString()
+    });
+    return response.data;
+}
+
+export async function getSellers(dateRange, segment, limit) {
+    const response = await Api.post(`https://${url}/api/sellers/${limit}`, {
+        startDate: format(dateRange.startDate, "yyyy.MM.dd"),
+        endDate: format(dateRange.endDate, "yyyy.MM.dd"),
+        segment: segment.toString()
     });
     return response.data;
 }

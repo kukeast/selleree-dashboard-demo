@@ -6,6 +6,7 @@ import ProductList from './view/ProductList';
 import OrderList from './view/OrderList';
 import LogIn from './view/LogIn';
 import SellerFunnel from './view/SellerFunnel';
+import PaymentSetting from './view/PaymentSetting';
 
 function App() {
   window.localStorage.setItem("theme", "light")
@@ -17,6 +18,7 @@ function App() {
         <PrivateRoute header path="/products" component={ProductList}/>
         <PrivateRoute header path="/orders" component={OrderList}/>
         <PrivateRoute header path="/funnel" component={SellerFunnel}/>
+        <PrivateRoute header path="/payment-setting" component={PaymentSetting}/>
         <Route path="/login" component={LogIn}/>
       </Switch>
     </>

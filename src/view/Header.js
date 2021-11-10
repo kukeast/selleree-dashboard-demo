@@ -25,6 +25,11 @@ const tabs = [
         title : "판매자 퍼널",
         path : "/funnel"
     },
+    {
+        id : 5,
+        title : "결제 설정 현황",
+        path : "/payment-setting"
+    },
 ]
 
 const HeaderWrapper = styled.div`
