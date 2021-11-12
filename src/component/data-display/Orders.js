@@ -46,7 +46,6 @@ function Orders () {
     
     useEffect(() => {
         if(response.data){
-            //setOrderList(response.data.data)
             const newArr = []
             var items = []
             var stack = {}
@@ -55,29 +54,16 @@ function Orders () {
                     items.push(order)
                 }else if(response.data.data[index-1] && order.name === response.data.data[index-1].name && format(parseISO(order[sortBy]), 'M월 d일') === format(parseISO(response.data.data[index-1][sortBy]), 'M월 d일')){
                     items.push(order)
-                    if(index === response.data.data.length - 1){
-                        stack = {
-                            id: order.id,
-                            type : "stack",
-                            items : items,
-                            created_at : order.created_at,
-                            last_modified_at : order.last_modified_at,
-                        }
-                        newArr.push(stack)
-                        items = []
+                    stack = {
+                        id: order.id,
+                        type : "stack",
+                        items : items,
+                        created_at : order.created_at,
+                        last_modified_at : order.last_modified_at,
                     }
+                    newArr.push(stack)
+                    items = []
                 }else{
-                    if(items[0]){
-                        stack = {
-                            id: response.data.data[index-1].id,
-                            type : "stack",
-                            items : items,
-                            created_at : response.data.data[index-1].created_at,
-                            last_modified_at : response.data.data[index-1].last_modified_at,
-                        }
-                        newArr.push(stack)
-                        items = []
-                    }  
                     newArr.push(order)
                 }
             })
