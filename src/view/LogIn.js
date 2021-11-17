@@ -13,7 +13,8 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 24px;
-    width: 400px;
+    max-width: 400px;
+    padding: 20px;
     height: fit-content;
     position: absolute; 
     inset: 0;
@@ -35,7 +36,6 @@ const Alert = styled.div`
     background-color: ${COLOR.red1};
 `
 function LogIn ({history}) {
-    // eslint-disable-next-line
     const refreshTokenVaild = ValidToken("refresh-token")
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
