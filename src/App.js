@@ -9,7 +9,6 @@ import SellerFunnel from './view/SellerFunnel';
 import PaymentSetting from './view/PaymentSetting';
 
 function App() {
-  window.localStorage.setItem("theme", "light")
   return (
     <>
       <GlobalStyle/>
