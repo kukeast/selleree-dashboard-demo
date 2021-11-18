@@ -61,14 +61,17 @@ const Para = styled.div`
     font-size: 15px;
     color: ${COLOR.black};
     line-height: 1.6;
-    flex: 1;
+    flex: 0.5;
+`
+const Emoji = styled(Para)`
+    font-size: 20px;
 `
 const Label = styled.p`
     font-size: 13px;
     color: ${COLOR.gray6};
 `
 const StoreWrapper = styled.div`
-    flex: 2;
+    flex: 1.5;
 `
 const ButtonWrapper = styled.div`
     margin-top: 20px;
@@ -104,6 +107,7 @@ function Card ({data}) {
                         <Label>{data.identifier}.selleree.shop</Label>
                         {data.name && <StoreName>{data.name}</StoreName>}
                     </StoreWrapper>
+                    <Emoji>{data.businessRegistrationNumber !== "null" && "💼"}</Emoji>
                     <Para><Icon size={20} name="tag20" color={COLOR.green}/>{data.itemCount ? data.itemCount : 0}개</Para>
                     <Para><Icon size={20} name="cart20" color={COLOR.yellow}/>{data.orderCount ? data.orderCount : 0}개</Para>
                 </>
