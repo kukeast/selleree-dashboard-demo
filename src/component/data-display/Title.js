@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { changeTheme, COLOR } from '../../constants/color'
+import { COLOR } from '../../constants/color'
 
 const Wrapper = styled.div`
     display: flex;
@@ -27,7 +27,7 @@ function Title ({title, subtitle, iconSrc}) {
     return(
         <Wrapper>
             {iconSrc && <img src={iconSrc} alt="header"/>}
-            <h1 onClick={changeTheme}>{title}</h1>
+            <h1>{title}</h1>
             <p>{subtitle}</p>
         </Wrapper>
     )
