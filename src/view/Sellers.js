@@ -107,13 +107,13 @@ function Card ({data}) {
                         <Label>{data.identifier}.selleree.shop</Label>
                         {data.name && <StoreName>{data.name}</StoreName>}
                     </StoreWrapper>
-                    <Emoji>{data.businessRegistrationNumber !== "null" && "💼"}</Emoji>
+                    <Emoji>{data.businessRegistrationNumber && data.businessRegistrationNumber !== "null" && "💼"}</Emoji>
                     <Para><Icon size={20} name="tag20" color={COLOR.green}/>{data.itemCount ? data.itemCount : 0}개</Para>
                     <Para><Icon size={20} name="cart20" color={COLOR.yellow}/>{data.orderCount ? data.orderCount : 0}개</Para>
                 </>
                 :
                 <StoreWrapper>
-                        <Label>{data.identifier}</Label>
+                    <Label>{data.identifier}</Label>
                 </StoreWrapper>
             }
         </CardWrapper>
