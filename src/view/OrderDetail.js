@@ -5,6 +5,7 @@ import { COLOR } from '../constants/color'
 import { getOrderDetail } from '../util/api'
 import useAsync from '../util/useAsync'
 import SkeletonOrderDetail from '../component/data-display/SkeletonOrderDetail';
+import Icon from '../component/data-display/Icon';
 const FinancialStatus ={
     WAITING : {
         color: COLOR.yellow,
@@ -43,10 +44,19 @@ const Header = styled.div`
     justify-content: space-between;
     margin: 20px 0 30px;
 `
-const StoreName = styled.p`
+const StoreName = styled.a`
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
     font-size: 15px;
     font-weight: bold;
     color: ${COLOR.main};
+    transition: 0.3s;
+    padding: 0 2px;
+    border-radius: 4px;
+    :hover{
+        background-color: ${COLOR.main2};
+    }
 `
 const OrderTitle = styled.p`
     font-size: 20px;
@@ -133,7 +143,8 @@ function OrderDetail ({orderId}) {
     const backgroundImage = detail && {
         backgroundImage: `url(${detail.image_url}?w=300)`
     };
-    const href = detail && `https://${detail.identifier}.selleree.shop/products/${detail.item_id}`
+    const StoreHref = detail && `https://${detail.identifier}.selleree.shop/`
+    const ProductHref = detail && `https://${detail.identifier}.selleree.shop/products/${detail.item_id}`
 
     const formattingPrice = price => {
         return price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
@@ -149,7 +160,10 @@ function OrderDetail ({orderId}) {
             {detail ? <>
                 <Header>
                     <div>
-                        <StoreName>{detail.store_name}</StoreName>
+                        <StoreName href={StoreHref} target="_blank" rel="noreferrer">
+                            {detail.store_name}
+                            <Icon name="new_tab" color={COLOR.main} size={16}/>
+                        </StoreName>
                         <OrderTitle>{detail.buyer_name}님의 주문</OrderTitle>
                         <OrderDate>
                             {format(parseISO(detail.created_at), 'M월 d일 H시 m분 s초')}
@@ -157,7 +171,7 @@ function OrderDetail ({orderId}) {
                     </div>
                     <OrderTitle>{formattingPrice(defaultShippingFee + extraShippingFee + (price * detail.quantity))}원</OrderTitle>
                 </Header>
-                <ItemCard href={href} target="_blank" rel="noreferrer">
+                <ItemCard href={ProductHref} target="_blank" rel="noreferrer">
                     <Image style={backgroundImage}/>
                     <ItemName>{detail.item_name}</ItemName>
                     <Para>{detail.quantity}개</Para>
