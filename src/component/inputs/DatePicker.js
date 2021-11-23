@@ -58,11 +58,21 @@ const Wrapper = styled.div`
     .rdrDayDisabled {
         background-color: ${COLOR.gray1};
         .rdrDayNumber span{
-            color: ${COLOR.gray5};
+            color: ${COLOR.black};
         }
     }
     .rdrDayNumber span{
         color: ${COLOR.black};
+    }
+    .rdrDayPassive{
+        pointer-events: none;
+        .rdrDayNumber span{
+            color: ${COLOR.black};
+        }
+        .rdrInRange, .rdrStartEdge, .rdrEndEdge, .rdrSelected, .rdrDayStartPreview, .rdrDayInPreview, .rdrDayEndPreview{
+            // display: none;
+            background-color: ${COLOR.main3};
+        }
     }
 `
 const PickerWrapper = styled.div`
@@ -149,6 +159,10 @@ const rangeItems = [
         title: "최근 90일",
         days: 89
     },
+    {
+        title: "전체 기간",
+        days: 999
+    },
 ]
 
 function DatePicker ({ defaultDate, callback }) {
@@ -193,11 +207,19 @@ function DatePicker ({ defaultDate, callback }) {
         setSelect(-1)
     }
     const setDefinedRange = (days, index) => {
-        setDate({
-            ...date,
-            startDate: sub(new Date(), {days: days}),
-            endDate: new Date()
-        })
+        if(days === 999){
+            setDate({
+                ...date,
+                startDate: new Date('2021.6.30'),
+                endDate: new Date()
+            })
+        }else{
+            setDate({
+                ...date,
+                startDate: sub(new Date(), {days: days}),
+                endDate: new Date()
+            })
+        }
         setSelect(index)
     }
     useEffect(() => {

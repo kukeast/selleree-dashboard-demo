@@ -359,15 +359,6 @@ $main : #403DD5;
   background: transparent;
 }
 
-.rdrDayPassive{
-  pointer-events: none;
-  .rdrDayNumber span{
-    color: #d5dce0;
-  }
-  .rdrInRange, .rdrStartEdge, .rdrEndEdge, .rdrSelected, .rdrDayStartPreview, .rdrDayInPreview, .rdrDayEndPreview{
-    display: none;
-  }
-}
 
 .rdrDayDisabled {
   .rdrInRange, .rdrStartEdge, .rdrEndEdge, .rdrSelected, .rdrDayStartPreview, .rdrDayInPreview, .rdrDayEndPreview{
