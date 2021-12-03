@@ -8,6 +8,7 @@ import useLocalStorage from '../util/useLocalStorage';
 const SortWrapper = styled.div`
     display: flex;
     justify-content: space-between;
+    margin-bottom: 16px;
     > div{
         flex: 1;
     }
@@ -31,7 +32,7 @@ function OrderList () {
     const switchOrderSort = () => {
         setSortBy(prev => prev === "created_at" ? "last_modified_at" : "created_at")
     }
-    const SelectCallback = value => {
+    const selectCallback = value => {
         setUnit(value)
     }
     return(
@@ -47,7 +48,7 @@ function OrderList () {
                     <Select 
                         options={options} 
                         defaultValue={unit} 
-                        callback={SelectCallback}
+                        callback={selectCallback}
                     />
                 </div>
             </SortWrapper>
