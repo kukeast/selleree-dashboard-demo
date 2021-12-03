@@ -128,8 +128,8 @@ function Card ({data}) {
                         {data.name && <StoreName>{data.name}</StoreName>}
                     </StoreWrapper>
                     <Emoji>{data.businessRegistrationNumber && data.businessRegistrationNumber !== "null" && "💼"}</Emoji>
-                    <Para><Icon size={20} name="tag20" color={COLOR.green}/>{data.itemCount ? data.itemCount : 0}개</Para>
-                    <Para><Icon size={20} name="cart20" color={COLOR.yellow}/>{data.orderCount ? data.orderCount : 0}개</Para>
+                    <Para><Icon size={20} name="tag20" color={COLOR.green}/>{data.item_count ? data.item_count : 0}개</Para>
+                    <Para><Icon size={20} name="cart20" color={COLOR.yellow}/>{data.order_count ? data.order_count : 0}개</Para>
                     <LinkWrapper>
                         <LinkButton to={`/seller/${data.id}`}>
                             <Icon size={24} name="file" color={COLOR.main}/>
