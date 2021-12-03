@@ -59,14 +59,12 @@ export async function getTodayChart(name) {
 }
 
 export async function getProducts(limit) {
-    const response = await Api.get(`https://${url}/api/products/${limit}`);
+    const response = await Api.get(`https://${url}/api/products?limit=${limit}`);
     return response.data;
 }
 
 export async function getOrders(limit, sortBy) {
-    const response = await Api.post(`https://${url}/api/orders/${limit}`, {
-        sortBy : sortBy
-    });
+    const response = await Api.get(`https://${url}/api/orders?limit=${limit}&sortBy=${sortBy}`);
     return response.data;
 }
 
