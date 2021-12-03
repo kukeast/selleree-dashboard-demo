@@ -25,9 +25,12 @@ const Card = styled.div`
     justify-content: space-between;
 `
 const StoreWrapper = styled.div`
-    flex: 2;
+    flex: 1.5;
 `
 const Para = styled.div`
+    flex: 0.75;
+`
+const Link = styled.div`
     flex: 1;
 `
 function SkeletonCard () {
@@ -51,6 +54,8 @@ function SkeletonCard () {
                 />
             </StoreWrapper>
             <Para>
+            </Para>
+            <Para>
                 <Skeleton 
                     style={{
                         width: "60px",
@@ -70,6 +75,16 @@ function SkeletonCard () {
                     }}
                 />
             </Para>
+            <Link>
+                <Skeleton 
+                    style={{
+                        width: "80px",
+                        height: "24px",
+                        borderRadius: "4px",
+                        float: "right",
+                    }}
+                />
+            </Link>
         </Card>
     )
 }
