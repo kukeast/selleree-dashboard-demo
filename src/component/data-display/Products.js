@@ -25,13 +25,13 @@ const ButtonWrapper = styled.div`
     }
 `
 
-function Products ({column, repatch, id}) {
+function Products ({column, repatch}) {
     const [limit, setLimit] = useState(20)
     const [productList, setProductList] = useState([])
-    const [response, repatchResponse] = useAsync(() => getProducts(limit, id),[limit, id])
+    const [response, repatchResponse] = useAsync(() => getProducts(limit),[limit])
     
     useEffect(() => {
-        if(response.data && response.data.data){
+        if(response.data){
             setProductList(response.data.data)
         }
     }, [response])
@@ -44,47 +44,40 @@ function Products ({column, repatch, id}) {
     }, [repatch])
     
     const skeleton = () => {
-        const result = [];
+        const result = []
         for (let i = 0; i < 20; i++) {
-            result.push(<SkeletonProduct key={i}/>);
+            result.push(<SkeletonProduct key={i}/>)
         }
-        return result;
-    };
+        return result
+    }
     return(
         <>
             <Wrapper column={column}>
-                {!response.loading ?
-                    <>
-                        {productList[0] ?
-                            productList.map((product) => (
-                                <Product
-                                    key={product["item-id"]}
-                                    url={product["url"]}
-                                    storeName={product["store-name"]}
-                                    itemName={product["item-name"]}
-                                    price={product["price"]}
-                                    imageCount={product["image-count"]}
-                                    visibility={product["visibility"]}
-                                    deleted={product["deleted"]}
-                                    href={`https://${product["store-id"]}.selleree.shop/products/${product["item-id"]}`}
-                                />
-                            )): 
-                        <p>0개</p>}
-                    </> :
-                skeleton()}
+                {response.loading && productList.length === 0 ?
+                    skeleton() :
+                    productList.map(product => (
+                        <Product
+                            data={product}
+                            key={product.item_id}
+                        />
+                    ))
+                }
             </Wrapper>
-            {productList.length % 10 === 0 &&
-                <ButtonWrapper>
-                    <Button type="mono" onClick={() => setLimit(prev => prev + 20)} isLoading={response.loading}>20개 더 보기</Button>
-                </ButtonWrapper>
-            }
+            <ButtonWrapper>
+                <Button 
+                    type="mono" 
+                    onClick={() => setLimit(prev => prev + 20)} 
+                    isLoading={response.loading}
+                >
+                    20개 더 보기
+                </Button>
+            </ButtonWrapper>
         </>
     )
 }
 
 Products.defaultProps = {
     column: 4,
-    id: 0,
 }
 
 export default Products

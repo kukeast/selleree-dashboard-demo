@@ -43,35 +43,38 @@ const Tags = styled.div`
         font-size: 14px;
         border-radius: 8px;
     }
-    .imageCount{
-        background-color: rgba(66, 133, 244, 0.1);
-        color: #4285F4;
-    }
-    .private{
-        background-color: ${COLOR.gray1};
-        color: ${COLOR.gray6};
-    }
     .delete{
         background-color: rgba(246, 30, 82, 0.1);
         color: #F61E52;
     }
 `
+const ImageCount = styled.p`
+    background-color: rgba(66, 133, 244, 0.1);
+    color: #4285F4;
+`
+const Private = styled.p`
+    background-color: ${COLOR.gray1};
+    color: ${COLOR.gray6};
+`
+const Delete = styled.p`
+    background-color: rgba(246, 30, 82, 0.1);
+    color: #F61E52;
+`
 
-function Product ({url, storeName, itemName, price, imageCount, visibility, deleted, href}) {
+function Product ({ data }) {
     var backgroundImage = {
-        backgroundImage: "url(" + url + "?w=600)"
+        backgroundImage: "url(" + data.url + "?w=600)"
     };
     return(
-        <Wrapper href={href} target="_blank" rel="noreferrer">
+        <Wrapper href={`https://${data.store_id}.selleree.shop/products/${data.item_id}`} target="_blank" rel="noreferrer">
             <Image style={backgroundImage}/>
-            <StoreName>{storeName}</StoreName>
-            <ItemName>{itemName}</ItemName>
-            <Price>{price.slice(0,-3).toString()
-    .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원"}</Price>
+            <StoreName>{data.store_name}</StoreName>
+            <ItemName>{data.item_name}</ItemName>
+            <Price>{data.price.slice(0,-3).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원"}</Price>
             <Tags>
-                <p className="imageCount"><span>{imageCount}</span>장</p>
-                {visibility === "PRIVATE" && <p className="private">비공개</p>}
-                {deleted === "\u0001" && <p className="delete">삭제됨</p>}
+                <ImageCount>{data.image_count}장</ImageCount>
+                {data.visibility === "PRIVATE" && <Private>비공개</Private>}
+                {data.deleted === "\u0001" && <Delete>삭제됨</Delete>}
             </Tags>
         </Wrapper>
     )
