@@ -89,34 +89,34 @@ const Fulfillment = styled.div`
     color: ${props => FulfillmentStatus[props.status].color};
 `
 
-function Order ({order, sortBy}) {
+function Order ({data, sortBy}) {
     const [isOpen, setIsOpen] = useState(false)
-    const defaultShippingFee = parseInt(order.default_shipping_fee)
-    const extraShippingFee = parseInt(order.extra_shipping_fee)
-    const price = parseInt(order.price)
-    const totalPrice = (defaultShippingFee + extraShippingFee + (price * order.quantity)).toString()
+    const defaultShippingFee = parseInt(data.default_shipping_fee)
+    const extraShippingFee = parseInt(data.extra_shipping_fee)
+    const price = parseInt(data.price)
+    const totalPrice = (defaultShippingFee + extraShippingFee + (price * data.quantity)).toString()
     .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
     var backgroundImage = {
-        backgroundImage: "url(" + order.image_url + "?w=300)"
+        backgroundImage: "url(" + data.image_url + "?w=300)"
     }
     return(
         <>
             <Wrapper onClick={() => setIsOpen(true)}>
-                <CreatedAt>{format(parseISO(order[sortBy]), 'H시 m분 s초')}</CreatedAt>
+                <CreatedAt>{format(parseISO(data[sortBy]), 'H시 m분 s초')}</CreatedAt>
                 
                 <Image style={backgroundImage}/>
-                <Title>{order.title}</Title>
-                <Name>{order.name}</Name>
+                <Title>{data.title}</Title>
+                <Name>{data.name}</Name>
                 <Price>
                     {totalPrice}원 
-                    <PaymentMethod>{order.payment_method === "CASH" ? "💸" : "💳"}</PaymentMethod>
+                    <PaymentMethod>{data.payment_method === "CASH" ? "💸" : "💳"}</PaymentMethod>
                 </Price>
-                <Financial status={order.financial_status}>{FinancialStatus[order.financial_status].text}</Financial>
-                <Fulfillment status={order.fulfillment_status}>{FulfillmentStatus[order.fulfillment_status].text}</Fulfillment>
+                <Financial status={data.financial_status}>{FinancialStatus[data.financial_status].text}</Financial>
+                <Fulfillment status={data.fulfillment_status}>{FulfillmentStatus[data.fulfillment_status].text}</Fulfillment>
             </Wrapper>
             {isOpen && 
                 <Modal onClickClose={() => setIsOpen(false)}>
-                    <OrderDetail orderId={order.id}/> 
+                    <OrderDetail orderId={data.id}/> 
                 </Modal>
             }
         </>

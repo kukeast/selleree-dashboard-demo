@@ -67,17 +67,17 @@ const More = styled.div`
     flex: 2;
 `
 
-function OrderExpand ({order, sortBy, length, onClick}) {
+function OrderExpand ({data, sortBy, length, onClick}) {
     var backgroundImage = {
-        backgroundImage: "url(" + order.image_url + "?w=300)"
+        backgroundImage: "url(" + data.image_url + "?w=300)"
     }
     return(
         <Wrapper onClick={onClick}>
             <OrderWrapper>
-                <CreatedAt>{format(parseISO(order[sortBy]), 'H시 m분 s초')}</CreatedAt>
+                <CreatedAt>{format(parseISO(data[sortBy]), 'H시 m분 s초')}</CreatedAt>
                 <Image style={backgroundImage}/>
-                <Title>{order.title}</Title>
-                <Name>{order.name}</Name>
+                <Title>{data.title}</Title>
+                <Name>{data.name}</Name>
                 <More>
                     <Button type="secondary" shape="pill">
                         {length}개
@@ -100,13 +100,13 @@ function OrderStack ( {orders, sortBy} ) {
                 orders.map(order => (
                     <Order
                         key={order.id}
-                        order={order}
+                        data={order}
                         sortBy={sortBy}
                     />
                 )):
                 <OrderExpand
                     key={orders[0].id}
-                    order={orders[0]}
+                    data={orders[0]}
                     length={orders.length}
                     sortBy={sortBy}
                     onClick={() => setIsExpand(true)}
