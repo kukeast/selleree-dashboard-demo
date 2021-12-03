@@ -34,12 +34,12 @@ const DateWrapper = styled.div`
     border-radius: 8px;
 `
 
-function Orders ({ sortBy, unit }) {
+function Orders ({ sortBy, unit, id }) {
     const [limit, setLimit] = useState(parseInt(unit))
     const [orderList, setOrderList] = useState([])
-    const [response] = useAsync(() => getOrders(limit, sortBy),[limit, sortBy])
+    const [response] = useAsync(() => getOrders(limit, sortBy, id),[limit, sortBy, id])
     useEffect(() => {
-        if(response.data){
+        if(response.data && response.data.data){
             const newArr = []
             var items = []
             var stack = {}
@@ -78,28 +78,32 @@ function Orders ({ sortBy, unit }) {
         }
         return result;
     };
-    
+    console.log(orderList.length)
     return(
         <>
             <Wrapper>
                 <OrdersHeader sortBy={sortBy}/>
-                {orderList[0] && !response.loading ? orderList.map((order, index) => (
-                    <div key={order.id}>
-                        {index === 0 
-                            ? <DateWrapper>{format(parseISO(orderList[index][sortBy]), 'M월 d일')}</DateWrapper>
-                            : format(parseISO(orderList[index-1][sortBy]), 'M월 d일') === format(parseISO(orderList[index][sortBy]), 'M월 d일')
-                            ? null
-                            : <DateWrapper>{format(parseISO(orderList[index][sortBy]), 'M월 d일')}</DateWrapper>
-                        }
-                        {order.type === "stack"
-                            ? <OrderStack orders={order.items} sortBy={sortBy}/>
-                            : <Order
-                                order={order}
-                                sortBy={sortBy}
-                            />
-                        }
-                    </div>
-                )): skeleton()}
+                {!response.loading ?
+                    <>
+                        {orderList[0] ? orderList.map((order, index) => (
+                            <div key={order.id}>
+                                {index === 0 
+                                    ? <DateWrapper>{format(parseISO(orderList[index][sortBy]), 'M월 d일')}</DateWrapper>
+                                    : format(parseISO(orderList[index-1][sortBy]), 'M월 d일') === format(parseISO(orderList[index][sortBy]), 'M월 d일')
+                                    ? null
+                                    : <DateWrapper>{format(parseISO(orderList[index][sortBy]), 'M월 d일')}</DateWrapper>
+                                }
+                                {order.type === "stack"
+                                    ? <OrderStack orders={order.items} sortBy={sortBy}/>
+                                    : <Order
+                                        order={order}
+                                        sortBy={sortBy}
+                                    />
+                                }
+                            </div>
+                        )): <p>0개</p>}
+                    </> :
+                skeleton()}
             </Wrapper>
             <ButtonWrapper>
                 <Button type="mono" onClick={() => setLimit(prev => prev + parseInt(unit))} isLoading={response.loading}>{unit}개 더 보기</Button>
@@ -111,6 +115,7 @@ function Orders ({ sortBy, unit }) {
 Orders.defaultProps = {
     sortBy: "created_at",
     unit: 20,
+    id: 0,
 }
 
 export default Orders

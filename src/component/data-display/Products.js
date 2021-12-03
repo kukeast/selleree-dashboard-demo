@@ -25,13 +25,13 @@ const ButtonWrapper = styled.div`
     }
 `
 
-function Products ({column, repatch}) {
+function Products ({column, repatch, id}) {
     const [limit, setLimit] = useState(20)
     const [productList, setProductList] = useState([])
-    const [response, repatchResponse] = useAsync(() => getProducts(limit),[limit])
+    const [response, repatchResponse] = useAsync(() => getProducts(limit, id),[limit, id])
     
     useEffect(() => {
-        if(response.data){
+        if(response.data && response.data.data){
             setProductList(response.data.data)
         }
     }, [response])
@@ -50,23 +50,28 @@ function Products ({column, repatch}) {
         }
         return result;
     };
-    
     return(
         <>
             <Wrapper column={column}>
-                {productList[0] ? productList.map((product) => (
-                    <Product
-                        key={product["item-id"]}
-                        url={product["url"]}
-                        storeName={product["store-name"]}
-                        itemName={product["item-name"]}
-                        price={product["price"]}
-                        imageCount={product["image-count"]}
-                        visibility={product["visibility"]}
-                        deleted={product["deleted"]}
-                        href={`https://${product["store-id"]}.selleree.shop/products/${product["item-id"]}`}
-                    />
-                )): skeleton()}
+                {!response.loading ?
+                    <>
+                        {productList[0] ?
+                            productList.map((product) => (
+                                <Product
+                                    key={product["item-id"]}
+                                    url={product["url"]}
+                                    storeName={product["store-name"]}
+                                    itemName={product["item-name"]}
+                                    price={product["price"]}
+                                    imageCount={product["image-count"]}
+                                    visibility={product["visibility"]}
+                                    deleted={product["deleted"]}
+                                    href={`https://${product["store-id"]}.selleree.shop/products/${product["item-id"]}`}
+                                />
+                            )): 
+                        <p>0개</p>}
+                    </> :
+                skeleton()}
             </Wrapper>
             {productList.length % 10 === 0 &&
                 <ButtonWrapper>
@@ -79,6 +84,7 @@ function Products ({column, repatch}) {
 
 Products.defaultProps = {
     column: 4,
+    id: 0,
 }
 
 export default Products
