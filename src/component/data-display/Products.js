@@ -28,20 +28,13 @@ const ButtonWrapper = styled.div`
 function Products ({column, repatch}) {
     const [limit, setLimit] = useState(20)
     const [productList, setProductList] = useState([])
-    const [response, repatchResponse] = useAsync(() => getProducts(limit),[limit])
+    const [response] = useAsync(() => getProducts(limit), [limit, repatch])
     
     useEffect(() => {
         if(response.data){
             setProductList(response.data.data)
         }
     }, [response])
-
-    useEffect(() => {
-        if(repatch){
-            repatchResponse()
-        }
-        // eslint-disable-next-line
-    }, [repatch])
     
     const skeleton = () => {
         const result = []

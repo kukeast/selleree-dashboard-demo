@@ -12,22 +12,15 @@ const Wrapper = styled.div`
     gap: 16px;
 `
 
-function Shopggus ({repatch}) {
+function Shopggus ({ repatch }) {
     const [shopgguList, setShopgguList] = useState([])
-    const [response, repatchResponse] = useAsync(() => getShopggu())
+    const [response] = useAsync(() => getShopggu(), [repatch])
 
     useEffect(() => {
         if(response.data){
             setShopgguList(response.data.data)
         }
     }, [response])
-
-    useEffect(() => {
-        if(repatch){
-            repatchResponse()
-        }
-        // eslint-disable-next-line
-    }, [repatch])
 
     const skeleton = () => {
         const result = [];

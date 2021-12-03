@@ -18,7 +18,7 @@ const CardWrapper = styled.div`
     grid-template-columns: repeat(4, 1fr);
 `
 
-function Statistics ({repatch}) {
+function Statistics ({ repatch }) {
     const [todayData, setTodayData] = useState([])
     const [chartData, setChartData] = useState({
         categories: [],
@@ -26,8 +26,8 @@ function Statistics ({repatch}) {
     })
     const [select, setSelect] = useState(0)
 
-    const [today, repatchToday] = useAsync(() => getToday())
-    const [chart, repatchChart] = useAsync(() => getTodayChart(cards[select].dataName), [select])
+    const [today] = useAsync(() => getToday(), [repatch])
+    const [chart] = useAsync(() => getTodayChart(cards[select].dataName), [select, repatch])
 
     const cards = [
         {
@@ -66,14 +66,6 @@ function Statistics ({repatch}) {
             setChartData(chart.data.data)
         }
     }, [chart])
-    
-    useEffect(() => {
-        if(repatch){
-            repatchToday()
-            repatchChart()
-        }
-        // eslint-disable-next-line
-    }, [repatch])
 
     const getTodayCount = (data, index) => {
         var result = []
