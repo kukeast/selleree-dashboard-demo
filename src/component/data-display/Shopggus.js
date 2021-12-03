@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import styled from 'styled-components';
-import useAsync from '../../util/useAsync';
+import styled from 'styled-components'
+import useAsync from '../../util/useAsync'
 import Shopggu from './Shopggu'
-import { getShopggu } from '../../util/api';
-import SkeletonShopggu from './SkeletonShopggu';
+import { getShopggu } from '../../util/api'
+import SkeletonShopggu from './SkeletonShopggu'
 
 const Wrapper = styled.div`
     display: flex;  
@@ -23,24 +23,24 @@ function Shopggus ({ repatch }) {
     }, [response])
 
     const skeleton = () => {
-        const result = [];
+        const result = []
         for (let i = 0; i < 16; i++) {
-            result.push(<SkeletonShopggu key={i}/>);
+            result.push(<SkeletonShopggu key={i}/>)
         }
-        return result;
+        return result
     }
 
     return(
         <Wrapper>
-            {shopgguList[0] ? shopgguList.map((shopggu) => (
-                <Shopggu
-                    key={shopggu['store-name']+shopggu['order']}
-                    href= {`https://${shopggu["store-name"]}.selleree.shop/`}
-                    storeName={shopggu['store-name']}
-                    order={shopggu['order']}
-                    date={shopggu['date']}
-                />
-            )): skeleton()}
+            {response.loading ? 
+                skeleton() :
+                shopgguList.map((shopggu) => (
+                    <Shopggu
+                        key={shopggu.store_name + shopggu.order}
+                        data={shopggu}
+                    />
+                ))
+            }
         </Wrapper>
     )
 }
