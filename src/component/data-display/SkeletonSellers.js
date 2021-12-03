@@ -7,6 +7,12 @@ const Wrapper = styled.div`
     width: 640px;
     margin: auto;
 `
+const Header = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 0 30px;
+`
 const Card = styled.div`
     padding: 20px;
     transition: 0.2s;
@@ -71,6 +77,40 @@ function SkeletonCard () {
 function SkeletonSellers () {
     return(
         <Wrapper>
+            <Header>
+                <div>
+                    <Skeleton 
+                        style={{
+                            width: "60px",
+                            height: "19px",
+                            borderRadius: "4px",
+                        }}
+                    />
+                    <Skeleton 
+                        style={{
+                            width: "150px",
+                            height: "25px",
+                            borderRadius: "4px",
+                            margin: "8px 0",
+                        }}
+                    />
+                    <Skeleton 
+                        style={{
+                            width: "80px",
+                            height: "19px",
+                            borderRadius: "4px",
+                        }}
+                    />
+                </div>
+                <Skeleton 
+                    style={{
+                        width: "150px",
+                        height: "25px",
+                        borderRadius: "4px",
+                        margin: "8px 0",
+                    }}
+                />
+            </Header>
             <SkeletonCard/>
             <SkeletonCard/>
             <SkeletonCard/>
