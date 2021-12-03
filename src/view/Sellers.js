@@ -157,9 +157,10 @@ function Sellers ({data, dateRange}) {
             setSellers(response.data.data)
         }
     }, [response])
+
     return(
         <Wrapper>
-            {data && sellers ? 
+            {data && data.count === 0 ? 
                 <>
                     <Header>
                         <div>
@@ -169,6 +170,19 @@ function Sellers ({data, dateRange}) {
                         </div>
                         <Title>{data.count.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}개</Title>
                     </Header>
+                    <Empty>해당 조건의 판매자가 없어요..</Empty>
+                </> :
+            sellers ? 
+                <>
+                    <Header>
+                        <div>
+                            <Subtitle>{data.subtitle}</Subtitle>
+                            <Title>{data.title}</Title>
+                            <Description>{formattingDate(dateRange)}</Description>
+                        </div>
+                        <Title>{data.count.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}개</Title>
+                    </Header>
+                    {data && data.count === 0 && <p>dd</p>}
                     {sellers.map( (seller, index) => (
                         <Card key={index} data={seller}/>
                     ))}

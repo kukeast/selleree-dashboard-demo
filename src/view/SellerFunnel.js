@@ -78,7 +78,7 @@ function SellerFunnel ({ location, history }) {
             setFunnelData(defaultFunnel.map((data,i) => (
                 {
                     ...data,
-                    count: response.data.data[i],
+                    count: parseInt(response.data.data[i]),
                     conversionRate: roundToTwo(response.data.data[i] / response.data.data[0] * 100),
                     bounceRate: response.data.data[i-1] ? roundToTwo(100 - response.data.data[i] / response.data.data[0] * 100) : null,
                     previousConversionRate: response.data.data[i-1] ? roundToTwo(response.data.data[i] / response.data.data[i-1] * 100) : null,
