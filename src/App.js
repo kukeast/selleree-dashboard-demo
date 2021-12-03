@@ -7,6 +7,7 @@ import OrderList from './view/OrderList';
 import LogIn from './view/LogIn';
 import SellerFunnel from './view/SellerFunnel';
 import PaymentSetting from './view/PaymentSetting';
+import Seller from './view/Seller';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <PrivateRoute header path="/orders" component={OrderList}/>
         <PrivateRoute header path="/funnel" component={SellerFunnel}/>
         <PrivateRoute header path="/payment-setting" component={PaymentSetting}/>
+        <PrivateRoute path="/seller/:id" component={Seller}/>
         <Route path="/login" component={LogIn}/>
       </Switch>
     </>

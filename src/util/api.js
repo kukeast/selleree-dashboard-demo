@@ -104,3 +104,8 @@ export async function getSellers(dateRange, segment, limit) {
     });
     return response.data;
 }
+
+export async function getSeller(id) {
+    const response = await Api.get(`https://${url}/api/seller/${id}`);
+    return response.data;
+}
