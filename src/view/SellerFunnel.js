@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
+import queryString from 'query-string'
 import useAsync from '../util/useAsync';
 import Chart from '../component/data-display/Chart';
 import Table from '../component/data-display/Table';
@@ -7,6 +8,8 @@ import DatePicker from '../component/inputs/DatePicker';
 import Container from '../component/layout/Container';
 import { COLOR } from '../constants/color';
 import { getFunnel } from '../util/api';
+import Modal from '../component/data-display/Modal';
+import Sellers from './Sellers';
 
 const defaultFunnel = [
     {
@@ -55,14 +58,14 @@ const FunnelWrapper = styled.div`
     }
     overflow-x: scroll;
 `
-function SellerFunnel () {
+function SellerFunnel ({ location, history }) {
+    const queryObj = queryString.parse(location.search)
     const [dateRange, setDateRange] = useState({
         startDate: new Date("2021.8.1"),
         endDate: new Date(),
     })
     const [response] = useAsync(() => getFunnel(dateRange), [dateRange])
     const [funnelData, setFunnelData] = useState([])
-
     const roundToTwo = num => {
         return +(Math.round(num + "e+2")  + "e-2");
     }
@@ -113,6 +116,17 @@ function SellerFunnel () {
                     />
                 </FunnelWrapper>
             </Container>
+            {queryObj.id && 
+                <Modal onClickClose={() => history.replace({
+                    pathname: history.location.pathname,
+                    search: "",
+                })}>
+                    <Sellers 
+                        data={funnelData.filter( data => data.id === parseInt(queryObj.id))[0]}
+                        dateRange={dateRange}
+                    />
+                </Modal>
+            }
         </>
     )
 }

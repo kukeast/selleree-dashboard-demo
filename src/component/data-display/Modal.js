@@ -23,8 +23,19 @@ const Wrapper = styled.div`
     overflow: scroll;
     border-radius: 16px 16px 0 0;
     z-index: 9;
+    animation: slide 0.5s;
     @media screen and (max-width: 425px) {
         padding: 20px;
+    }
+    @keyframes slide{
+        0%{
+            opacity: 0.6;
+            transform: translateY(20px);
+        }
+        100%{
+            opacity: 1;
+            transform: translateY(0px);
+        }
     }
 `
 const Close = styled.div`
@@ -45,6 +56,20 @@ const Close = styled.div`
     z-index: 9;
     :hover{
         background-color: ${COLOR.gray2};
+    }
+    animation: slide 0.5s;
+    @media screen and (max-width: 425px) {
+        padding: 20px;
+    }
+    @keyframes slide{
+        0%{
+            opacity: 0.8;
+            transform: translateY(20px);
+        }
+        100%{
+            opacity: 1;
+            transform: translateY(0px);
+        }
     }
 `
 

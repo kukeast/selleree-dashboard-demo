@@ -7,11 +7,8 @@ import { getOrders } from '../../util/api';
 import Order from './Order';
 import OrdersHeader from './OrdersHeader';
 import { COLOR } from '../../constants/color';
-import TextButton from '../inputs/TextButton';
 import SkeletonOrder from './SkeletonOrder';
 import OrderStack from './OrderStack';
-import Select from '../inputs/Select';
-import useLocalStorage from '../../util/useLocalStorage';
 
 const Wrapper = styled.div`
     display: flex;
@@ -20,19 +17,6 @@ const Wrapper = styled.div`
         min-width: 960px;
     }
     overflow-x: scroll;
-`
-const SortWrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
-    > div{
-        flex: 1;
-    }
-    > div:nth-child(2){
-        text-align: center;
-    }
-    > div:nth-child(3){
-        text-align: right;
-    }
 `
 const ButtonWrapper = styled.div`
     margin-top: 20px;
@@ -49,16 +33,9 @@ const DateWrapper = styled.div`
     background-color: ${COLOR.gray1};
     border-radius: 8px;
 `
-const options = {
-    20: "20개씩 보기",
-    40: "40개씩 보기",
-    60: "60개씩 보기",
-}
 
-function Orders () {
-    const [unit, setUnit] = useLocalStorage("order_unit", 20)
+function Orders ({ sortBy, unit }) {
     const [limit, setLimit] = useState(parseInt(unit))
-    const [sortBy, setSortBy] = useState("created_at")
     const [orderList, setOrderList] = useState([])
     const [response] = useAsync(() => getOrders(limit, sortBy),[limit, sortBy])
     useEffect(() => {
@@ -101,29 +78,9 @@ function Orders () {
         }
         return result;
     };
-
-    const switchOrderSort = () => {
-        setOrderList([])
-        setSortBy(prev => prev === "created_at" ? "last_modified_at" : "created_at")
-    }
-
-    const SelectCallback = value => {
-        setUnit(value)
-    }
     
     return(
         <>
-            <SortWrapper>
-                <div></div>
-                <div>
-                    <TextButton icon='sort' onClick={switchOrderSort}>
-                        {sortBy === "created_at" ? "최근 생성 순" : "최근 업데이트 순"}
-                    </TextButton>
-                </div>
-                <div>
-                    <Select options={options} defaultValue={limit} callback={SelectCallback}/>
-                </div>
-            </SortWrapper>
             <Wrapper>
                 <OrdersHeader sortBy={sortBy}/>
                 {orderList[0] && !response.loading ? orderList.map((order, index) => (
@@ -149,6 +106,11 @@ function Orders () {
             </ButtonWrapper>
         </>
     )
+}
+
+Orders.defaultProps = {
+    sortBy: "created_at",
+    unit: 20,
 }
 
 export default Orders

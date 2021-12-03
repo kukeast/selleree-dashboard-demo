@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { format }from "date-fns";
 import styled from 'styled-components'
 import { COLOR } from '../constants/color'
@@ -32,17 +33,13 @@ const Description = styled.p`
     font-size: 15px;
     color: ${COLOR.gray6};
 `
-const CardWrapper = styled.a`
+const CardWrapper = styled.div`
     padding: 20px;
     transition: 0.2s;
     background-color: ${COLOR.card};
     box-shadow: ${COLOR.shadow};
     border-radius: 8px;
     margin-bottom: 20px;
-    &:hover{
-        transform: translateY(-10px);
-    }
-    transition: 0.2s;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -61,10 +58,33 @@ const Para = styled.div`
     font-size: 15px;
     color: ${COLOR.black};
     line-height: 1.6;
-    flex: 0.5;
+    flex: 0.75;
 `
 const Emoji = styled(Para)`
     font-size: 20px;
+`
+const LinkWrapper = styled(Para)`
+    flex: 1;
+    display: flex;
+    gap: 10px;
+`
+const LinkButton = styled(Link)`
+    display: flex;
+    padding: 8px;
+    border-radius: 8px;
+    :hover{
+        background-color: ${COLOR.main2};
+    }
+    transition: 0.2s;
+`
+const SiteButton = styled.a`
+    display: flex;
+    padding: 8px;
+    border-radius: 8px;
+    :hover{
+        background-color: ${COLOR.main2};
+    }
+    transition: 0.2s;
 `
 const Label = styled.p`
     font-size: 13px;
@@ -100,7 +120,7 @@ const formattingDate = date => {
 
 function Card ({data}) {
     return(
-        <CardWrapper href={`https://${data.identifier}.selleree.shop`} target="_blank" rel="noreferrer">
+        <CardWrapper>
             {data.name ? 
                 <>
                     <StoreWrapper>
@@ -110,6 +130,14 @@ function Card ({data}) {
                     <Emoji>{data.businessRegistrationNumber && data.businessRegistrationNumber !== "null" && "💼"}</Emoji>
                     <Para><Icon size={20} name="tag20" color={COLOR.green}/>{data.itemCount ? data.itemCount : 0}개</Para>
                     <Para><Icon size={20} name="cart20" color={COLOR.yellow}/>{data.orderCount ? data.orderCount : 0}개</Para>
+                    <LinkWrapper>
+                        <LinkButton to={`/seller/${data.id}`}>
+                            <Icon size={24} name="file" color={COLOR.main}/>
+                        </LinkButton>
+                        <SiteButton href={`https://${data.identifier}.selleree.shop`} target="_blank" rel="noreferrer">
+                            <Icon size={24} name="new_tab24" color={COLOR.main}/>
+                        </SiteButton>
+                    </LinkWrapper>
                 </>
                 :
                 <StoreWrapper>
@@ -123,9 +151,7 @@ function Card ({data}) {
 function Sellers ({data, dateRange}) {
     const [limit, setLimit] = useState(10)
     const [sellers, setSellers] = useState()
-    const [response] = useAsync(() => getSellers(dateRange, data.title, limit), [limit])
-    const count = data.count.toString()
-    .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+    const [response] = useAsync(() => getSellers(dateRange, data.title, limit), [limit, data])
     useEffect(() => {
         if(response.data){
             setSellers(response.data.data)
@@ -133,15 +159,17 @@ function Sellers ({data, dateRange}) {
     }, [response])
     return(
         <Wrapper>
-            <Header>
-                <div>
-                    <Subtitle>{data.subtitle}</Subtitle>
-                    <Title>{data.title}</Title>
-                    <Description>{formattingDate(dateRange)}</Description>
-                </div>
-                <Title>{count}개</Title>
-            </Header>
-            {data.count === "0" ? 
+            {data && 
+                <Header>
+                    <div>
+                        <Subtitle>{data.subtitle}</Subtitle>
+                        <Title>{data.title}</Title>
+                        <Description>{formattingDate(dateRange)}</Description>
+                    </div>
+                    <Title>{data.count.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}개</Title>
+                </Header>
+            }   
+            {data && data.count === "0" ? 
                 <Empty>해당 조건의 판매자가 없어요..</Empty> : 
                 sellers ? 
                 <>

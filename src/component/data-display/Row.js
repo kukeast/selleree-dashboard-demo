@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useHistory } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import { COLOR } from '../../constants/color'
-import Sellers from '../../view/Sellers'
-import Modal from './Modal'
 
 const Wrapper = styled.div`
     display: flex;
@@ -48,12 +47,14 @@ const Rate = styled(Flex1Center)`
     };
 `
 
-
-function Row ({type, data, dateRange}) {
-    const [isOpen, setIsOpen] = useState(false)
+function Row ({type, data}) {
+    const history = useHistory()
     return(
         <>
-            <Wrapper onClick={() => setIsOpen(true)}>
+            <Wrapper onClick={() => history.replace({
+                pathname: history.location.pathname,
+                search: `?id=${data.id}`,
+            })}>
                 {type === "seller-funnel" && 
                     <>
                         <Flex1>{data.subtitle}</Flex1>
@@ -77,14 +78,6 @@ function Row ({type, data, dateRange}) {
                     </>
                 }
             </Wrapper>
-            {isOpen &&
-                <Modal onClickClose={() => setIsOpen(false)}>
-                    <Sellers 
-                        data={data}
-                        dateRange={dateRange}
-                    />
-                </Modal>
-            }
         </>
     )
 }
