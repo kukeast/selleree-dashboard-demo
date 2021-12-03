@@ -131,15 +131,6 @@ function SellerStatistics() {
       setSelectedArr(selectedArr.filter(num => num !== selected))
     }
   }
-
-  // useEffect(()=>{
-  //   console.log(selectedArr)
-
-  // },[selectedArr])
-  // useEffect(()=>{
-  //   console.log(chartData)
-  // }, [chartData])
-
   return (
     <>
       <Container className="setting-date">
