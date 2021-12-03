@@ -58,13 +58,13 @@ export async function getTodayChart(name) {
     return response.data;
 }
 
-export async function getProducts(limit, id) {
-    const response = await Api.get(`https://${url}/api/products?limit=${limit}&id=${id}`);
+export async function getProducts(limit) {
+    const response = await Api.get(`https://${url}/api/products?limit=${limit}`);
     return response.data;
 }
 
-export async function getOrders(limit, sortBy, id) {
-    const response = await Api.get(`https://${url}/api/orders?limit=${limit}&sortBy=${sortBy}&id=${id}`);
+export async function getOrders(limit, sortBy) {
+    const response = await Api.get(`https://${url}/api/orders?limit=${limit}&sortBy=${sortBy}`);
     return response.data;
 }
 
