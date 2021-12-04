@@ -2,6 +2,7 @@ import React from "react";
 import ApexChart from "react-apexcharts";
 import styled from "styled-components";
 import { COLOR } from "../../constants/color";
+import Card from "./Card";
 import Loading from "./Loading";
 const LoadingWrapper = styled.div`
     display: flex;
@@ -14,12 +15,8 @@ const Title = styled.p`
     color: ${COLOR.black};
     margin-top: 6px;
 `
-const Wrapper = styled.div`
-    border-radius: 8px;
-    background-color: ${COLOR.card};
-    box-shadow: ${COLOR.shadow};
+const Wrapper = styled(Card)`
     margin: 20px 0;
-    padding: 20px 20px 10px 20px;
     > div {
         height: ${props => props.height}px;
     }

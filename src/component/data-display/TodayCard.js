@@ -2,18 +2,10 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { COLOR } from '../../constants/color'
 import Icon from './Icon'
+import Card from './Card'
 
-const Card = styled.div`
+const CardWrapper = styled(Card)`
     flex: 1;
-    &:hover{
-        transform: translateY(-10px);
-    }
-    transition: 0.2s;
-    background-color: ${COLOR.card};
-    box-shadow: ${COLOR.shadow};
-    border-radius: 8px;
-    padding: 20px 20px 16px;
-    cursor: pointer;
     ${props => props.select 
         ? css`border: 2px solid ${props => props.color};`
         : css`border: 2px solid ${COLOR.white};`
@@ -27,9 +19,10 @@ const CardTitle = styled.p`
 `
 const Count = styled.p`
     font-size: 44px;
+    line-height: 1;
     font-weight: 700;
     color: ${COLOR.black};
-    margin-top: 4px;
+    margin-top: 12px;
 `
 const GrowthCountWrapper = styled.span`
     font-size: 16px;
@@ -60,7 +53,7 @@ function GrowthCount ({count}) {
 
 function TodayCard ({icon, title, color, count, growthCount, select, onClick}) {
     return(
-        <Card select={select} onClick={onClick} color={color}>
+        <CardWrapper select={select} onClick={onClick} color={color}>
             <Icon
                 size={24}
                 color={color}
@@ -71,7 +64,7 @@ function TodayCard ({icon, title, color, count, growthCount, select, onClick}) {
                 {count ? count : 0}
                 <GrowthCount count={growthCount}/>
             </Count>
-        </Card>
+        </CardWrapper>
     )
 }
 
