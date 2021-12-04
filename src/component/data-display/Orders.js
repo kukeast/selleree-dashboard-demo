@@ -7,7 +7,6 @@ import { getOrders } from '../../util/api'
 import Order from './Order'
 import OrdersHeader from './OrdersHeader'
 import { COLOR } from '../../constants/color'
-import SkeletonOrder from './SkeletonOrder'
 import OrderStack from './OrderStack'
 
 const Wrapper = styled.div`
@@ -73,7 +72,7 @@ function Orders ({ sortBy, unit }) {
     const skeleton = () => {
         const result = []
         for (let i = 0; i < 16; i++) {
-            result.push(<SkeletonOrder key={i}/>)
+            result.push(<Order isLoading key={i}/>)
         }
         return result
     }

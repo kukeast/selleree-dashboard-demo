@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components';
 import Row from './Row';
 import TableHeader from './TableHeader';
-import SkeletonRow from './SkeletonRow';
 
 const Wrapper = styled.div`
     display: flex;
@@ -23,13 +22,13 @@ function Table ({data, isLoading, dateRange, type}) {
                     />
                 )): 
                     <>
-                        <SkeletonRow type={type}/>
-                        <SkeletonRow type={type}/>
-                        <SkeletonRow type={type}/>
-                        <SkeletonRow type={type}/>
-                        <SkeletonRow type={type}/>
-                        <SkeletonRow type={type}/>
-                        <SkeletonRow type={type}/>
+                        <Row isLoading type={type}/>
+                        <Row isLoading type={type}/>
+                        <Row isLoading type={type}/>
+                        <Row isLoading type={type}/>
+                        <Row isLoading type={type}/>
+                        <Row isLoading type={type}/>
+                        <Row isLoading type={type}/>
                     </>
                 }
             </Wrapper>

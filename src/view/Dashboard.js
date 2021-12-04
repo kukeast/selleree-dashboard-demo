@@ -7,6 +7,7 @@ import Shopggus from '../component/data-display/Shopggus';
 import Products from '../component/data-display/Products';
 import Statistics from './Statistics';
 import TextButton from '../component/inputs/TextButton';
+import Card from '../component/data-display/Card';
 
 const UpdateTime = styled.p`
     margin: 30px 0 0;
@@ -26,12 +27,6 @@ const Wrapper = styled.div`
     @media screen and (max-width: 768px) {
         grid-template-columns: 1fr;
     }
-`
-const ProductWrapper = styled.div`
-    background-color: ${COLOR.card};
-    box-shadow: ${COLOR.shadow};
-    border-radius: 8px;
-    padding: 20px;
 `
 
 function Dashboard () {
@@ -63,9 +58,9 @@ function Dashboard () {
             <Wrapper>
                 <div>
                     <h2>🙋‍♀️ 여기 상품 등록했어요</h2>
-                    <ProductWrapper>
+                    <Card>
                         <Products repatch={repatch}/>
-                    </ProductWrapper>
+                    </Card>
                 </div>
                 <div>
                     <h2>🙋‍♂️ 여기 샵꾸 발행했어요</h2>

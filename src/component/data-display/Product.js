@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import { COLOR } from '../../constants/color';
+import Skeleton from './Skeleton';
 
 const Wrapper = styled.a`
     font-size: 16px;
@@ -10,10 +11,14 @@ const Wrapper = styled.a`
         transform: translateY(-10px);
     }
 `
-
+const ImageSkeleton = styled(Skeleton)`
+    width: 100%;
+    padding-top: 100%;
+`
 const Image = styled.div`
     width: 100%;
     padding-top: 100%;
+    background-image: url(${props => props.url}?w=600);
     background-color: ${COLOR.gray2};
     background-position: center;
     background-repeat: no-repeat;
@@ -61,23 +66,32 @@ const Delete = styled.p`
     color: #F61E52;
 `
 
-function Product ({ data }) {
-    var backgroundImage = {
-        backgroundImage: "url(" + data.url + "?w=600)"
-    };
-    return(
-        <Wrapper href={`https://${data.store_id}.selleree.shop/products/${data.item_id}`} target="_blank" rel="noreferrer">
-            <Image style={backgroundImage}/>
-            <StoreName>{data.store_name}</StoreName>
-            <ItemName>{data.item_name}</ItemName>
-            <Price>{data.price.slice(0,-3).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + "원"}</Price>
-            <Tags>
-                <ImageCount>{data.image_count}장</ImageCount>
-                {data.visibility === "PRIVATE" && <Private>비공개</Private>}
-                {data.deleted === "\u0001" && <Delete>삭제됨</Delete>}
-            </Tags>
-        </Wrapper>
-    )
+function Product ({ data, isLoading }) {
+    if(isLoading){
+        return(
+            <Wrapper>
+                <ImageSkeleton rounded/>
+                <StoreName><Skeleton width={50} height={15}/></StoreName>
+                <ItemName><Skeleton width={160} height={21}/></ItemName>
+                <Price><Skeleton width={140} height={21}/></Price>
+                <Tags><Skeleton width={40} height={26} rounded/></Tags>
+            </Wrapper>
+        )
+    }else{
+        return(
+            <Wrapper href={`https://${data.store_id}.selleree.shop/products/${data.item_id}`} target="_blank" rel="noreferrer">
+                <Image url={data.url}/>
+                <StoreName>{data.store_name}</StoreName>
+                <ItemName>{data.item_name}</ItemName>
+                <Price>{data.price.slice(0,-3).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원</Price>
+                <Tags>
+                    <ImageCount>{data.image_count}장</ImageCount>
+                    {data.visibility === "PRIVATE" && <Private>비공개</Private>}
+                    {data.deleted === "\u0001" && <Delete>삭제됨</Delete>}
+                </Tags>
+            </Wrapper>
+        )
+    }
 }
 
 export default React.memo(Product)

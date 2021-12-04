@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import useAsync from '../../util/useAsync'
 import Shopggu from './Shopggu'
 import { getShopggu } from '../../util/api'
-import SkeletonShopggu from './SkeletonShopggu'
 
 const Wrapper = styled.div`
     display: flex;  
@@ -25,7 +24,7 @@ function Shopggus ({ repatch }) {
     const skeleton = () => {
         const result = []
         for (let i = 0; i < 16; i++) {
-            result.push(<SkeletonShopggu key={i}/>)
+            result.push(<Shopggu isLoading key={i}/>)
         }
         return result
     }

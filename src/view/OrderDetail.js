@@ -4,8 +4,9 @@ import styled from 'styled-components'
 import { COLOR } from '../constants/color'
 import { getOrderDetail } from '../util/api'
 import useAsync from '../util/useAsync'
-import SkeletonOrderDetail from '../component/data-display/SkeletonOrderDetail';
 import Icon from '../component/data-display/Icon';
+import Card from '../component/data-display/Card';
+import Skeleton from '../component/data-display/Skeleton';
 const FinancialStatus ={
     WAITING : {
         color: COLOR.yellow,
@@ -68,27 +69,12 @@ const OrderDate = styled.p`
     font-size: 15px;
     color: ${COLOR.gray6};
 `
-const Card = styled.div`
-    padding: 20px;
-    transition: 0.2s;
-    background-color: ${COLOR.card};
-    box-shadow: ${COLOR.shadow};
-    border-radius: 8px;
+const CardWrapper = styled(Card)`
     margin-bottom: 20px;
 `
-const ItemCard = styled.a`
+const ItemCard = styled(CardWrapper)`
     display: flex;
     align-items: center;
-    padding: 20px;
-    transition: 0.2s;
-    background-color: ${COLOR.card};
-    box-shadow: ${COLOR.shadow};
-    border-radius: 8px;
-    margin-bottom: 20px;
-    &:hover{
-        transform: translateY(-10px);
-    }
-    transition: 0.2s;
 `
 const Image = styled.div`
     width: 60px;
@@ -96,7 +82,6 @@ const Image = styled.div`
     background-size: cover;
     border-radius: 8px;
     background-color: ${COLOR.gray2};
-    margin-right: 16px;
 `
 const Para = styled.p`
     font-size: 15px;
@@ -105,10 +90,12 @@ const Para = styled.p`
 `
 const ItemName = styled(Para)`
     flex: 3;
+    margin-left: 16px;
 `
 const Price = styled(Para)`
     flex: 1;
-    text-align: right;
+    display: flex;
+    justify-content: end;
 `
 const Title = styled(Para)`
     font-weight: bold;
@@ -171,13 +158,13 @@ function OrderDetail ({orderId}) {
                     </div>
                     <OrderTitle>{formattingPrice(defaultShippingFee + extraShippingFee + (price * detail.quantity))}원</OrderTitle>
                 </Header>
-                <ItemCard href={ProductHref} target="_blank" rel="noreferrer">
+                <ItemCard onClick={() => window.open(ProductHref, "_blank")}>
                     <Image style={backgroundImage}/>
                     <ItemName>{detail.item_name}</ItemName>
                     <Para>{detail.quantity}개</Para>
                     <Price>{formattingPrice(price)}원</Price>
                 </ItemCard>
-                <Card>
+                <CardWrapper>
                     <Title>주문 정보</Title>
                     <CardInfo>
                         <Label>결제 상태</Label>
@@ -195,8 +182,8 @@ function OrderDetail ({orderId}) {
                         <Label>최근 수정 시간</Label>
                         <Para>{detail.created_at !== detail.last_modified_at ? format(parseISO(detail.last_modified_at), 'M월 d일 H시 m분 s초') : "-"}</Para>
                     </CardInfo>
-                </Card>
-                <Card>
+                </CardWrapper>
+                <CardWrapper>
                     <Title>주문자</Title>
                     <CardInfo>
                         <Label>이름</Label>
@@ -218,8 +205,8 @@ function OrderDetail ({orderId}) {
                             {detail.address_detail_line && ", " + detail.address_detail_line}
                         </Para>
                     </CardInfo>
-                </Card>
-                <Card>
+                </CardWrapper>
+                <CardWrapper>
                     <Title>결제 정보</Title>
                     <CardInfo>
                         <Label>상품 합계</Label>
@@ -237,9 +224,9 @@ function OrderDetail ({orderId}) {
                         <Label>결제 방법</Label>
                         <Para>{detail.payment_method === "CASH" ? "무통장 입금" : "카드 · 간편결제"}</Para>
                     </CardInfo>
-                </Card>
+                </CardWrapper>
                 {detail.payment_method === "CASH" &&
-                    <Card>
+                    <CardWrapper>
                         <Title>입금 계좌</Title>
                         <CardInfo>
                             <Label>예금주</Label>
@@ -253,9 +240,82 @@ function OrderDetail ({orderId}) {
                             <Label>계좌번호</Label>
                             <Para>{detail.bank_account_number}</Para>
                         </CardInfo>
-                    </Card>
+                    </CardWrapper>
                 }
-            </> : <SkeletonOrderDetail/>}
+            </> : 
+            <>
+                <Header>
+                    <div>
+                        <StoreName><Skeleton width={60} height={19}/></StoreName>
+                        <OrderTitle><Skeleton width={150} height={25}/></OrderTitle>
+                        <OrderDate><Skeleton width={80} height={19}/></OrderDate>
+                    </div>
+                    <OrderTitle><Skeleton width={150} height={25}/></OrderTitle>
+                </Header>
+                <ItemCard>
+                    <Skeleton width={60} height={60} rounded/>
+                    <ItemName><Skeleton width={100} height={21}/></ItemName>
+                    <Para><Skeleton width={20} height={21}/></Para>
+                    <Price><Skeleton width={60} height={21}/></Price>
+                </ItemCard>
+                <CardWrapper>
+                    <Title><Skeleton width={120} height={24}/></Title>
+                    <CardInfo>
+                        <Label><Skeleton width={60} height={17}/></Label>
+                        <Para><Skeleton width={180} height={24}/></Para>
+                    </CardInfo>
+                    <CardInfo>
+                        <Label><Skeleton width={60} height={17}/></Label>
+                        <Para><Skeleton width={180} height={24}/></Para>
+                    </CardInfo>
+                    <CardInfo>
+                        <Label><Skeleton width={60} height={17}/></Label>
+                        <Para><Skeleton width={180} height={24}/></Para>
+                    </CardInfo>
+                    <CardInfo>
+                        <Label><Skeleton width={60} height={17}/></Label>
+                        <Para><Skeleton width={180} height={24}/></Para>
+                    </CardInfo>
+                </CardWrapper>
+                <CardWrapper>
+                    <Title><Skeleton width={120} height={24}/></Title>
+                    <CardInfo>
+                        <Label><Skeleton width={60} height={17}/></Label>
+                        <Para><Skeleton width={180} height={24}/></Para>
+                    </CardInfo>
+                    <CardInfo>
+                        <Label><Skeleton width={60} height={17}/></Label>
+                        <Para><Skeleton width={180} height={24}/></Para>
+                    </CardInfo>
+                    <CardInfo>
+                        <Label><Skeleton width={60} height={17}/></Label>
+                        <Para><Skeleton width={180} height={24}/></Para>
+                    </CardInfo>
+                    <CardInfo>
+                        <Label><Skeleton width={60} height={17}/></Label>
+                        <Para><Skeleton width={180} height={24}/></Para>
+                    </CardInfo>
+                </CardWrapper>
+                <CardWrapper>
+                    <Title><Skeleton width={120} height={24}/></Title>
+                    <CardInfo>
+                        <Label><Skeleton width={60} height={17}/></Label>
+                        <Para><Skeleton width={180} height={24}/></Para>
+                    </CardInfo>
+                    <CardInfo>
+                        <Label><Skeleton width={60} height={17}/></Label>
+                        <Para><Skeleton width={180} height={24}/></Para>
+                    </CardInfo>
+                    <CardInfo>
+                        <Label><Skeleton width={60} height={17}/></Label>
+                        <Para><Skeleton width={180} height={24}/></Para>
+                    </CardInfo>
+                    <CardInfo>
+                        <Label><Skeleton width={60} height={17}/></Label>
+                        <Para><Skeleton width={180} height={24}/></Para>
+                    </CardInfo>
+                </CardWrapper>
+            </>}
         </Wrapper>
     )
 }

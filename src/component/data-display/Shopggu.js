@@ -2,17 +2,9 @@ import React from 'react'
 import styled from 'styled-components';
 import { parseISO, format }from "date-fns";
 import { COLOR } from '../../constants/color';
+import Card from './Card';
+import Skeleton from './Skeleton';
 
-const Wrapper = styled.a`
-    &:hover{
-        transform: translateY(-10px);
-    }
-    transition: 0.2s;
-    background-color: ${COLOR.card};
-    box-shadow: ${COLOR.shadow};
-    border-radius: 8px;
-    padding: 20px;
-`
 const TitleWrapper = styled.div`
     display: flex;
     justify-content: space-between;
@@ -32,16 +24,30 @@ const StoreName = styled.p`
     margin-top: 6px;
 `
 
-function Shopggu ({data}) {
-    return(
-        <Wrapper href={`https://${data.store_name}.selleree.shop/`} target="_blank" rel="noreferrer">
-            <TitleWrapper>
-                <Order>{data.order + 1}번째 발행</Order>
-                <Date>{format(parseISO(data.date), 'M월 d일 H시 m분 s초')}</Date>
-            </TitleWrapper>
-            <StoreName>{data.store_name}</StoreName>
-        </Wrapper>
-    )
+function Shopggu ({ data, isLoading }) {
+    if(isLoading){
+        return (
+            <Card>
+                <TitleWrapper>
+                    <Skeleton width={60} height={19}/>
+                    <Skeleton width={80} height={16}/>
+                </TitleWrapper>
+                <StoreName>
+                    <Skeleton width={180} height={25}/>
+                </StoreName>
+            </Card>
+        )
+    }else{
+        return(
+            <Card onClick={() => window.open(`https://${data.store_name}.selleree.shop/`, "_blank")}>
+                <TitleWrapper>
+                    <Order>{data.order + 1}번째 발행</Order>
+                    <Date>{format(parseISO(data.date), 'M월 d일 H시 m분 s초')}</Date>
+                </TitleWrapper>
+                <StoreName>{data.store_name}</StoreName>
+            </Card>
+        )
+    }
 }
 
 export default Shopggu

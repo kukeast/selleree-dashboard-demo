@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { COLOR } from '../../constants/color'
 import OrderDetail from '../../view/OrderDetail';
 import Modal from './Modal';
+import Skeleton from './Skeleton';
 
 const FinancialStatus ={
     WAITING : {
@@ -51,10 +52,10 @@ const Wrapper = styled.div`
 const Image = styled.div`
     width: 60px;
     height: 60px;
+    background-image: url( ${props => props.url}?w=300);
     background-size: cover;
     border-radius: 8px;
     background-color: ${COLOR.gray2};
-    margin-right: 16px;
     border: 1px solid ${COLOR.gray2};
 `
 const CreatedAt = styled.div`
@@ -72,55 +73,69 @@ const PaymentMethod = styled.span`
 `
 const Title = styled.div`
     flex: 4;
+    margin-left: 16px;
 `
 const Name = styled.div`
     flex: 1.5;
 `
 const Financial = styled.div`
-    text-align: right;
+    display: flex;
+    justify-content: end;
     flex: 1;
     font-weight: bold;
-    color: ${props => FinancialStatus[props.status].color};
+    color: ${props => props.status ? FinancialStatus[props.status].color : null};
 `
 const Fulfillment = styled.div`
-    text-align: right;
+    display: flex;
+    justify-content: end;
     flex: 1;
     font-weight: bold;
-    color: ${props => FulfillmentStatus[props.status].color};
+    color: ${props => props.status ? FulfillmentStatus[props.status].color : null};
 `
 
-function Order ({data, sortBy}) {
+function Order ({data, sortBy, isLoading}) {
     const [isOpen, setIsOpen] = useState(false)
-    const defaultShippingFee = parseInt(data.default_shipping_fee)
-    const extraShippingFee = parseInt(data.extra_shipping_fee)
-    const price = parseInt(data.price)
-    const totalPrice = (defaultShippingFee + extraShippingFee + (price * data.quantity)).toString()
-    .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-    var backgroundImage = {
-        backgroundImage: "url(" + data.image_url + "?w=300)"
-    }
-    return(
-        <>
-            <Wrapper onClick={() => setIsOpen(true)}>
-                <CreatedAt>{format(parseISO(data[sortBy]), 'H시 m분 s초')}</CreatedAt>
-                
-                <Image style={backgroundImage}/>
-                <Title>{data.title}</Title>
-                <Name>{data.name}</Name>
-                <Price>
-                    {totalPrice}원 
-                    <PaymentMethod>{data.payment_method === "CASH" ? "💸" : "💳"}</PaymentMethod>
-                </Price>
-                <Financial status={data.financial_status}>{FinancialStatus[data.financial_status].text}</Financial>
-                <Fulfillment status={data.fulfillment_status}>{FulfillmentStatus[data.fulfillment_status].text}</Fulfillment>
+    if(isLoading){
+        return(
+            <Wrapper>
+                <CreatedAt><Skeleton width={100} height={21}/></CreatedAt>
+                <Skeleton width={60} height={60} rounded/>
+                <Title><Skeleton width={260} height={21}/></Title>
+                <Name><Skeleton width={100} height={21}/></Name>
+                <Price><Skeleton width={80} height={21}/></Price>
+                <Financial><Skeleton width={80} height={21}/></Financial>
+                <Fulfillment><Skeleton width={80} height={21}/></Fulfillment>
             </Wrapper>
-            {isOpen && 
-                <Modal onClickClose={() => setIsOpen(false)}>
-                    <OrderDetail orderId={data.id}/> 
-                </Modal>
-            }
-        </>
-    )
+        )
+    }else{
+        return(
+            <>
+                <Wrapper onClick={() => setIsOpen(true)}>
+                    <CreatedAt>{format(parseISO(data[sortBy]), 'H시 m분 s초')}</CreatedAt>
+                    <Image url={data.image_url}/>
+                    <Title>{data.title}</Title>
+                    <Name>{data.name}</Name>
+                    <Price>
+                        {
+                            (
+                                parseInt(data.default_shipping_fee) 
+                                + parseInt(data.extra_shipping_fee) 
+                                + (parseInt(data.price) * data.quantity)
+                            ).toString()
+                            .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원 
+                        <PaymentMethod>{data.payment_method === "CASH" ? "💸" : "💳"}</PaymentMethod>
+                    </Price>
+                    <Financial status={data.financial_status}>{FinancialStatus[data.financial_status].text}</Financial>
+                    <Fulfillment status={data.fulfillment_status}>{FulfillmentStatus[data.fulfillment_status].text}</Fulfillment>
+                </Wrapper>
+                {isOpen && 
+                    <Modal onClickClose={() => setIsOpen(false)}>
+                        <OrderDetail orderId={data.id}/> 
+                    </Modal>
+                }
+            </>
+        )
+    }
 }
 
 export default Order

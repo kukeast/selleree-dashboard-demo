@@ -7,7 +7,8 @@ import { getSellers } from '../util/api'
 import useAsync from '../util/useAsync'
 import Icon from '../component/data-display/Icon';
 import Button from '../component/inputs/Button';
-import SkeletonSellers from '../component/data-display/SkeletonSellers';
+import Skeleton from '../component/data-display/Skeleton';
+import Card from '../component/data-display/Card';
 const Wrapper = styled.div`
     max-width: 640px;
     margin: auto;
@@ -33,12 +34,7 @@ const Description = styled.p`
     font-size: 15px;
     color: ${COLOR.gray6};
 `
-const CardWrapper = styled.div`
-    padding: 20px;
-    transition: 0.2s;
-    background-color: ${COLOR.card};
-    box-shadow: ${COLOR.shadow};
-    border-radius: 8px;
+const CardWrapper = styled(Card)`
     margin-bottom: 20px;
     display: flex;
     align-items: center;
@@ -118,34 +114,85 @@ const formattingDate = date => {
     }
 }
 
-function Card ({data}) {
-    return(
-        <CardWrapper>
-            {data.name ? 
-                <>
-                    <StoreWrapper>
-                        <Label>{data.identifier}.selleree.shop</Label>
-                        {data.name && <StoreName>{data.name}</StoreName>}
-                    </StoreWrapper>
-                    <Emoji>{data.businessRegistrationNumber && data.businessRegistrationNumber !== "null" && "💼"}</Emoji>
-                    <Para><Icon size={20} name="tag20" color={COLOR.green}/>{data.item_count ? data.item_count : 0}개</Para>
-                    <Para><Icon size={20} name="cart20" color={COLOR.yellow}/>{data.order_count ? data.order_count : 0}개</Para>
-                    <LinkWrapper>
-                        <LinkButton to={`/seller/${data.id}`}>
-                            <Icon size={24} name="file" color={COLOR.main}/>
-                        </LinkButton>
-                        <SiteButton href={`https://${data.identifier}.selleree.shop`} target="_blank" rel="noreferrer">
-                            <Icon size={24} name="new_tab24" color={COLOR.main}/>
-                        </SiteButton>
-                    </LinkWrapper>
-                </>
-                :
+function Seller ({ data, isLoading }) {
+    if(isLoading){
+        return(
+            <CardWrapper>
                 <StoreWrapper>
-                    <Label>{data.identifier}</Label>
+                    <Skeleton width={140} height={17}/>
+                    <StoreName><Skeleton width={100} height={22}/></StoreName>
                 </StoreWrapper>
-            }
-        </CardWrapper>
-    )
+                <Emoji></Emoji>
+                <Para><Skeleton width={60} height={24}/></Para>
+                <Para><Skeleton width={60} height={24}/></Para>
+                <LinkWrapper>
+                    <Skeleton width={80} height={24}/>
+                </LinkWrapper>
+            </CardWrapper>
+        )
+    }else{
+        return(
+            <CardWrapper>
+                {data.name ? 
+                    <>
+                        <StoreWrapper>
+                            <Label>{data.identifier}.selleree.shop</Label>
+                            {data.name && <StoreName>{data.name}</StoreName>}
+                        </StoreWrapper>
+                        <Emoji>{data.businessRegistrationNumber && data.businessRegistrationNumber !== "null" && "💼"}</Emoji>
+                        <Para><Icon size={20} name="tag20" color={COLOR.green}/>{data.item_count ? data.item_count : 0}개</Para>
+                        <Para><Icon size={20} name="cart20" color={COLOR.yellow}/>{data.order_count ? data.order_count : 0}개</Para>
+                        <LinkWrapper>
+                            <LinkButton to={`/seller/${data.id}`}>
+                                <Icon size={24} name="file" color={COLOR.main}/>
+                            </LinkButton>
+                            <SiteButton href={`https://${data.identifier}.selleree.shop`} target="_blank" rel="noreferrer">
+                                <Icon size={24} name="new_tab24" color={COLOR.main}/>
+                            </SiteButton>
+                        </LinkWrapper>
+                    </>
+                    :
+                    <StoreWrapper>
+                        <Label>{data.identifier}</Label>
+                    </StoreWrapper>
+                }
+            </CardWrapper>
+        )
+    }
+}
+
+function SellerHeader ({ data, dateRange, isLoading }) {
+    if(isLoading){
+        return(
+            <Header>
+                <div>
+                    <Subtitle>
+                        <Skeleton width={60} height={19}/>
+                    </Subtitle>
+                    <Title>
+                        <Skeleton width={150} height={25}/>
+                    </Title>
+                    <Description>
+                        <Skeleton width={80} height={19}/>
+                    </Description>
+                </div>
+                <Title>
+                    <Skeleton width={150} height={25}/>
+                </Title>
+            </Header>
+        )
+    }else{
+        return(
+            <Header>
+                <div>
+                    <Subtitle>{data.subtitle}</Subtitle>
+                    <Title>{data.title}</Title>
+                    <Description>{formattingDate(dateRange)}</Description>
+                </div>
+                <Title>{data.count.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}개</Title>
+            </Header>
+        )
+    }
 }
 
 function Sellers ({data, dateRange}) {
@@ -158,33 +205,26 @@ function Sellers ({data, dateRange}) {
         }
     }, [response])
 
+    const skeleton = () => {
+        const result = []
+        for (let i = 0; i < 10; i++) {
+            result.push(<Seller isLoading key={i}/>)
+        }
+        return result
+    }
+
     return(
         <Wrapper>
             {data && data.count === 0 ? 
                 <>
-                    <Header>
-                        <div>
-                            <Subtitle>{data.subtitle}</Subtitle>
-                            <Title>{data.title}</Title>
-                            <Description>{formattingDate(dateRange)}</Description>
-                        </div>
-                        <Title>{data.count.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}개</Title>
-                    </Header>
+                    <SellerHeader data={data} dateRange={dateRange}/>
                     <Empty>해당 조건의 판매자가 없어요..</Empty>
                 </> :
             sellers ? 
                 <>
-                    <Header>
-                        <div>
-                            <Subtitle>{data.subtitle}</Subtitle>
-                            <Title>{data.title}</Title>
-                            <Description>{formattingDate(dateRange)}</Description>
-                        </div>
-                        <Title>{data.count.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}개</Title>
-                    </Header>
-                    {data && data.count === 0 && <p>dd</p>}
+                    <SellerHeader data={data} dateRange={dateRange}/>
                     {sellers.map( (seller, index) => (
-                        <Card key={index} data={seller}/>
+                        <Seller key={index} data={seller}/>
                     ))}
                     {sellers.length % 10 === 0 && 
                         <ButtonWrapper>
@@ -198,7 +238,10 @@ function Sellers ({data, dateRange}) {
                         </ButtonWrapper>
                     }
                 </> : 
-                <SkeletonSellers/>
+                <>
+                    <SellerHeader isLoading/>
+                    {skeleton()}
+                </>
             }
         </Wrapper>
     )

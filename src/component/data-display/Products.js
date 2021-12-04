@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import Product from './Product'
 import Button from '../inputs/Button';
 import { getProducts } from '../../util/api';
-import SkeletonProduct from './SkeletonProduct';
 
 const Wrapper = styled.div`
     display: grid;
@@ -39,7 +38,7 @@ function Products ({column, repatch}) {
     const skeleton = () => {
         const result = []
         for (let i = 0; i < 20; i++) {
-            result.push(<SkeletonProduct key={i}/>)
+            result.push(<Product isLoading key={i}/>)
         }
         return result
     }
