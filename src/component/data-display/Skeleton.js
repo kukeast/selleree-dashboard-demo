@@ -2,7 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { COLOR } from '../../constants/color'
 
-const Wrapper = styled.div`
+const Wrapper = styled.span`
+    display: block;
     width: ${props => props.width}px;
     height: ${props => props.height}px;
     border-radius: ${props => props.rounded ? 8 : 4}px;
