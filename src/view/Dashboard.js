@@ -8,6 +8,9 @@ import Products from '../component/data-display/Products';
 import Statistics from './Statistics';
 import TextButton from '../component/inputs/TextButton';
 import Card from '../component/data-display/Card';
+import useAsync from '../util/useAsync';
+import { getProducts } from '../util/api';
+import Button from '../component/inputs/Button';
 
 const UpdateTime = styled.p`
     margin: 30px 0 0;
@@ -26,6 +29,13 @@ const Wrapper = styled.div`
     gap: 20px;
     @media screen and (max-width: 768px) {
         grid-template-columns: 1fr;
+    }
+`
+const ButtonWrapper = styled.div`
+    margin-top: 30px;
+    text-align: center;
+    > *{
+        width: 100%;
     }
 `
 
@@ -59,7 +69,7 @@ function Dashboard () {
                 <div>
                     <h2>🙋‍♀️ 여기 상품 등록했어요</h2>
                     <Card>
-                        <Products repatch={repatch}/>
+                        <ProductList/>
                     </Card>
                 </div>
                 <div>
@@ -72,3 +82,31 @@ function Dashboard () {
 }
 
 export default Dashboard
+
+function ProductList () {
+    const [limit, setLimit] = useState(20)
+    const [productList, setProductList] = useState([])
+    const [response] = useAsync(() => getProducts(limit), [limit])
+    useEffect(() => {
+        if(response.data){
+            setProductList(response.data.data)
+        }
+    }, [response])
+    return(
+        <>
+            <Products
+                data={productList}
+                isLoading={response.loading}
+            />
+            <ButtonWrapper>
+                <Button 
+                    type="mono" 
+                    onClick={() => setLimit(prev => prev + 20)} 
+                    isLoading={response.loading}
+                >
+                    20개 더 보기
+                </Button>
+            </ButtonWrapper>
+        </>
+    )
+}

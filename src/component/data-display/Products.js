@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import useAsync from '../../util/useAsync';
+import React from 'react'
 import styled from 'styled-components';
 import Product from './Product'
-import Button from '../inputs/Button';
-import { getProducts } from '../../util/api';
 
 const Wrapper = styled.div`
     display: grid;
@@ -16,25 +13,9 @@ const Wrapper = styled.div`
     }
     grid-template-columns: repeat(${props => props.column}, 1fr);
 `
-const ButtonWrapper = styled.div`
-    margin-top: 30px;
-    text-align: center;
-    > *{
-        width: 100%;
-    }
-`
 
-function Products ({column, repatch}) {
-    const [limit, setLimit] = useState(20)
-    const [productList, setProductList] = useState([])
-    const [response] = useAsync(() => getProducts(limit), [limit, repatch])
-    
-    useEffect(() => {
-        if(response.data){
-            setProductList(response.data.data)
-        }
-    }, [response])
-    
+
+function Products ({data, column, isLoading}) {
     const skeleton = () => {
         const result = []
         for (let i = 0; i < 20; i++) {
@@ -45,9 +26,9 @@ function Products ({column, repatch}) {
     return(
         <>
             <Wrapper column={column}>
-                {response.loading && productList.length === 0 ?
+                {isLoading && data.length === 0 ?
                     skeleton() :
-                    productList.map(product => (
+                    data.map(product => (
                         <Product
                             data={product}
                             key={product.item_id}
@@ -55,21 +36,15 @@ function Products ({column, repatch}) {
                     ))
                 }
             </Wrapper>
-            <ButtonWrapper>
-                <Button 
-                    type="mono" 
-                    onClick={() => setLimit(prev => prev + 20)} 
-                    isLoading={response.loading}
-                >
-                    20개 더 보기
-                </Button>
-            </ButtonWrapper>
+            
         </>
     )
 }
 
 Products.defaultProps = {
+    data: [],
     column: 4,
+    isLoading: false,
 }
 
 export default Products

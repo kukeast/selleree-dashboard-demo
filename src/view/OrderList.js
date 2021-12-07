@@ -80,7 +80,7 @@ function OrderList () {
         setOrderList([])
     }, [sortBy])
     return(
-        <Container className='mt30'>
+        <Container>
             <SortWrapper>
                 <div></div>
                 <div>
@@ -102,7 +102,13 @@ function OrderList () {
                 isLoading={response.loading}
             />
             <ButtonWrapper>
-                <Button type="mono" onClick={() => setLimit(prev => prev + parseInt(unit))} isLoading={response.loading}>{unit}개 더 보기</Button>
+                <Button 
+                    type="mono" 
+                    onClick={() => setLimit(prev => prev + parseInt(unit))} 
+                    isLoading={response.loading}
+                >
+                    {unit}개 더 보기
+                </Button>
             </ButtonWrapper>
         </Container>
     )
