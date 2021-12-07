@@ -22,7 +22,7 @@ const light = {
     gray5 : '#85858C',
     gray6 : '#535358',
     black : '#222222',
-
+    main1 : '#EFEFFF',
     main2 : '#E8E8FF',
     main3 : '#D9D9FF',
     main6 : '#2C29BC',
