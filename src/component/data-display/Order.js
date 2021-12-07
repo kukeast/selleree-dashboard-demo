@@ -114,7 +114,7 @@ function Order ({data, sortBy, isLoading}) {
                     <CreatedAt>{format(parseISO(data[sortBy]), 'H시 m분 s초')}</CreatedAt>
                     <Image url={data.image_url}/>
                     <Title>{data.title}</Title>
-                    <Name>{data.name}</Name>
+                    {data.name && <Name>{data.name}</Name>}
                     <Price>
                         {
                             (

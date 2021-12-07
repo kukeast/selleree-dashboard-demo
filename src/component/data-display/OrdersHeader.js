@@ -36,13 +36,13 @@ const Fulfillment = styled.div`
     flex: 1;
 `
 
-function OrdersHeader ({sortBy}) {
+function OrdersHeader ({ sortBy, storeName }) {
     return(
         <Wrapper>
             <CreatedAt>{sortBy === "created_at" ? "주문 시간" : "업데이트 시간"}</CreatedAt>
             <Image>상품</Image>
             <Title></Title>
-            <Name>상점 이름</Name>
+            {storeName && <Name>상점 이름</Name>}
             <Price>결제 금액</Price>
             <Financial>결제 상태</Financial>
             <Fulfillment>배송 상태</Fulfillment>
