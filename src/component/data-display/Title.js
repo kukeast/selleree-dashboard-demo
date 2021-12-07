@@ -6,7 +6,7 @@ const Wrapper = styled.div`
     display: flex;
     align-items: flex-end;
     gap: 6px;
-    margin: 36px 0 16px;
+    margin: 36px 0 30px;
 
     h1{
         font-size: 20px;

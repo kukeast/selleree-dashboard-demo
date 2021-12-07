@@ -5,7 +5,7 @@ import Header from '../view/Header';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-     margin: 150px 0 80px;
+     margin: 180px 0 80px;
 `
 
 function PrivateRoute ({ component: Component, header, ...rest }) {
@@ -15,10 +15,15 @@ function PrivateRoute ({ component: Component, header, ...rest }) {
             {...rest}
             render = {props => refreshTokenValid?(
                 <>
-                    {header && <Header/>}
-                    <Wrapper>
+                    {header ? 
+                        <>
+                            <Header/>
+                            <Wrapper>
+                                <Component {...props}/>
+                            </Wrapper>
+                        </> :
                         <Component {...props}/>
-                    </Wrapper>
+                    }
                 </>
             ) : ( 
                 <Redirect 
