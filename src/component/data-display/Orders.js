@@ -10,7 +10,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     > div {
-        min-width: 960px;
+        min-width: 860px;
     }
     overflow-x: scroll;
 `
@@ -23,7 +23,7 @@ const DateWrapper = styled.div`
     border-radius: 8px;
 `
 
-function Orders ({ sortBy, data, isLoading }) {
+function Orders ({ sortBy, data, isLoading, size }) {
     const skeleton = () => {
         const result = []
         for (let i = 0; i < 20; i++) {
@@ -33,7 +33,7 @@ function Orders ({ sortBy, data, isLoading }) {
     }
     return(
         <Wrapper>
-            <OrdersHeader sortBy={sortBy} storeName/>
+            <OrdersHeader sortBy={sortBy} size={size}/>
             {isLoading && data.length === 0 ?
                 skeleton() :
                 data.map((order, index) => (
@@ -49,6 +49,7 @@ function Orders ({ sortBy, data, isLoading }) {
                             : <Order
                                 data={order}
                                 sortBy={sortBy}
+                                size={size}
                             />
                         }
                     </div>
@@ -62,6 +63,7 @@ Orders.defaultProps = {
     sortBy: "created_at",
     data: [],
     isLoading: false,
+    size: "medium",
 }
 
 export default Orders

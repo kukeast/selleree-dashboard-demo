@@ -22,7 +22,7 @@ const Price = styled.div`
     text-align: right;
 `
 const Title = styled.div`
-    flex: 4;
+    flex: ${props => props.size === "medium" ? 4 : 3};
 `
 const Name = styled.div`
     flex: 1.5;
@@ -36,13 +36,13 @@ const Fulfillment = styled.div`
     flex: 1;
 `
 
-function OrdersHeader ({ sortBy, storeName }) {
+function OrdersHeader ({ sortBy, size }) {
     return(
         <Wrapper>
             <CreatedAt>{sortBy === "created_at" ? "주문 시간" : "업데이트 시간"}</CreatedAt>
             <Image>상품</Image>
-            <Title></Title>
-            {storeName && <Name>상점 이름</Name>}
+            <Title size={size}></Title>
+            {size === "medium" && <Name>상점 이름</Name>}
             <Price>결제 금액</Price>
             <Financial>결제 상태</Financial>
             <Fulfillment>배송 상태</Fulfillment>

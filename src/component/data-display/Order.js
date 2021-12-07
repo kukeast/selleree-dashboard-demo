@@ -71,8 +71,8 @@ const Price = styled.div`
 const PaymentMethod = styled.span`
     font-size: 22px;
 `
-const Title = styled.div`
-    flex: 4;
+const Title = styled.div` 
+    flex: ${props => props.size === "medium" ? 4 : 3};
     margin-left: 16px;
 `
 const Name = styled.div`
@@ -93,7 +93,7 @@ const Fulfillment = styled.div`
     color: ${props => props.status ? FulfillmentStatus[props.status].color : null};
 `
 
-function Order ({data, sortBy, isLoading}) {
+function Order ({data, sortBy, isLoading, size = "medium"}) {
     const [isOpen, setIsOpen] = useState(false)
     if(isLoading){
         return(
@@ -113,8 +113,8 @@ function Order ({data, sortBy, isLoading}) {
                 <Wrapper onClick={() => setIsOpen(true)}>
                     <CreatedAt>{format(parseISO(data[sortBy]), 'H시 m분 s초')}</CreatedAt>
                     <Image url={data.image_url}/>
-                    <Title>{data.title}</Title>
-                    {data.name && <Name>{data.name}</Name>}
+                    <Title size={size}>{data.title}</Title>
+                    {size === "medium" && <Name>{data.name}</Name>}
                     <Price>
                         {
                             (
