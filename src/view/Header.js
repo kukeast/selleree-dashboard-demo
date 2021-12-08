@@ -42,9 +42,8 @@ const HeaderWrapper = styled.div`
     `: css`
         position: absolute;
         top: 0;
-        /* box-shadow: 0px 4px 24px 0px #2222220a; */
         box-shadow: none;
-        border-bottom: 1px solid ${COLOR.gray1};
+        border-bottom: 1px solid ${COLOR.gray2};
     `}
     width: 100%;
     background-color: ${COLOR.backgroundColor};
