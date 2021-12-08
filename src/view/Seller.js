@@ -466,7 +466,7 @@ function ProductList ({ id }) {
                 /> :
                 <EmptyArea>상품이 없어요.</EmptyArea>
             }
-            {productList && productList.length === limit &&
+            {productList && (productList.length === limit || response.loading) &&
                 <ButtonWrapper>
                     <Button 
                         type="mono" 
@@ -499,7 +499,7 @@ function OrderList ({ id }) {
                 />:
                 <EmptyArea>주문이 없어요.</EmptyArea>
             }
-            {orderList && orderList.length === limit &&
+            {orderList && (orderList.length === limit || response.loading) &&
                 <ButtonWrapper>
                     <Button 
                         type="mono" 
