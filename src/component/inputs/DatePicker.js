@@ -70,7 +70,6 @@ const Wrapper = styled.div`
             color: ${COLOR.black};
         }
         .rdrInRange, .rdrStartEdge, .rdrEndEdge, .rdrSelected, .rdrDayStartPreview, .rdrDayInPreview, .rdrDayEndPreview{
-            // display: none;
             background-color: ${COLOR.main3};
         }
     }

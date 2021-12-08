@@ -88,12 +88,10 @@ function SellerStatistics() {
     {
       id: 1,
       title: "주별",
-      //disabled: true,
     },
     {
       id: 2,
       title: "월별",
-      //disabled: true,
     }
   ]
 

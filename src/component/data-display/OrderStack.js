@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import { COLOR } from '../../constants/color'
 import Icon from './Icon';
 import Button from '../inputs/Button'
-// import OrderExpand from './OrderExpand'
 import Order from './Order'
 
 const Wrapper = styled.div`
