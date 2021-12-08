@@ -19,10 +19,10 @@ const Wrapper = styled.button`
             font-weight: bold;
             color: ${COLOR.main};
             :hover{
-                background-color: ${COLOR.main2};
+                background-color: ${COLOR.main1};
             }
             :active{
-                background-color: ${COLOR.main3};
+                background-color: ${COLOR.main2};
             }
         `
         : props.theme === "mono" 
