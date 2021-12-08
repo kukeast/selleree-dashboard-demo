@@ -58,13 +58,22 @@ export async function getTodayChart(name) {
     return response.data;
 }
 
-export async function getProducts(limit) {
+export async function getProducts(limit, id) {
     const response = await Api.get(`https://${url}/api/products?limit=${limit}`);
+    return response.data;
+}
+export async function getSellerProducts(limit, id) {
+    const response = await Api.get(`https://${url}/api/products?limit=${limit}&id=${id}`);
     return response.data;
 }
 
 export async function getOrders(limit, sortBy) {
     const response = await Api.get(`https://${url}/api/orders?limit=${limit}&sortBy=${sortBy}`);
+    return response.data;
+}
+
+export async function getSellerOrders(limit, sortBy, id) {
+    const response = await Api.get(`https://${url}/api/orders?limit=${limit}&sortBy=${sortBy}&id=${id}`);
     return response.data;
 }
 
@@ -75,6 +84,11 @@ export async function getOrderDetail(orderId) {
 
 export async function getShopggu() {
     const response = await Api.get(`https://${url}/api/shopggus`);
+    return response.data;
+}
+
+export async function getCover(id) {
+    const response = await Api.get(`https://${url}/api/cover?id=${id}`);
     return response.data;
 }
 
