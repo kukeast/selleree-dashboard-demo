@@ -34,7 +34,7 @@ function Title ({title, subtitle, iconSrc}) {
 }
 
 Title.defaultProps = {
-    title : "셀러리 모니터링",
+    title : "마요네즈",
     subtitle : "동국이의 두번째 작업"
 }
 
