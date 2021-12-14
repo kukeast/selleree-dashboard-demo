@@ -100,7 +100,7 @@ function Order ({data, sortBy, isLoading, size = "medium"}) {
             <Wrapper>
                 <CreatedAt><Skeleton width={100} height={21}/></CreatedAt>
                 <Skeleton width={60} height={60} rounded/>
-                <Title><Skeleton width={260} height={21}/></Title>
+                <Title size={size}><Skeleton width={260} height={21}/></Title>
                 <Name><Skeleton width={100} height={21}/></Name>
                 <Price><Skeleton width={80} height={21}/></Price>
                 <Financial><Skeleton width={80} height={21}/></Financial>

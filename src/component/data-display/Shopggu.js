@@ -29,11 +29,11 @@ function Shopggu ({ data, isLoading }) {
         return (
             <Card>
                 <TitleWrapper>
-                    <Skeleton width={60} height={19}/>
-                    <Skeleton width={80} height={16}/>
+                    <Skeleton width={60} height={17}/>
+                    <Skeleton width={80} height={17}/>
                 </TitleWrapper>
                 <StoreName>
-                    <Skeleton width={180} height={25}/>
+                    <Skeleton width={180} height={22}/>
                 </StoreName>
             </Card>
         )
