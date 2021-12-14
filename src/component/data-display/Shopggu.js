@@ -10,7 +10,7 @@ const TitleWrapper = styled.div`
     justify-content: space-between;
 `
 const Order = styled.p`
-    font-size: 15px;
+    font-size: 13px;
     color: ${COLOR.gray6};
 `
 const Date = styled.p`
@@ -18,10 +18,10 @@ const Date = styled.p`
     color: ${COLOR.gray5};
 `
 const StoreName = styled.p`
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     color: ${COLOR.main};
-    margin-top: 6px;
+    margin-top: 4px;
 `
 
 function Shopggu ({ data, isLoading }) {
@@ -42,7 +42,7 @@ function Shopggu ({ data, isLoading }) {
             <Card onClick={() => window.open(`https://${data.store_name}.selleree.shop/`, "_blank")}>
                 <TitleWrapper>
                     <Order>{data.order + 1}번째 발행</Order>
-                    <Date>{format(parseISO(data.date), 'M월 d일 H시 m분 s초')}</Date>
+                    <Date>{format(parseISO(data.date), 'M월 d일 H시 m분')}</Date>
                 </TitleWrapper>
                 <StoreName>{data.store_name}</StoreName>
             </Card>

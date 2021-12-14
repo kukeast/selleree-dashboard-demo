@@ -3,26 +3,14 @@ import { parseISO, format }from "date-fns"
 import styled from 'styled-components';
 import Orders from '../component/data-display/Orders';
 import Container from '../component/layout/Container';
-import TextButton from '../component/inputs/TextButton';
 import Select from '../component/inputs/Select';
 import useLocalStorage from '../util/useLocalStorage';
 import useAsync from '../util/useAsync';
 import { getOrders } from '../util/api';
 import Button from '../component/inputs/Button';
-const SortWrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 16px;
-    > div{
-        flex: 1;
-    }
-    > div:nth-child(2){
-        text-align: center;
-    }
-    > div:nth-child(3){
-        text-align: right;
-    }
-`
+import Icon from '../component/data-display/Icon';
+import Title from '../component/data-display/Title';
+import { COLOR } from '../constants/color';
 const ButtonWrapper = styled.div`
     margin-top: 20px;
     text-align: center;
@@ -81,21 +69,25 @@ function OrderList () {
     }, [sortBy])
     return(
         <Container>
-            <SortWrapper>
-                <div></div>
-                <div>
-                    <TextButton icon='sort' onClick={switchOrderSort}>
-                        {sortBy === "created_at" ? "최근 생성 순" : "최근 업데이트 순"}
-                    </TextButton>
-                </div>
-                <div>
-                    <Select 
-                        options={options} 
-                        defaultValue={unit} 
-                        callback={selectCallback}
-                    />
-                </div>
-            </SortWrapper>
+            <Title 
+                title="주문"
+                icon="cart16"
+                color={COLOR.yellow}
+            >
+                <Button
+                    type="line"
+                    size="small"
+                    onClick={switchOrderSort}
+                >
+                    <Icon name="sort" size={16} color={COLOR.gray5}/>
+                    {sortBy === "created_at" ? "최근 생성 순" : "최근 업데이트 순"}
+                </Button>
+                <Select 
+                    options={options} 
+                    defaultValue={unit} 
+                    callback={selectCallback}
+                />
+            </Title>
             <Orders
                 sortBy={sortBy}
                 data={orderList}

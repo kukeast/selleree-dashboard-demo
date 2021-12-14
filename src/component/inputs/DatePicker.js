@@ -6,8 +6,8 @@ import ko from 'date-fns/locale/ko'
 import {sub, format} from "date-fns";
 import styled, { css } from 'styled-components';
 import { COLOR } from '../../constants/color';
-import TextButton from './TextButton';
 import Button from './Button';
+import Icon from '../data-display/Icon';
 
 const Wrapper = styled.div`
     display: inline-flex;
@@ -77,6 +77,7 @@ const Wrapper = styled.div`
 const PickerWrapper = styled.div`
     position: absolute;
     top: 50px;
+    right: 0;
     display: ${props => props.isShow ? "inline-block" : "none"};
     border-radius: 16px;
     background-color: ${COLOR.white};
@@ -226,12 +227,14 @@ function DatePicker ({ defaultDate, callback }) {
     }, [submitDate, callback])
     return(
         <Wrapper>
-            <TextButton 
-                icon="calendar" 
+            <Button
+                type="line"
+                size="small"
                 onClick={openModal}
             >
+                <Icon name="calendar" size={16} color={COLOR.gray5}/>
                 {formattingDate(submitDate)}
-            </TextButton>
+            </Button>
             <Dim isShow={isShow} onClick={() => setIsShow(false)}/>
             <PickerWrapper isShow={isShow}>
                 <DateRangeWrapper>

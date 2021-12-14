@@ -11,7 +11,7 @@ import { COLOR } from '../constants/color';
 const CardWrapper = styled.div`
     display: grid;
     gap: 20px;
-    margin-top: 20px;
+    margin-bottom: 20px;
     @media screen and (max-width: 768px) {
         grid-template-columns: repeat(2, 1fr);
     }

@@ -10,6 +10,7 @@ import Modal from '../component/data-display/Modal';
 import Sellers from './Sellers';
 import { COLOR } from '../constants/color';
 import { getPaymentSetting } from '../util/api';
+import Title from '../component/data-display/Title';
 
 const defaultTable = [
     [
@@ -66,10 +67,6 @@ const Column = styled.div`
         grid-template-columns: 1fr;
     }
 `
-const DatePickerWrapper = styled.div`
-    margin-top: 30px;
-    text-align: center;
-`
 
 function PaymentSetting ({ location, history }) {
     const queryObj = queryString.parse(location.search)
@@ -108,9 +105,13 @@ function PaymentSetting ({ location, history }) {
     return(
         <>
             <Container>
-                <DatePickerWrapper>
+                <Title 
+                    title="결제 설정 현황"
+                    icon="card16"
+                    color={COLOR.red}
+                >
                     <DatePicker defaultDate="2021.8.1" callback={callbackDateRange}/>
-                </DatePickerWrapper>
+                </Title>
                 <Column>
                     <div>
                         <Chart

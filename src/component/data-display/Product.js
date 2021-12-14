@@ -4,7 +4,7 @@ import { COLOR } from '../../constants/color';
 import Skeleton from './Skeleton';
 
 const Wrapper = styled.a`
-    font-size: 16px;
+    font-size: 14px;
     color: ${COLOR.black};
     transition: 0.2s;
     &:hover{
@@ -27,8 +27,8 @@ const Image = styled.div`
     border: 1px solid ${COLOR.gray2};
 `
 const StoreName = styled.p`
-    font-size: 12px;
-    font-weight: bold;
+    font-size: 11px;
+    font-weight: 600;
     color: ${COLOR.main};
     margin-top: 10px;
 `
@@ -37,6 +37,7 @@ const ItemName = styled.p`
 `
 const Price = styled.p`
     margin-top: 4px;
+    font-weight: 500;
 `
 const Tags = styled.div`
     display: flex;
@@ -45,7 +46,7 @@ const Tags = styled.div`
     p{
         display: inline-block;
         padding: 4px 6px;
-        font-size: 14px;
+        font-size: 12px;
         border-radius: 8px;
     }
     .delete{
@@ -71,10 +72,10 @@ function Product ({ data, isLoading }) {
         return(
             <Wrapper>
                 <ImageSkeleton rounded/>
-                <StoreName><Skeleton width={50} height={15}/></StoreName>
-                <ItemName><Skeleton width={160} height={21}/></ItemName>
-                <Price><Skeleton width={140} height={21}/></Price>
-                <Tags><Skeleton width={40} height={26} rounded/></Tags>
+                <StoreName><Skeleton width={50} height={14}/></StoreName>
+                <ItemName><Skeleton width={160} height={18}/></ItemName>
+                <Price><Skeleton width={140} height={18}/></Price>
+                <Tags><Skeleton width={30} height={23} rounded/></Tags>
             </Wrapper>
         )
     }else{

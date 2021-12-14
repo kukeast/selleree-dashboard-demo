@@ -6,22 +6,20 @@ import Container from '../component/layout/Container'
 import Shopggus from '../component/data-display/Shopggus';
 import Products from '../component/data-display/Products';
 import Statistics from './Statistics';
-import TextButton from '../component/inputs/TextButton';
-import Card from '../component/data-display/Card';
 import useAsync from '../util/useAsync';
 import { getProducts } from '../util/api';
 import Button from '../component/inputs/Button';
+import Title from '../component/data-display/Title';
+import Icon from '../component/data-display/Icon';
 
 const UpdateTime = styled.p`
-    margin: 30px 0 0;
-    text-align: center;
     font-size: 15px;
-    color: ${COLOR.gray6};
+    color: ${COLOR.gray5};
 `
 const Wrapper = styled.div`
     h2{
         margin: 20px 0;
-        font-size: 20px;
+        font-size: 18px;
         color: ${COLOR.black};
     }
     display: grid;
@@ -38,7 +36,6 @@ const ButtonWrapper = styled.div`
         width: 100%;
     }
 `
-
 function Dashboard () {
     const [repatch, setRepatch] = useState(0)
     const [updateTime, setUpdateTime] = useState(format(new Date(), 'H시 m분 s초'))
@@ -56,21 +53,26 @@ function Dashboard () {
     }
     return(
         <Container>
-            <UpdateTime>
-                <TextButton 
-                    icon="refresh"
+            <Title 
+                title="대시보드"
+                icon="dashboard16"
+                color={COLOR.main}
+            >
+                <UpdateTime>최근 업데이트 {updateTime}</UpdateTime>
+                <Button
+                    size="small"
+                    type="line"
                     onClick={() => refresh()}
                 >
-                    최근 업데이트 {updateTime}
-                </TextButton>
-            </UpdateTime>
+                    <Icon name="refresh" size={16} color={COLOR.gray5}/>
+                    새로고침
+                </Button>
+            </Title>
             <Statistics repatch={repatch}/>
             <Wrapper>
                 <div>
                     <h2>🙋‍♀️ 여기 상품 등록했어요</h2>
-                    <Card>
-                        <ProductList/>
-                    </Card>
+                    <ProductList repatch={repatch}/>
                 </div>
                 <div>
                     <h2>🙋‍♂️ 여기 샵꾸 발행했어요</h2>
@@ -83,15 +85,20 @@ function Dashboard () {
 
 export default Dashboard
 
-function ProductList () {
+function ProductList ({ repatch }) {
     const [limit, setLimit] = useState(20)
     const [productList, setProductList] = useState([])
-    const [response] = useAsync(() => getProducts(limit), [limit])
+    const [response, repatchResponse] = useAsync(() => getProducts(limit), [limit])
     useEffect(() => {
         if(response.data){
             setProductList(response.data.data)
         }
     }, [response])
+    useEffect(() => {
+        repatchResponse()
+        setProductList([])
+        //eslint-disable-next-line
+    },[repatch])
     return(
         <>
             <Products

@@ -97,7 +97,7 @@ function LogIn ({history}) {
                             아이디 또는 비밀번호가 일치하지 않아요
                         </Alert>
                     }
-                    <Button isLoading={loading} onClick={onClick}>로그인</Button>
+                    <Button isLoading={loading} onClick={onClick} size="large">로그인</Button>
                 </Wrapper>
             }
             

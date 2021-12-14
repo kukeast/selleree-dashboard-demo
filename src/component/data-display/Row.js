@@ -12,9 +12,9 @@ const Wrapper = styled.div`
     }
     transition: 0.2s;
     background-color: ${COLOR.white};
-    margin: 4px 0;
+    margin: 2px 0;
     padding: 16px;
-    font-size: 15px;
+    font-size: 14px;
     color: ${COLOR.black};
     align-items: center;
     cursor: pointer;

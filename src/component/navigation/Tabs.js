@@ -2,17 +2,21 @@ import React from 'react'
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
 import { COLOR } from '../../constants/color'
-
+import Icon from '../../component/data-display/Icon'
 const Wrapper = styled.div`
     display: flex;
+    flex-direction: column;
     gap: 6px;
     margin-bottom: 8px;
 `
 
 const TabWrapper = styled(NavLink)`
-    padding: 12px;
+    padding: 8px 10px;
     display: inline-flex;
-    font-size: 16px;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    line-height: 20px;
     border-radius: 8px;
     transition: 0.3s;
     background-color: ${COLOR.white};
@@ -21,18 +25,11 @@ const TabWrapper = styled(NavLink)`
     &:hover{
         background-color: ${COLOR.gray1};
     }
-    &:active{
-        background-color: ${COLOR.gray2};
-    }
     &.selected{
-        background-color: ${COLOR.main1};
-        font-weight: bold;
-        color: ${COLOR.main};
+        background-color: ${props => props.color}1a;
+        color: ${COLOR.black};
         &:hover{
-            background-color: ${COLOR.main2};
-        }
-        &:active{
-            background-color: ${COLOR.main3};
+            background-color: ${props => props.color}33;
         }
     }
 `
@@ -45,7 +42,9 @@ function Tabs ({ tabs }) {
                     activeClassName="selected"
                     exact={tab.path === "/"}
                     key={tab.id}
+                    color={tab.color}
                 >
+                    {tab.icon && <Icon name={tab.icon} color={tab.color} size={16}/>}
                     {tab.title}
                 </TabWrapper>
             ))}

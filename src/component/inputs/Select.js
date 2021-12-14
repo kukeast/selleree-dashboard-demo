@@ -8,12 +8,12 @@ const Wrapper = styled.div`
     display: inline-block;
 `
 const SelectWrapper = styled.div`
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 400;
     color: ${COLOR.black};
-    background-color: ${COLOR.gray2};
+    background-color: ${COLOR.white};
     line-height: 20px;
-    padding: 10px 10px 10px 12px;
+    padding: 8px 10px;
     border-radius: 8px;
     cursor: pointer;
     transition: 0.3s;
@@ -22,15 +22,13 @@ const SelectWrapper = styled.div`
     justify-content: center;
     gap: 6px;
     transition: 0.3s;
+    border: 1px solid ${COLOR.gray2};
+    box-shadow: 0px 2px 4px 0px #22222214;
     :hover{
-        background-color: ${COLOR.gray3};
-    }
-    :active{
-        background-color: ${COLOR.gray2};
+        background-color: ${COLOR.gray1};
     }
     ${props => props.isShow && css`
-        background-color: ${COLOR.main2};
-        color: ${COLOR.main};
+        background-color: ${COLOR.gray1};
     `}
 `
 const Dim = styled.div`
@@ -43,7 +41,7 @@ const Options = styled.div`
     position: absolute;
     width: 120px;
     top: 50px;
-    right: 0;
+    right: -2px;
     display: ${props => props.isShow ? "inline-block" : "none"};
     border-radius: 16px;
     background-color: ${COLOR.white};
@@ -80,8 +78,8 @@ function Select ({ options, defaultValue, callback }) {
             <SelectWrapper isShow={isShow} onClick={() => setIsShow(prev => !prev)}>
                 {options[selected]}
                 {isShow ? 
-                    <Icon name="expand_less" size={16} color={COLOR.main}/> :
-                    <Icon name="expand_more" size={16} color={COLOR.black}/>
+                    <Icon name="expand_less" size={16} color={COLOR.gray5}/> :
+                    <Icon name="expand_more" size={16} color={COLOR.gray5}/>
                 }
             </SelectWrapper>
             <Dim isShow={isShow} onClick={() => setIsShow(false)}/>

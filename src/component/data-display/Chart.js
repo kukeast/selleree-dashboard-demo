@@ -16,7 +16,7 @@ const Title = styled.p`
     margin-top: 6px;
 `
 const Wrapper = styled(Card)`
-    margin: 20px 0;
+    margin-bottom: 20px;
     > div {
         height: ${props => props.height}px;
     }

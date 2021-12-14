@@ -1,34 +1,49 @@
 import React from 'react'
 import styled from 'styled-components'
 import { COLOR } from '../../constants/color'
+import Icon from './Icon'
 
 const Wrapper = styled.div`
     display: flex;
-    align-items: flex-end;
-    gap: 6px;
-    margin: 36px 0 24px;
-
-    h1{
-        font-size: 20px;
-        margin: 0;
-        color: ${COLOR.black};
-        line-height: 22px;
-    }
-    p{
-        font-size: 12px;
-        font-weight: 800;
-        line-height: 16px;
-        color: ${COLOR.gray4};
-    }
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 24px 0 24px;
 `
-
-function Title ({title, subtitle, iconSrc}) {
+const Left = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 8px;
+`
+const Right = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 12px;
+`
+const H1 = styled.p`
+    font-size: 20px;
+    font-weight: 600;
+    color: ${COLOR.black};
+`
+const IconWrapper = styled.div`
+    display: flex;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: ${props => props.color}1a;
+`
+function Title ({title, icon, color, children}) {
     
     return(
         <Wrapper>
-            {iconSrc && <img src={iconSrc} alt="header"/>}
-            <h1>{title}</h1>
-            <p>{subtitle}</p>
+            <Left>
+                <IconWrapper color={color}>
+                    <Icon name={icon} color={color} size={16}/>
+                </IconWrapper>
+                <H1>{title}</H1>
+            </Left>
+            <Right>
+                {children}
+            </Right>
         </Wrapper>
     )
 }

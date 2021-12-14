@@ -42,9 +42,9 @@ const Wrapper = styled.div`
     }
     transition: 0.2s;
     background-color: ${COLOR.white};
-    margin: 10px 0;
+    margin: 8px 0;
     padding: 10px 16px;
-    font-size: 15px;
+    font-size: 14px;
     color: ${COLOR.black};
     align-items: center;
     cursor: pointer;

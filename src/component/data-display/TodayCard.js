@@ -7,26 +7,25 @@ import Card from './Card'
 const CardWrapper = styled(Card)`
     flex: 1;
     ${props => props.select 
-        ? css`border: 2px solid ${props => props.color};`
-        : css`border: 2px solid ${COLOR.white};`
+        && css`border: 1px solid ${props => props.color};`
     }
 `
 const CardTitle = styled.p`
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 400;
     color: ${COLOR.gray5};
     margin-top: 16px;
 `
 const Count = styled.p`
-    font-size: 44px;
+    font-size: 40px;
     line-height: 1;
-    font-weight: 700;
+    font-weight: 600;
     color: ${COLOR.black};
     margin-top: 12px;
 `
 const GrowthCountWrapper = styled.span`
-    font-size: 16px;
-    margin-left: 4px;
+    font-size: 15px;
+    margin-left: 2px;
     display: inline-flex;
     align-items: center;
     ${props => props.count > 0 

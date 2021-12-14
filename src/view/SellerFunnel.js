@@ -10,6 +10,7 @@ import { COLOR } from '../constants/color';
 import { getFunnel } from '../util/api';
 import Modal from '../component/data-display/Modal';
 import Sellers from './Sellers';
+import Title from '../component/data-display/Title';
 
 const defaultFunnel = [
     {
@@ -48,10 +49,6 @@ const defaultFunnel = [
         title : "주문 상태 변경 10개 이상",
     },
 ]
-const DatePickerWrapper = styled.div`
-    margin-top: 30px;
-    text-align: center;
-`
 const FunnelWrapper = styled.div`
     > div {
         min-width: 960px;
@@ -91,9 +88,13 @@ function SellerFunnel ({ location, history }) {
     return(
         <>
             <Container>
-                <DatePickerWrapper>
+                <Title 
+                    title="판매자 퍼널"
+                    icon="filter16"
+                    color={COLOR.blue}
+                >
                     <DatePicker defaultDate="2021.8.1" callback={callbackDateRange}/>
-                </DatePickerWrapper>
+                </Title>
                 <Chart
                     data={[{
                         name: "Count",

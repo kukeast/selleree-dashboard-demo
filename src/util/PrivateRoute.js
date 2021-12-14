@@ -5,7 +5,7 @@ import Header from '../view/Header';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-     margin: 160px 0 80px;
+     margin: 30px 0 80px 220px;
 `
 
 function PrivateRoute ({ component: Component, header, ...rest }) {

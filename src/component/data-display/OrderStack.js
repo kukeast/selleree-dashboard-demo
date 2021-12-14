@@ -3,7 +3,6 @@ import { parseISO, format }from "date-fns"
 import styled from 'styled-components'
 import { COLOR } from '../../constants/color'
 import Icon from './Icon';
-import Button from '../inputs/Button'
 import Order from './Order'
 
 const Wrapper = styled.div`
@@ -16,7 +15,7 @@ const Wrapper = styled.div`
             background-color: ${COLOR.gray1};
         }
     }
-    margin: 10px 0;
+    margin: 8px 0;
     cursor: s-resize;
 `
 
@@ -62,7 +61,14 @@ const Name = styled.div`
     flex: 2.5;
 `
 const More = styled.div`
+    display: flex;
+    font-size: 15px;
+    font-weight: 500;
+    color: ${COLOR.main};
     text-align: right;
+    justify-content: flex-end;
+    gap: 6px;
+    align-items: center;
     flex: 2;
 `
 
@@ -78,10 +84,7 @@ function OrderExpand ({data, sortBy, length, onClick}) {
                 <Title>{data.title}</Title>
                 <Name>{data.name}</Name>
                 <More>
-                    <Button type="secondary" shape="pill">
-                        {length}개
-                        <Icon name="arrow_down" color={COLOR.main} size={16}/>
-                    </Button>
+                    {length}개<Icon name="arrow_down" color={COLOR.main} size={16}/>
                 </More>
             </OrderWrapper>
             <Card1/>

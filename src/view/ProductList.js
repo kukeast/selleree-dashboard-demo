@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import Products from '../component/data-display/Products';
+import Title from '../component/data-display/Title';
 import Button from '../component/inputs/Button';
 import Select from '../component/inputs/Select';
 import Container from '../component/layout/Container';
+import { COLOR } from '../constants/color';
 import { getProducts } from '../util/api';
 import useAsync from '../util/useAsync';
 import useLocalStorage from '../util/useLocalStorage';
 
-const SortWrapper = styled.div`
-    display: flex;
-    justify-content: end;
-    margin-bottom: 16px;
-`
 const ButtonWrapper = styled.div`
     margin-top: 30px;
     text-align: center;
@@ -43,13 +40,18 @@ function ProductList () {
 
     return(
         <Container>
-            <SortWrapper>
+            <Title 
+                title="상품"
+                icon="tag16"
+                color={COLOR.green}
+            >
                 <Select 
                     options={options} 
                     defaultValue={unit} 
                     callback={selectCallback}
                 />
-            </SortWrapper>
+            </Title>
+        
             <Products 
                 column='5'
                 data={productList}
