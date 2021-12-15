@@ -51,10 +51,22 @@ const HeaderWrapper = styled.div`
     width: 220px;
     background-color: ${COLOR.backgroundColor};
     z-index: 9;
+    @media screen and (max-width: 1024px) {
+        width: 160px;
+    }
+    @media screen and (max-width: 768px) {
+        border-top: 1px solid ${COLOR.gray2};
+        border-right: none;
+        top: initial;
+        width: 100%;
+    }
 `
 const TitleWrapper = styled.div`
     padding: 0 10px;
     margin: 16px 0;
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
 `
 const Title = styled.p`
     font-size: 15px;

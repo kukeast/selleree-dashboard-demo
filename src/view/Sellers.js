@@ -39,6 +39,11 @@ const CardWrapper = styled(Card)`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @media screen and (max-width: 425px) {
+        > *{
+            flex: auto !important;
+        }
+    }
 `
 const StoreName = styled.p`
     font-size: 18px;

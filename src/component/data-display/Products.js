@@ -5,7 +5,7 @@ import Product from './Product'
 const Wrapper = styled.div`
     display: grid;
     gap: 40px 20px;
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1024px) {
         grid-template-columns: repeat(4, 1fr);
     }
     @media screen and (max-width: 425px) {

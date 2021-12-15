@@ -105,6 +105,9 @@ const CardInfo = styled.div`
     width: 50%;
     margin-top: 20px;
     vertical-align: top;
+    @media screen and (max-width: 425px) {
+        width: 100%;
+    }
 `
 const Label = styled.p`
     font-size: 13px;

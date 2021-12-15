@@ -8,6 +8,10 @@ const Wrapper = styled.div`
     flex-direction: column;
     gap: 6px;
     margin-bottom: 8px;
+    @media screen and (max-width: 768px) {
+        flex-direction: row;
+        justify-content: space-between;
+    }
 `
 
 const TabWrapper = styled(NavLink)`
@@ -33,6 +37,11 @@ const TabWrapper = styled(NavLink)`
         }
     }
 `
+const Title = styled.p`
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
+`
 function Tabs ({ tabs }) {
     return(
         <Wrapper>
@@ -45,7 +54,7 @@ function Tabs ({ tabs }) {
                     color={tab.color}
                 >
                     {tab.icon && <Icon name={tab.icon} color={tab.color} size={16}/>}
-                    {tab.title}
+                    <Title>{tab.title}</Title>
                 </TabWrapper>
             ))}
         </Wrapper>

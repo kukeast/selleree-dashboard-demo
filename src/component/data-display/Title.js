@@ -9,15 +9,21 @@ const Wrapper = styled.div`
     justify-content: space-between;
     gap: 8px;
     margin: 24px 0 24px;
+    @media screen and (max-width: 425px) {
+        flex-direction: column;
+        align-items: initial;
+    }
 `
 const Left = styled.div`
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     gap: 8px;
 `
 const Right = styled.div`
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 12px;
 `
 const H1 = styled.p`

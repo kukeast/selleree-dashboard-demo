@@ -58,9 +58,6 @@ const Close = styled.div`
         background-color: ${COLOR.gray2};
     }
     animation: slide 0.5s;
-    @media screen and (max-width: 425px) {
-        padding: 20px;
-    }
     @keyframes slide{
         0%{
             opacity: 0.8;
