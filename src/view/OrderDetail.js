@@ -7,6 +7,7 @@ import useAsync from '../util/useAsync'
 import Icon from '../component/data-display/Icon';
 import Card from '../component/data-display/Card';
 import Skeleton from '../component/data-display/Skeleton';
+import { Link } from 'react-router-dom';
 const FinancialStatus ={
     WAITING : {
         color: COLOR.yellow,
@@ -45,7 +46,7 @@ const Header = styled.div`
     justify-content: space-between;
     margin: 20px 0 30px;
 `
-const StoreName = styled.a`
+const StoreName = styled(Link)`
     display: inline-flex;
     align-items: center;
     gap: 2px;
@@ -133,9 +134,7 @@ function OrderDetail ({orderId}) {
     const backgroundImage = detail && {
         backgroundImage: `url(${detail.image_url}?w=300)`
     };
-    const StoreHref = detail && `https://${detail.identifier}.selleree.shop/`
     const ProductHref = detail && `https://${detail.identifier}.selleree.shop/products/${detail.item_id}`
-
     const formattingPrice = price => {
         return price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
     }
@@ -150,7 +149,7 @@ function OrderDetail ({orderId}) {
             {detail ? <>
                 <Header>
                     <div>
-                        <StoreName href={StoreHref} target="_blank" rel="noreferrer">
+                        <StoreName to={`/seller/${detail.seller_id}`}>
                             {detail.store_name}
                             <Icon name="new_tab" color={COLOR.main} size={16}/>
                         </StoreName>
@@ -249,7 +248,7 @@ function OrderDetail ({orderId}) {
             <>
                 <Header>
                     <div>
-                        <StoreName><Skeleton width={60} height={19}/></StoreName>
+                        <StoreName to={"/"}><Skeleton width={60} height={19}/></StoreName>
                         <OrderTitle><Skeleton width={150} height={25}/></OrderTitle>
                         <OrderDate><Skeleton width={80} height={19}/></OrderDate>
                     </div>
