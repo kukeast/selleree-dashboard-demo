@@ -151,7 +151,7 @@ function OrderDetail ({orderId}) {
                     <div>
                         <StoreName to={`/seller/${detail.seller_id}`}>
                             {detail.store_name}
-                            <Icon name="new_tab" color={COLOR.main} size={16}/>
+                            <Icon name="file16" color={COLOR.main} size={16}/>
                         </StoreName>
                         <OrderTitle>{detail.buyer_name}님의 주문</OrderTitle>
                         <OrderDate>
