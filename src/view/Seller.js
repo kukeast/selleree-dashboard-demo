@@ -200,7 +200,7 @@ function Seller ({match, history}) {
                 <Wrapper>
                     <TitleWrapper>
                         <Title>{sellerInfo.store_name}</Title>
-                        <Button onClick={() => window.open(`https://${sellerInfo.identifier}.selleree.shop/`, "_blank")}>상점 바로가기<Icon name="new_tab" size={16} color={COLOR.white}/></Button>
+                        <Button onClick={() => window.open(`https://${sellerInfo.identifier}.selleree.shop/`, "_blank")}>상점 바로가기<Icon name="new_tab16" size={16} color={COLOR.white}/></Button>
                     </TitleWrapper>
                     <ContentsWrapper>
                         <Navs>
@@ -229,7 +229,7 @@ function Seller ({match, history}) {
                 <Wrapper>
                     <TitleWrapper>
                         <Title><Skeleton width={180} height={40}/></Title>
-                        <Button isLoading>상점 바로가기<Icon name="new_tab" size={16} color={COLOR.white}/></Button>
+                        <Button isLoading>상점 바로가기<Icon name="new_tab16" size={16} color={COLOR.white}/></Button>
                     </TitleWrapper>
                     <ContentsWrapper>
                         <Navs>
