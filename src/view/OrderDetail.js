@@ -46,11 +46,33 @@ const Header = styled.div`
     justify-content: space-between;
     margin: 20px 0 30px;
 `
-const StoreName = styled(Link)`
+const StoreName = styled.div`
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    color: ${COLOR.black};
+`
+const LinkWrapper = styled(Link)`
     display: inline-flex;
     align-items: center;
     gap: 2px;
-    font-size: 15px;
+    font-size: 13px;
+    font-weight: bold;
+    color: ${COLOR.main};
+    transition: 0.3s;
+    padding: 0 2px;
+    border-radius: 4px;
+    :hover{
+        background-color: ${COLOR.main2};
+    }
+`
+const AnchorWrapper = styled.a`
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 13px;
     font-weight: bold;
     color: ${COLOR.main};
     transition: 0.3s;
@@ -149,9 +171,14 @@ function OrderDetail ({orderId}) {
             {detail ? <>
                 <Header>
                     <div>
-                        <StoreName to={`/seller/${detail.seller_id}`}>
+                        <StoreName>
                             {detail.store_name}
-                            <Icon name="file16" color={COLOR.main} size={16}/>
+                            <LinkWrapper to={`/seller/${detail.seller_id}`}>
+                                상점 정보<Icon name="file16" color={COLOR.main} size={16}/>
+                            </LinkWrapper>
+                            <AnchorWrapper href={`https://${detail.identifier}.selleree.shop/`} target="_blank" rel="noreferrer">
+                                바로가기<Icon name="new_tab16" color={COLOR.main} size={16}/>
+                            </AnchorWrapper>
                         </StoreName>
                         <OrderTitle>{detail.buyer_name}님의 주문</OrderTitle>
                         <OrderDate>
