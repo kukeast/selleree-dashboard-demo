@@ -26,7 +26,7 @@ const OrderWrapper = styled.div`
     transition: 0.2s;
     background-color: ${COLOR.white};
     padding: 10px 16px;
-    font-size: 15px;
+    font-size: 14px;
     color: ${COLOR.black};
     align-items: center;
 `
