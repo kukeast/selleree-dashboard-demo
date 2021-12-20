@@ -1,7 +1,7 @@
 import React from 'react'
-import { createPortal } from 'react-dom';
 import styled from 'styled-components'
 import { COLOR } from '../../constants/color';
+import Portal from '../../util/Portal';
 import Icon from './Icon';
 
 const Dim = styled.div`
@@ -69,10 +69,6 @@ const Close = styled.div`
         }
     }
 `
-
-function Portal (props) {
-    return createPortal(props.children, document.getElementById("portal"))
-}
 
 function Modal ({ children, onClickClose }) {
     return(
