@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
+import Icon from '../component/data-display/Icon';
 import Tabs from '../component/navigation/Tabs';
 import { COLOR } from '../constants/color';
+import Search from './Search';
 const tabs = [
     {
         id : 1,
@@ -62,6 +64,9 @@ const HeaderWrapper = styled.div`
     }
 `
 const TitleWrapper = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 0 10px;
     margin: 16px 0;
     @media screen and (max-width: 768px) {
@@ -80,15 +85,37 @@ const Description = styled.p`
     line-height: 18px;
     color: ${COLOR.gray5};
 `
+const SearchIcon = styled.div`
+    display: flex;
+    padding: 6px;
+    border-radius: 8px;
+    background-color: ${COLOR.gray1};
+    &:hover{
+        background-color: ${COLOR.gray2};
+    }
+    cursor: pointer;
+`
 function Header () {
+    const [searching, setSearching] = useState(false)
+    const closeSearching = () => {
+        setSearching(false)
+    }
     return(
-        <HeaderWrapper>
-            <TitleWrapper>
-                <Title>마요네즈</Title>
-                <Description>셀러리 모니터링</Description>
-            </TitleWrapper>
-            <Tabs tabs={tabs}/>
-        </HeaderWrapper>
+        <>
+            <HeaderWrapper>
+                <TitleWrapper>
+                    <div>
+                        <Title>마요네즈</Title>
+                        <Description>셀러리 모니터링</Description>
+                    </div>
+                    <SearchIcon onClick={() => setSearching(true)}>
+                        <Icon name="search20" size={20} color={COLOR.gray6}/>
+                    </SearchIcon>
+                </TitleWrapper>
+                <Tabs tabs={tabs}/>
+            </HeaderWrapper>
+            {searching && <Search callback={closeSearching}/>}
+        </>
     )
 }
 

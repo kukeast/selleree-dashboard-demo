@@ -8,6 +8,7 @@ import LogIn from './view/LogIn';
 import SellerFunnel from './view/SellerFunnel';
 import PaymentSetting from './view/PaymentSetting';
 import Seller from './view/Seller';
+import Search from './view/Search';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <PrivateRoute header path="/funnel" component={SellerFunnel}/>
         <PrivateRoute header path="/payment-setting" component={PaymentSetting}/>
         <PrivateRoute path="/seller/:id" component={Seller}/>
+        <PrivateRoute path="/search" component={Search}/>
         <Route path="/login" component={LogIn}/>
       </Switch>
     </>

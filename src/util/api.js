@@ -58,7 +58,7 @@ export async function getTodayChart(name) {
     return response.data;
 }
 
-export async function getProducts(limit, id) {
+export async function getProducts(limit) {
     const response = await Api.get(`https://${url}/api/products?limit=${limit}`);
     return response.data;
 }
@@ -119,5 +119,10 @@ export async function getSellers(dateRange, segment, limit) {
 
 export async function getSeller(id) {
     const response = await Api.get(`https://${url}/api/seller/${id}`);
+    return response.data;
+}
+
+export async function getSearchResults(keyword) {
+    const response = await Api.get(`https://${url}/api/search?keyword=${keyword}`);
     return response.data;
 }
