@@ -1,20 +1,32 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 6px;
-    height: 20px;
-    > div{
-        background-color: ${props => props.color};
+    ${props => props.size === 'small' ? 
+        css`
+            gap: 3px;
+            > div{
+                background-color: ${props => props.color};
+                width: 6px;
+                height: 6px;
+            }
+        ` :
+        css`
+            gap: 6px;
+            > div{
+                background-color: ${props => props.color};
+                width: 8px;
+                height: 8px;
+            }
+        `
     }
+    height: 24px;
 `
 
 const Bullet = styled.div`
-    width: 8px;
-    height: 8px;
     border-radius: 10px;
     transform: scale(0.8);
     opacity: 0.5;
@@ -37,14 +49,19 @@ const Bullet = styled.div`
     }
 `
 
-function Loading ({color}) {
+function Loading ({ color, size }) {
     return(
-        <Wrapper color={color}>
+        <Wrapper color={color} size={size}>
             <Bullet/>
             <Bullet/>
             <Bullet/>
         </Wrapper>
     )
+}
+
+Loading.defaultProps = {
+    color: 'black',
+    size: 'medium',
 }
 
 export default Loading
