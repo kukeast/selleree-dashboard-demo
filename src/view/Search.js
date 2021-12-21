@@ -27,6 +27,17 @@ const Wrapper = styled.div`
     background-color: ${COLOR.white};
     padding: 20px;
     z-index: 99;
+    animation: slide 0.3s;
+    @keyframes slide{
+        0%{
+            opacity: 0.6;
+            transform: translateY(10px);
+        }
+        100%{
+            opacity: 1;
+            transform: translateY(0px);
+        }
+    }
 `
 const SearchBar = styled.div`
     display: flex;
