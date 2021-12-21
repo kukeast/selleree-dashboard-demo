@@ -66,7 +66,7 @@ const HeaderWrapper = styled.div`
 const TitleWrapper = styled.div`
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: start;
     padding: 0 10px;
     margin: 16px 0;
     @media screen and (max-width: 768px) {
@@ -90,6 +90,7 @@ const SearchIcon = styled.div`
     padding: 6px;
     border-radius: 8px;
     background-color: ${COLOR.gray1};
+    transition: 0.3s;
     &:hover{
         background-color: ${COLOR.gray2};
     }
