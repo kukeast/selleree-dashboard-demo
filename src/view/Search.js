@@ -38,6 +38,13 @@ const Wrapper = styled.div`
             transform: translateY(0px);
         }
     }
+    @media screen and (max-width: 425px) {
+        top: 40px;
+        bottom: 0;
+        border-radius: 8px 8px 0 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
 `
 const SearchBar = styled.div`
     display: flex;
@@ -65,6 +72,9 @@ const ResultWrapper = styled.div`
     border-top: 1px solid ${COLOR.gray2};
     max-height: 60vh;
     overflow: scroll;
+    @media screen and (max-width: 425px) {
+        max-height: calc(100% - 46px);
+    }
 `
 const ResultCard = styled.div`
 
@@ -171,13 +181,25 @@ const Empty = styled.p`
     margin: 20px 0;
     text-align: center;
 `
+const SearchTag = styled.p`
+    font-size: 12px;
+    font-weight: 400;
+    color: ${COLOR.gray6};
+    padding: 4px 6px;
+    background-color: ${COLOR.gray2};
+    border-radius: 6px;
+    cursor: pointer;
+    &:hover{
+        background-color: ${COLOR.gray3};
+    }
+`
 function Search ({ callback }) {
     const searchInput = useRef()
     const [recentSearches, setRecentSearches] = useLocalStorage("recent-searches", [])
     const [text, setText] = useState("")
     const [loading, setLoading] = useState(false)
     const [results, setResults] = useState()
-    const sumit = newKeyword => {
+    const submit = newKeyword => {
         setLoading(true)
         setRecentSearches(prev => 
             prev.filter(keyword => keyword !== searchInput.current.value).concat(searchInput.current.value)
@@ -186,7 +208,6 @@ function Search ({ callback }) {
         .then( data => {
             setLoading(false)
             setResults(data.data)
-            // setProducts(data.data)
         }).catch(() => {
             setLoading(false)
         })
@@ -194,7 +215,7 @@ function Search ({ callback }) {
     const handleKeyUp = e => {
         if(e.key === "Enter"){
             if(text !== ""){
-                sumit()
+                submit()
             }
         }
         if(text === ""){
@@ -210,7 +231,7 @@ function Search ({ callback }) {
     }
     const handleRecentClick = newKeyword => {
         setText(newKeyword)
-        sumit(newKeyword)
+        submit(newKeyword)
         setRecentSearches(prev => 
             prev.filter(keyword => keyword !== newKeyword).concat(newKeyword)
         )
@@ -226,7 +247,10 @@ function Search ({ callback }) {
             <Dim onClick={() => callback()}/>
             <Wrapper>
                 <SearchBar>
-                    <Icon name="search24" size={24} color={COLOR.gray5}/>
+                    {!loading ?
+                        <Icon name="search24" size={24} color={COLOR.gray5}/> :
+                        <Loading size="small" color={COLOR.gray5}/>
+                    }
                     <TextInput
                         value={text}
                         placeholder="상점, 상품 이름"
@@ -235,10 +259,7 @@ function Search ({ callback }) {
                         ref={searchInput}
                         autoFocus
                     />
-                    {loading ?
-                        <Loading color={COLOR.gray5}/> :
-                        <Loading color={COLOR.white}/>
-                    }
+                    {text !== "" && <SearchTag onClick={() => submit()}>검색 ↵</SearchTag>}
                 </SearchBar>
                 {(!loading && !results && recentSearches[0]) ?
                     <ResultWrapper>
