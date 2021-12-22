@@ -140,6 +140,7 @@ const ButtonWrapper = styled.div`
 
 
 function Seller ({history}) {
+    const [isLoading, setIsLoading] = useState(true)
     const [selectNav, setSelectNav] = useState(0)
     const [sellerInfo] = useState(sellerDetailMockData)
     const [coverUrl] = useState()
@@ -159,6 +160,9 @@ function Seller ({history}) {
             component: sellerInfo &&<OrderList id={sellerInfo.id}/>
         }
     ]
+    useEffect(() => {
+        setTimeout(() => setIsLoading(false), 1000);
+    }, [])
     return(
         <>
             <HeaderWrapper>
@@ -171,7 +175,7 @@ function Seller ({history}) {
             <CoverWrapper>
                 <Cover url={coverUrl}/>
             </CoverWrapper>
-            {sellerInfo ? 
+            {!isLoading ? 
                 <Wrapper>
                     <TitleWrapper>
                         <Title>{sellerInfo.store_name}</Title>

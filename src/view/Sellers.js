@@ -220,7 +220,7 @@ function Sellers ({data, dateRange}) {
                     <SellerHeader data={data} dateRange={dateRange}/>
                     <Empty>해당 조건의 판매자가 없어요..</Empty>
                 </> :
-            sellers ? 
+            !isLoading ? 
                 <>
                     <SellerHeader data={data} dateRange={dateRange}/>
                     {sellers.map( (seller, index) => (
