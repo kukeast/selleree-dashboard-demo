@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/selleree-dashboard-demo/static/css/main.96e6cf6f.chunk.css",
-    "main.js": "/selleree-dashboard-demo/static/js/main.e6f3c44c.chunk.js",
-    "main.js.map": "/selleree-dashboard-demo/static/js/main.e6f3c44c.chunk.js.map",
+    "main.js": "/selleree-dashboard-demo/static/js/main.3c8ccbdd.chunk.js",
+    "main.js.map": "/selleree-dashboard-demo/static/js/main.3c8ccbdd.chunk.js.map",
     "runtime-main.js": "/selleree-dashboard-demo/static/js/runtime-main.c24f4a97.js",
     "runtime-main.js.map": "/selleree-dashboard-demo/static/js/runtime-main.c24f4a97.js.map",
     "static/css/2.a8f82227.chunk.css": "/selleree-dashboard-demo/static/css/2.a8f82227.chunk.css",
@@ -18,6 +18,6 @@
     "static/css/2.a8f82227.chunk.css",
     "static/js/2.74398e14.chunk.js",
     "static/css/main.96e6cf6f.chunk.css",
-    "static/js/main.e6f3c44c.chunk.js"
+    "static/js/main.3c8ccbdd.chunk.js"
   ]
 }
