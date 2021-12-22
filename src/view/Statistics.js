@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import * as dateFns from "date-fns";
-import { getToday, getTodayChart } from '../util/api';
-import useAsync from '../util/useAsync';
-
 import Chart from '../component/data-display/Chart'
 import TodayCard from '../component/data-display/TodayCard';
 import { COLOR } from '../constants/color';
+import { chartMockData, todayMockData } from '../util/mockData';
 
 const CardWrapper = styled.div`
     display: grid;
@@ -19,16 +17,10 @@ const CardWrapper = styled.div`
 `
 
 function Statistics ({ repatch }) {
-    const [todayData, setTodayData] = useState([])
-    const [chartData, setChartData] = useState({
-        categories: [],
-        data: [],
-    })
+    const [isLoading, setIsLoading] = useState(true)
+    const [todayData] = useState(todayMockData)
+    const [chartData, setChartData] = useState(chartMockData[0])
     const [select, setSelect] = useState(0)
-
-    const [today] = useAsync(() => getToday(), [repatch])
-    const [chart] = useAsync(() => getTodayChart(cards[select].dataName), [select, repatch])
-
     const cards = [
         {
             icon: 'home',
@@ -56,16 +48,13 @@ function Statistics ({ repatch }) {
         }
     ]
     useEffect(() => {
-        if(today.data){
-            setTodayData(today.data.data)
-        }
-    }, [today])
-
+        setIsLoading(true)
+        setChartData(chartMockData[select])
+        setTimeout(() => setIsLoading(false), 500);
+    }, [select, repatch])
     useEffect(() => {
-        if(chart.data){
-            setChartData(chart.data.data)
-        }
-    }, [chart])
+        setTimeout(() => setIsLoading(false), 1000);
+    }, [])
 
     const getTodayCount = (data, index) => {
         var result = []
@@ -105,7 +94,7 @@ function Statistics ({ repatch }) {
                 data={chartData.data}
                 categories={chartData.categories}
                 color={[cards[select].color]}
-                isLoading={chart.loading}
+                isLoading={isLoading}
                 width={1080}
                 height={380}
                 type="line"

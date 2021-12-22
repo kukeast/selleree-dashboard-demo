@@ -34,7 +34,7 @@ function Orders ({ sortBy, data, isLoading, size }) {
     return(
         <Wrapper>
             <OrdersHeader sortBy={sortBy} size={size}/>
-            {isLoading && data.length === 0 ?
+            {isLoading ?
                 skeleton() :
                 data.map((order, index) => (
                     <div key={order.id}>

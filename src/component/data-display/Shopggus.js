@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
-import useAsync from '../../util/useAsync'
 import Shopggu from './Shopggu'
-import { getShopggu } from '../../util/api'
+import { shopgguMockData } from '../../util/mockData'
 
 const Wrapper = styled.div`
     display: flex;  
@@ -12,15 +11,16 @@ const Wrapper = styled.div`
 `
 
 function Shopggus ({ repatch }) {
-    const [shopgguList, setShopgguList] = useState([])
-    const [response] = useAsync(() => getShopggu(), [repatch])
+    const [isLoading, setIsLoading] = useState(true)
+    const [shopgguList] = useState(shopgguMockData)
 
     useEffect(() => {
-        if(response.data){
-            setShopgguList(response.data.data)
-        }
-    }, [response])
-
+        setIsLoading(true)
+        setTimeout(() => setIsLoading(false), 500);
+    }, [repatch])
+    useEffect(() => {
+        setTimeout(() => setIsLoading(false), 1000);
+    }, [])
     const skeleton = () => {
         const result = []
         for (let i = 0; i < 16; i++) {
@@ -31,7 +31,7 @@ function Shopggus ({ repatch }) {
 
     return(
         <Wrapper>
-            {response.loading ? 
+            {isLoading ? 
                 skeleton() :
                 shopgguList.map((shopggu) => (
                     <Shopggu

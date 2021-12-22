@@ -6,9 +6,7 @@ import Button from '../component/inputs/Button';
 import Select from '../component/inputs/Select';
 import Container from '../component/layout/Container';
 import { COLOR } from '../constants/color';
-import { getProducts } from '../util/api';
-import useAsync from '../util/useAsync';
-import useLocalStorage from '../util/useLocalStorage';
+import { productsMockData } from '../util/mockData';
 
 const ButtonWrapper = styled.div`
     margin-top: 30px;
@@ -23,17 +21,12 @@ const options = {
     60: "60개씩 보기",
 }
 function ProductList () {
-    const [unit, setUnit] = useLocalStorage("product_unit", 20)
-    const [limit, setLimit] = useState(parseInt(unit))
-    const [productList, setProductList] = useState([])
-    const [response] = useAsync(() => getProducts(limit), [limit])
-
+    const [isLoading, setIsLoading] = useState(true)
+    const [unit, setUnit] = useState(20)
+    const [productList] = useState(productsMockData)
     useEffect(() => {
-        if(response.data){
-            setProductList(response.data.data)
-        }
-    }, [response])
-
+        setTimeout(() => setIsLoading(false), 1000);
+    }, [])
     const selectCallback = value => {
         setUnit(value)
     }
@@ -51,17 +44,15 @@ function ProductList () {
                     callback={selectCallback}
                 />
             </Title>
-        
             <Products 
                 column='5'
                 data={productList}
-                isLoading={response.loading}
+                isLoading={isLoading}
             />
             <ButtonWrapper>
                 <Button 
                     type="mono" 
-                    onClick={() => setLimit(prev => prev + parseInt(unit))} 
-                    isLoading={response.loading}
+                    isLoading={isLoading}
                 >
                     {unit}개 더 보기
                 </Button>

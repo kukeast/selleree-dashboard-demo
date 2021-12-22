@@ -26,7 +26,7 @@ function Products ({data, column, isLoading}) {
     return(
         <>
             <Wrapper column={column}>
-                {isLoading && data.length === 0 ?
+                {isLoading ?
                     skeleton() :
                     data.map(product => (
                         <Product

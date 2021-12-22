@@ -4,13 +4,11 @@ import styled from 'styled-components';
 import Orders from '../component/data-display/Orders';
 import Container from '../component/layout/Container';
 import Select from '../component/inputs/Select';
-import useLocalStorage from '../util/useLocalStorage';
-import useAsync from '../util/useAsync';
-import { getOrders } from '../util/api';
 import Button from '../component/inputs/Button';
 import Icon from '../component/data-display/Icon';
 import Title from '../component/data-display/Title';
 import { COLOR } from '../constants/color';
+import { ordersMockData } from '../util/mockData';
 const ButtonWrapper = styled.div`
     margin-top: 20px;
     text-align: center;
@@ -25,48 +23,47 @@ const options = {
 }
 
 function OrderList () {
-    const [unit, setUnit] = useLocalStorage("order_unit", 20)
-    const [limit, setLimit] = useState(parseInt(unit))
+    const [isLoading, setIsLoading] = useState(true)
+    const [unit, setUnit] = useState(20)
     const [sortBy, setSortBy] = useState("created_at")
-    const [orderList, setOrderList] = useState([])
-    const [response] = useAsync(() => getOrders(limit, sortBy), [limit, sortBy])
+    const [orderList, setOrderList] = useState(ordersMockData)
 
     useEffect(() => {
-        if(response.data){
-            var newArr = []
-            var items = []
-            var stack = {}
-            response.data.data.forEach((order, index) => {
-                if(response.data.data[index+1] && order.name === response.data.data[index+1].name && format(parseISO(order[sortBy]), 'M월 d일') === format(parseISO(response.data.data[index+1][sortBy]), 'M월 d일')){
-                    items.push(order)
-                }else if(response.data.data[index-1] && order.name === response.data.data[index-1].name && format(parseISO(order[sortBy]), 'M월 d일') === format(parseISO(response.data.data[index-1][sortBy]), 'M월 d일')){
-                    items.push(order)
-                    stack = {
-                        id: order.id,
-                        type : "stack",
-                        items : items,
-                        created_at : order.created_at,
-                        last_modified_at : order.last_modified_at,
-                    }
-                    newArr.push(stack)
-                    items = []
-                }else{
-                    newArr.push(order)
+        setTimeout(() => setIsLoading(false), 1000);
+        var newArr = []
+        var items = []
+        var stack = {}
+        ordersMockData.forEach((order, index) => {
+            if(ordersMockData[index+1] && order.name === ordersMockData[index+1].name && format(parseISO(order[sortBy]), 'M월 d일') === format(parseISO(ordersMockData[index+1][sortBy]), 'M월 d일')){
+                items.push(order)
+            }else if(ordersMockData[index-1] && order.name === ordersMockData[index-1].name && format(parseISO(order[sortBy]), 'M월 d일') === format(parseISO(ordersMockData[index-1][sortBy]), 'M월 d일')){
+                items.push(order)
+                stack = {
+                    id: order.id,
+                    type : "stack",
+                    items : items,
+                    created_at : order.created_at,
+                    last_modified_at : order.last_modified_at,
                 }
-            })
-            setOrderList(newArr)
-        }
-    }, [response, sortBy])
-
+                newArr.push(stack)
+                items = []
+            }else{
+                newArr.push(order)
+            }
+        })
+        setOrderList(newArr)
+        // eslint-disable-next-line
+    }, [])
+    useEffect(() => {
+        setIsLoading(true)
+        setTimeout(() => setIsLoading(false), 500);
+    }, [sortBy])
     const switchOrderSort = () => {
         setSortBy(prev => prev === "created_at" ? "last_modified_at" : "created_at")
     }
     const selectCallback = value => {
         setUnit(value)
     }
-    useEffect(() => {
-        setOrderList([])
-    }, [sortBy])
     return(
         <Container>
             <Title 
@@ -91,13 +88,12 @@ function OrderList () {
             <Orders
                 sortBy={sortBy}
                 data={orderList}
-                isLoading={response.loading}
+                isLoading={isLoading}
             />
             <ButtonWrapper>
                 <Button 
                     type="mono" 
-                    onClick={() => setLimit(prev => prev + parseInt(unit))} 
-                    isLoading={response.loading}
+                    isLoading={isLoading}
                 >
                     {unit}개 더 보기
                 </Button>

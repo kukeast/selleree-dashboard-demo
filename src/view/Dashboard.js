@@ -6,11 +6,10 @@ import Container from '../component/layout/Container'
 import Shopggus from '../component/data-display/Shopggus';
 import Products from '../component/data-display/Products';
 import Statistics from './Statistics';
-import useAsync from '../util/useAsync';
-import { getProducts } from '../util/api';
 import Button from '../component/inputs/Button';
 import Title from '../component/data-display/Title';
 import Icon from '../component/data-display/Icon';
+import { productsMockData } from '../util/mockData';
 
 const UpdateTime = styled.p`
     font-size: 15px;
@@ -86,30 +85,25 @@ function Dashboard () {
 export default Dashboard
 
 function ProductList ({ repatch }) {
-    const [limit, setLimit] = useState(20)
-    const [productList, setProductList] = useState([])
-    const [response, repatchResponse] = useAsync(() => getProducts(limit), [limit])
+    const [isLoading, setIsLoading] = useState(true)
+    const [productList] = useState(productsMockData)
     useEffect(() => {
-        if(response.data){
-            setProductList(response.data.data)
-        }
-    }, [response])
+        setIsLoading(true)
+        setTimeout(() => setIsLoading(false), 500);
+    }, [repatch])
     useEffect(() => {
-        repatchResponse()
-        setProductList([])
-        //eslint-disable-next-line
-    },[repatch])
+        setTimeout(() => setIsLoading(false), 1000);
+    }, [])
     return(
         <>
             <Products
                 data={productList}
-                isLoading={response.loading}
+                isLoading={isLoading}
             />
             <ButtonWrapper>
                 <Button 
-                    type="mono" 
-                    onClick={() => setLimit(prev => prev + 20)} 
-                    isLoading={response.loading}
+                    type="mono"
+                    isLoading={isLoading}
                 >
                     20개 더 보기
                 </Button>

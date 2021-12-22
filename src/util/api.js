@@ -31,11 +31,6 @@ Api.interceptors.response.use(
 
 const url = "sellereeback.ngrok.io"
 
-export async function test() {
-    const response = await Api.get(`https://${url}/api/test`)
-    return response.data;
-}
-
 export async function refresh() {
     const response = await axios.post(`https://${url}/api/refresh`, {
         "refresh-token" : JSON.parse(window.localStorage.getItem("refresh-token"))
@@ -48,27 +43,8 @@ export async function logIn(user) {
     return response.data;
 }
 
-export async function getToday() {
-    const response = await Api.get(`https://${url}/api/today`);
-    return response.data;
-}
-
-export async function getTodayChart(name) {
-    const response = await Api.get(`https://${url}/api/today-chart/${name}`);
-    return response.data;
-}
-
-export async function getProducts(limit) {
-    const response = await Api.get(`https://${url}/api/products?limit=${limit}`);
-    return response.data;
-}
 export async function getSellerProducts(limit, id) {
     const response = await Api.get(`https://${url}/api/products?limit=${limit}&id=${id}`);
-    return response.data;
-}
-
-export async function getOrders(limit, sortBy) {
-    const response = await Api.get(`https://${url}/api/orders?limit=${limit}&sortBy=${sortBy}`);
     return response.data;
 }
 
@@ -79,11 +55,6 @@ export async function getSellerOrders(limit, sortBy, id) {
 
 export async function getOrderDetail(orderId) {
     const response = await Api.get(`https://${url}/api/order/${orderId}`);
-    return response.data;
-}
-
-export async function getShopggu() {
-    const response = await Api.get(`https://${url}/api/shopggus`);
     return response.data;
 }
 
