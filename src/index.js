@@ -4,7 +4,8 @@ import App from './App';
 import {HashRouter} from 'react-router-dom'
 
 ReactDOM.render(
-  <HashRouter basename="/selleree-dashboard-demo">
+  <HashRouter>
+  {/* <HashRouter basename="/selleree-dashboard-demo"> */}
     <App />
   </HashRouter>,
   document.getElementById('root')

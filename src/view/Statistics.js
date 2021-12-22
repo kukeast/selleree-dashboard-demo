@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import * as dateFns from "date-fns";
 import Chart from '../component/data-display/Chart'
 import TodayCard from '../component/data-display/TodayCard';
 import { COLOR } from '../constants/color';
