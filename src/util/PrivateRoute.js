@@ -1,6 +1,5 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
-import { ValidToken } from './token';
+import { Route } from 'react-router-dom';
 import Header from '../view/Header';
 import styled from 'styled-components';
 
@@ -15,30 +14,18 @@ const Wrapper = styled.div`
 `
 
 function PrivateRoute ({ component: Component, header, ...rest }) {
-    const refreshTokenValid = ValidToken("refresh-token")
     return (
         <Route
             {...rest}
-            render = {props => refreshTokenValid?(
+            render = {props => header ? 
                 <>
-                    {header ? 
-                        <>
-                            <Header/>
-                            <Wrapper>
-                                <Component {...props}/>
-                            </Wrapper>
-                        </> :
+                    <Header/>
+                    <Wrapper>
                         <Component {...props}/>
-                    }
-                </>
-            ) : ( 
-                <Redirect 
-                    to={{
-                        pathname: '/login', 
-                        state: {from: props.location}
-                    }}
-                />
-            )}
+                    </Wrapper>
+                </> :
+                <Component {...props}/>
+            }
         />
     )
 }

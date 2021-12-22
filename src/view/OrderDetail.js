@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { parseISO, format }from "date-fns";
 import styled from 'styled-components'
 import { COLOR } from '../constants/color'
-import { getOrderDetail } from '../util/api'
-import useAsync from '../util/useAsync'
 import Icon from '../component/data-display/Icon';
 import Card from '../component/data-display/Card';
 import Skeleton from '../component/data-display/Skeleton';
 import { Link } from 'react-router-dom';
+import { orderDetailMockData } from '../util/mockData';
 const FinancialStatus ={
     WAITING : {
         color: COLOR.yellow,
@@ -146,10 +145,9 @@ const Fulfillment = styled(Para)`
     color: ${props => FulfillmentStatus[props.status].color};
 `
 
-function OrderDetail ({orderId}) {
-    const [response] = useAsync(() => getOrderDetail(orderId))
-    const [detail, setDetail] = useState()
-
+function OrderDetail () {
+    const [detail] = useState(orderDetailMockData)
+    const [isLoading, setIsLoading] = useState(true)
     const defaultShippingFee = detail && parseInt(detail.default_shipping_fee)
     const extraShippingFee = detail && parseInt(detail.extra_shipping_fee)
     const price = detail && parseInt(detail.price)
@@ -161,14 +159,11 @@ function OrderDetail ({orderId}) {
         return price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
     }
     useEffect(() => {
-        if(response.data){
-            setDetail(response.data.data)
-        }
-    }, [response])
-
+        setTimeout(() => setIsLoading(false), 1000);
+    }, [])
     return(
         <Wrapper>
-            {detail ? <>
+            {!isLoading ? <>
                 <Header>
                     <div>
                         <StoreName>

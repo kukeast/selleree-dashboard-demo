@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import queryString from 'query-string'
-import useAsync from '../util/useAsync';
 import Chart from '../component/data-display/Chart';
 import Table from '../component/data-display/Table';
 import DatePicker from '../component/inputs/DatePicker';
 import Container from '../component/layout/Container';
 import { COLOR } from '../constants/color';
-import { getFunnel } from '../util/api';
 import Modal from '../component/data-display/Modal';
 import Sellers from './Sellers';
 import Title from '../component/data-display/Title';
+import { funnelMockData } from '../util/mockData';
 
 const defaultFunnel = [
     {
@@ -56,12 +55,12 @@ const FunnelWrapper = styled.div`
     overflow-x: scroll;
 `
 function SellerFunnel ({ location, history }) {
+    const [isLoading, setIsLoading] = useState(true)
     const queryObj = queryString.parse(location.search)
     const [dateRange, setDateRange] = useState({
         startDate: new Date("2021.8.1"),
         endDate: new Date(),
     })
-    const [response] = useAsync(() => getFunnel(dateRange), [dateRange])
     const [funnelData, setFunnelData] = useState([])
     const roundToTwo = num => {
         return +(Math.round(num + "e+2")  + "e-2");
@@ -69,22 +68,23 @@ function SellerFunnel ({ location, history }) {
     const callbackDateRange = (dateRange) => {
         setDateRange(dateRange)
     }
-    
     useEffect(() => {
-        if(response.data){
-            setFunnelData(defaultFunnel.map((data,i) => (
-                {
-                    ...data,
-                    count: parseInt(response.data.data[i]),
-                    conversionRate: roundToTwo(response.data.data[i] / response.data.data[0] * 100),
-                    bounceRate: response.data.data[i-1] ? roundToTwo(100 - response.data.data[i] / response.data.data[0] * 100) : null,
-                    previousConversionRate: response.data.data[i-1] ? roundToTwo(response.data.data[i] / response.data.data[i-1] * 100) : null,
-                    previousBounceRate: response.data.data[i-1] ? roundToTwo(100 - response.data.data[i] / response.data.data[i-1] * 100) : null,
-                }
-            )))
-        }
-    }, [response])
-
+        setTimeout(() => setIsLoading(false), 1000);
+        setFunnelData(defaultFunnel.map((data,i) => (
+            {
+                ...data,
+                count: parseInt(funnelMockData[i]),
+                conversionRate: roundToTwo(funnelMockData[i] / funnelMockData[0] * 100),
+                bounceRate: funnelMockData[i-1] ? roundToTwo(100 - funnelMockData[i] / funnelMockData[0] * 100) : null,
+                previousConversionRate: funnelMockData[i-1] ? roundToTwo(funnelMockData[i] / funnelMockData[i-1] * 100) : null,
+                previousBounceRate: funnelMockData[i-1] ? roundToTwo(100 - funnelMockData[i] / funnelMockData[i-1] * 100) : null,
+            }
+        )))
+    }, [])
+    useEffect(() => {
+        setIsLoading(true)
+        setTimeout(() => setIsLoading(false), 500);
+    }, [dateRange])
     return(
         <>
             <Container>
@@ -98,11 +98,11 @@ function SellerFunnel ({ location, history }) {
                 <Chart
                     data={[{
                         name: "Count",
-                        data: response.data ? response.data.data : [],
+                        data: funnelMockData,
                     }]}
                     categories={["가입","상점 개설","결제 설정","상품 1개 이상 등록","주문 1개 이상","주문 상태 변경 2개 이상","주문 상태 변경 10개 이상"]}
                     color={[COLOR.main]}
-                    isLoading={response.loading}
+                    isLoading={isLoading}
                     height={460}
                     type="bar"
                 />
@@ -112,7 +112,7 @@ function SellerFunnel ({ location, history }) {
                     <Table
                         type="seller-funnel"
                         data={funnelData}
-                        isLoading={response.loading}
+                        isLoading={isLoading}
                         dateRange={dateRange}
                     />
                 </FunnelWrapper>

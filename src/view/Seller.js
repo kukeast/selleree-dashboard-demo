@@ -7,9 +7,8 @@ import Orders from '../component/data-display/Orders'
 import Products from '../component/data-display/Products'
 import Button from '../component/inputs/Button'
 import { COLOR } from '../constants/color'
-import { getSellerOrders, getSeller, getSellerProducts, getCover } from '../util/api'
-import useAsync from '../util/useAsync'
 import Skeleton from '../component/data-display/Skeleton';
+import { ordersMockData, productsMockData, sellerDetailMockData } from '../util/mockData';
 
 const TOSS ={
     WAIT_FOR_REVIEW : "신청 완료",
@@ -140,13 +139,10 @@ const ButtonWrapper = styled.div`
 
 
 
-function Seller ({match, history}) {
-    const sellerId = match.params.id
+function Seller ({history}) {
     const [selectNav, setSelectNav] = useState(0)
-    const [sellerInfo, setSellerInfo] = useState()
-    const [coverUrl, setCoverUrl] = useState()
-    const [response] = useAsync(() => getSeller(sellerId))
-    const [coverResponse] = useAsync(() => getCover(sellerId))
+    const [sellerInfo] = useState(sellerDetailMockData)
+    const [coverUrl] = useState()
     const navs = [
         {
             title: "기본 정보",
@@ -163,27 +159,6 @@ function Seller ({match, history}) {
             component: sellerInfo &&<OrderList id={sellerInfo.id}/>
         }
     ]
-    useEffect(() => {
-        if(response.data){
-            Object.keys(response.data.data).map( key => {
-                return setSellerInfo( prev => ({
-                    ...prev,
-                    [key] : response.data.data[key].String
-                }))
-            })
-        }
-    }, [response])
-    useEffect(() => {
-        if(coverResponse.data){
-            if(coverResponse.data.data.visible.String === "1"){
-                if(coverResponse.data.data.cover_media_url.Valid){
-                    setCoverUrl(coverResponse.data.data.cover_media_url.String)
-                }else if(coverResponse.data.data.background_type.String === "MEDIA" && coverResponse.data.data.background_media_url.Valid ){
-                    setCoverUrl(coverResponse.data.data.background_media_url.String)
-                }
-            }
-        }
-    }, [coverResponse])
     return(
         <>
             <HeaderWrapper>
@@ -448,30 +423,28 @@ const EmptyArea = styled.div`
     border: 2px dashed ${COLOR.gray3};
     border-radius: 8px;
 `
-function ProductList ({ id }) {
+function ProductList () {
+    const [isLoading, setIsLoading] = useState(true)
     const [limit, setLimit] = useState(20)
-    const [productList, setProductList] = useState([])
-    const [response] = useAsync(() => getSellerProducts(limit, id), [limit])
+    const [productList] = useState(productsMockData)
     useEffect(() => {
-        if(response.data){
-            setProductList(response.data.data)
-        }
-    }, [response])
+        setTimeout(() => setIsLoading(false), 1000);
+    }, [])
     return(
         <>
             {productList ?
                 <Products
                     data={productList}
-                    isLoading={response.loading}
+                    isLoading={isLoading}
                 /> :
                 <EmptyArea>상품이 없어요.</EmptyArea>
             }
-            {productList && (productList.length === limit || response.loading) &&
+            {productList && (productList.length === limit || isLoading) &&
                 <ButtonWrapper>
                     <Button 
                         type="mono" 
                         onClick={() => setLimit(prev => prev + 20)} 
-                        isLoading={response.loading}
+                        isLoading={isLoading}
                     >
                         20개 더 보기
                     </Button>
@@ -480,31 +453,29 @@ function ProductList ({ id }) {
         </>
     )
 }
-function OrderList ({ id }) {
+function OrderList () {
+    const [isLoading, setIsLoading] = useState(true)
     const [limit, setLimit] = useState(20)
-    const [orderList, setOrderList] = useState([])
-    const [response] = useAsync(() => getSellerOrders(limit, "created_at", id), [limit])
+    const [orderList] = useState(ordersMockData)
     useEffect(() => {
-        if(response.data){
-            setOrderList(response.data.data)
-        }
-    }, [response])
+        setTimeout(() => setIsLoading(false), 1000);
+    }, [])
     return(
         <>
             {orderList ?
                 <Orders
                     data={orderList}
-                    isLoading={response.loading}
+                    isLoading={isLoading}
                     size="small"
                 />:
                 <EmptyArea>주문이 없어요.</EmptyArea>
             }
-            {orderList && (orderList.length === limit || response.loading) &&
+            {orderList && (orderList.length === limit || isLoading) &&
                 <ButtonWrapper>
                     <Button 
                         type="mono" 
                         onClick={() => setLimit(prev => prev + 20)} 
-                        isLoading={response.loading}
+                        isLoading={isLoading}
                     >
                         20개 더 보기
                     </Button>

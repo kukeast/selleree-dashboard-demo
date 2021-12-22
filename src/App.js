@@ -1,10 +1,9 @@
-import { Route, Switch } from 'react-router-dom'
+import { Switch } from 'react-router-dom'
 import GlobalStyle from './util/GlobalStyle';
 import PrivateRoute from './util/PrivateRoute';
 import Dashboard from './view/Dashboard';
 import ProductList from './view/ProductList';
 import OrderList from './view/OrderList';
-import LogIn from './view/LogIn';
 import SellerFunnel from './view/SellerFunnel';
 import PaymentSetting from './view/PaymentSetting';
 import Seller from './view/Seller';
@@ -22,7 +21,6 @@ function App() {
         <PrivateRoute header path="/payment-setting" component={PaymentSetting}/>
         <PrivateRoute path="/seller/:id" component={Seller}/>
         <PrivateRoute path="/search" component={Search}/>
-        <Route path="/login" component={LogIn}/>
       </Switch>
     </>
   );

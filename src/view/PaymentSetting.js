@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import queryString from 'query-string'
-import useAsync from '../util/useAsync';
 import Chart from '../component/data-display/Chart';
 import Table from '../component/data-display/Table';
 import DatePicker from '../component/inputs/DatePicker';
@@ -9,8 +8,8 @@ import Container from '../component/layout/Container';
 import Modal from '../component/data-display/Modal';
 import Sellers from './Sellers';
 import { COLOR } from '../constants/color';
-import { getPaymentSetting } from '../util/api';
 import Title from '../component/data-display/Title';
+import { paymentMockData } from '../util/mockData';
 
 const defaultTable = [
     [
@@ -69,12 +68,12 @@ const Column = styled.div`
 `
 
 function PaymentSetting ({ location, history }) {
+    const [isLoading, setIsLoading] = useState(true)
     const queryObj = queryString.parse(location.search)
     const [dateRange, setDateRange] = useState({
         startDate: new Date("2021.8.1"),
         endDate: new Date(),
     })
-    const [response] = useAsync(() => getPaymentSetting(dateRange), [dateRange])
     const [chartData, setChartData] = useState([[],[]])
     const [tableData, setTableData] = useState([[],[]])
     const roundToTwo = num => {
@@ -83,25 +82,27 @@ function PaymentSetting ({ location, history }) {
     const callbackDateRange = (dateRange) => {
         setDateRange(dateRange)
     }
-    
     useEffect(() => {
-        if(response.data){
-            setChartData(response.data.data.map(arr => (
-                arr.map(i => (
-                    parseInt(i)
-                )).slice(0, 4)
-            )))
-            setTableData(defaultTable.map((arr, i) => (
-                arr.map((data, j) => (
-                    {
-                        ...data,
-                        count: response.data.data[i][j],
-                        ratio: roundToTwo(response.data.data[i][j]/response.data.data[i][4]*100),
-                    }
-                ))
-            )))
-        }
-    }, [response])
+        setTimeout(() => setIsLoading(false), 1000);
+        setChartData(paymentMockData.map(arr => (
+            arr.map(i => (
+                parseInt(i)
+            )).slice(0, 4)
+        )))
+        setTableData(defaultTable.map((arr, i) => (
+            arr.map((data, j) => (
+                {
+                    ...data,
+                    count: paymentMockData[i][j],
+                    ratio: roundToTwo(paymentMockData[i][j]/paymentMockData[i][4]*100),
+                }
+            ))
+        )))
+    }, [])
+    useEffect(() => {
+        setIsLoading(true)
+        setTimeout(() => setIsLoading(false), 500);
+    }, [dateRange])
     return(
         <>
             <Container>
@@ -119,14 +120,14 @@ function PaymentSetting ({ location, history }) {
                             title="결제 설정"
                             labels={["무통장 입금", "토스", "무통장 입금 & 토스", "설정 안 함"]}
                             color={[COLOR.main, COLOR.green, COLOR.yellow, COLOR.gray5]}
-                            isLoading={response.loading}
+                            isLoading={isLoading}
                             height={460}
                             type="donut"
                         />
                         <Table
                             type="payment-setting"
                             data={tableData[0]}
-                            isLoading={response.loading}
+                            isLoading={isLoading}
                             dateRange={dateRange}
                         />
                     </div>
@@ -136,14 +137,14 @@ function PaymentSetting ({ location, history }) {
                             title="토스페이먼츠 상태"
                             labels={["신청서 작성 중", "신청 완료", "심사 완료", "계약 종료"]}
                             color={[COLOR.main, COLOR.green, COLOR.yellow, COLOR.gray5]}
-                            isLoading={response.loading}
+                            isLoading={isLoading}
                             height={460}
                             type="donut"
                         />
                         <Table
                             type="payment-setting"
                             data={tableData[1]}
-                            isLoading={response.loading}
+                            isLoading={isLoading}
                             dateRange={dateRange}
                         />
                     </div>

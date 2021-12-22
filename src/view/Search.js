@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Icon from '../component/data-display/Icon'
 import Loading from '../component/data-display/Loading'
 import { COLOR } from '../constants/color'
-import { getSearchResults } from '../util/api'
+import { searchMockData } from '../util/mockData'
 import Portal from '../util/Portal'
 import useLocalStorage from '../util/useLocalStorage'
 
@@ -198,19 +198,14 @@ function Search ({ callback }) {
     const [recentSearches, setRecentSearches] = useLocalStorage("recent-searches", [])
     const [text, setText] = useState("")
     const [loading, setLoading] = useState(false)
-    const [results, setResults] = useState()
-    const submit = newKeyword => {
+    const [results, setResults] = useState(searchMockData)
+    const submit = () => {
         setLoading(true)
+        setResults(searchMockData)
+        setTimeout(() => setLoading(false), 500)
         setRecentSearches(prev => 
             prev.filter(keyword => keyword !== searchInput.current.value).concat(searchInput.current.value)
         )
-        getSearchResults(newKeyword || text)
-        .then( data => {
-            setLoading(false)
-            setResults(data.data)
-        }).catch(() => {
-            setLoading(false)
-        })
     }
     const handleKeyUp = e => {
         if(e.key === "Enter"){

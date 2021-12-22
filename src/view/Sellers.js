@@ -3,12 +3,11 @@ import { Link } from 'react-router-dom'
 import { format }from "date-fns";
 import styled from 'styled-components'
 import { COLOR } from '../constants/color'
-import { getSellers } from '../util/api'
-import useAsync from '../util/useAsync'
 import Icon from '../component/data-display/Icon';
 import Button from '../component/inputs/Button';
 import Skeleton from '../component/data-display/Skeleton';
 import Card from '../component/data-display/Card';
+import { sellersMockData } from '../util/mockData';
 const Wrapper = styled.div`
     max-width: 640px;
     margin: auto;
@@ -201,15 +200,11 @@ function SellerHeader ({ data, dateRange, isLoading }) {
 }
 
 function Sellers ({data, dateRange}) {
-    const [limit, setLimit] = useState(10)
-    const [sellers, setSellers] = useState()
-    const [response] = useAsync(() => getSellers(dateRange, data.title, limit), [limit, data])
+    const [isLoading, setIsLoading] = useState(true)
+    const [sellers] = useState(sellersMockData)
     useEffect(() => {
-        if(response.data){
-            setSellers(response.data.data)
-        }
-    }, [response])
-
+        setTimeout(() => setIsLoading(false), 1000);
+    }, [])
     const skeleton = () => {
         const result = []
         for (let i = 0; i < 10; i++) {
@@ -235,8 +230,7 @@ function Sellers ({data, dateRange}) {
                         <ButtonWrapper>
                             <Button 
                                 type="mono"
-                                onClick={() => setLimit(prev => prev + 10)} 
-                                isLoading={response.loading}
+                                isLoading={isLoading}
                             >
                                 10개 더 보기
                             </Button>
