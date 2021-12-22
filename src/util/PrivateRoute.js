@@ -17,7 +17,6 @@ function PrivateRoute ({ component: Component, header, ...rest }) {
     return (
         <Route
             {...rest}
-            // basename="/selleree-dashboard-demo"
             render = {props => header ? 
                 <>
                     <Header/>
