@@ -8,8 +8,11 @@ import SellerFunnel from './view/SellerFunnel';
 import PaymentSetting from './view/PaymentSetting';
 import Seller from './view/Seller';
 import Search from './view/Search';
+import Alert from './component/data-display/Alert'
+import { useState } from 'react';
 
 function App() {
+  const [showAlert, setShoeAlert] = useState(true)
   return (
     <>
       <GlobalStyle/>
@@ -22,6 +25,7 @@ function App() {
         <PrivateRoute path="/seller/:id" component={Seller}/>
         <PrivateRoute path="/search" component={Search}/>
       </Switch>
+      {showAlert && <Alert callback={() => setShoeAlert(false)}/>}
     </>
   );
 }
