@@ -41,7 +41,7 @@ function Alert ({ callback }) {
     return(
         <Wrapper>
             <div>
-                <Title>dd외부 공개용으로 제작된 데모 사이트입니다.</Title>
+                <Title>외부 공개용으로 제작된 데모 사이트입니다.</Title>
                 <Des>특정 기능이 작동하지 않을 수 있습니다.</Des>
             </div>
             <Close onClick={() => callback()}>
