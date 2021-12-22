@@ -198,7 +198,7 @@ function Search ({ callback }) {
     const [recentSearches, setRecentSearches] = useLocalStorage("recent-searches", [])
     const [text, setText] = useState("")
     const [loading, setLoading] = useState(false)
-    const [results, setResults] = useState(searchMockData)
+    const [results, setResults] = useState()
     const submit = () => {
         setLoading(true)
         setResults(searchMockData)
