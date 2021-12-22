@@ -58,19 +58,8 @@ function Statistics ({ repatch }) {
 
     const getTodayCount = (data, index) => {
         var result = []
-        if(data[index]){
-            if(data[index][0].date === dateFns.format(new Date(), 'yyyy-MM-dd')){
-                result.push(data[index][0].count)
-                if(data[index][1]){
-                    result.push(data[index][0].count - data[index][1].count)
-                }else{
-                    result.push(data[index][0].count)
-                }
-            }else{
-                result.push(0)
-                result.push(-data[index][0].count)
-            }
-        }
+        result.push(data[index][0].count)
+        result.push(data[index][0].count - data[index][1].count)
         return result
     }
 
