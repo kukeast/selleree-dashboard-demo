@@ -150,7 +150,7 @@ function Seller ({ data, isLoading }) {
                             <LinkButton to={`/seller/${data.id}`}>
                                 <Icon size={24} name="file" color={COLOR.main}/>
                             </LinkButton>
-                            <SiteButton href={`https://${data.identifier}.selleree.shop`} target="_blank" rel="noreferrer">
+                            <SiteButton href={data.url} target="_blank" rel="noreferrer">
                                 <Icon size={24} name="new_tab24" color={COLOR.main}/>
                             </SiteButton>
                         </LinkWrapper>

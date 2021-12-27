@@ -130,7 +130,7 @@ function Order ({data, sortBy, isLoading, size = "medium"}) {
                 </Wrapper>
                 {isOpen && 
                     <Modal onClickClose={() => setIsOpen(false)}>
-                        <OrderDetail orderId={data.id}/> 
+                        <OrderDetail data={data}/> 
                     </Modal>
                 }
             </>

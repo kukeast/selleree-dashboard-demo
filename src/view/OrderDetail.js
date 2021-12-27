@@ -6,7 +6,6 @@ import Icon from '../component/data-display/Icon';
 import Card from '../component/data-display/Card';
 import Skeleton from '../component/data-display/Skeleton';
 import { Link } from 'react-router-dom';
-import { orderDetailMockData } from '../util/mockData';
 const FinancialStatus ={
     WAITING : {
         color: COLOR.yellow,
@@ -145,18 +144,16 @@ const Fulfillment = styled(Para)`
     color: ${props => FulfillmentStatus[props.status].color};
 `
 
-function OrderDetail () {
-    const [detail] = useState(orderDetailMockData)
+function OrderDetail ({ data }) {
     const [isLoading, setIsLoading] = useState(true)
-    const defaultShippingFee = detail && parseInt(detail.default_shipping_fee)
-    const extraShippingFee = detail && parseInt(detail.extra_shipping_fee)
-    const price = detail && parseInt(detail.price)
-    const backgroundImage = detail && {
-        backgroundImage: `url(${detail.image_url}?w=300)`
+    const defaultShippingFee = parseInt(data.default_shipping_fee)
+    const extraShippingFee = parseInt(data.extra_shipping_fee)
+    const price = parseInt(data.price)
+    const backgroundImage = {
+        backgroundImage: `url(${data.image_url}?w=300)`
     };
-    const ProductHref = detail && `https://${detail.identifier}.selleree.shop/products/${detail.item_id}`
     const formattingPrice = price => {
-        return price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+        return (price * 1).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
     }
     useEffect(() => {
         setTimeout(() => setIsLoading(false), 1000);
@@ -167,74 +164,77 @@ function OrderDetail () {
                 <Header>
                     <div>
                         <StoreName>
-                            {detail.store_name}
-                            <LinkWrapper to={`/seller/${detail.seller_id}`}>
+                            {data.name}
+                            <LinkWrapper to={`/seller/1`}>
                                 상점 정보<Icon name="file16" color={COLOR.main} size={16}/>
                             </LinkWrapper>
-                            <AnchorWrapper href={`https://${detail.identifier}.selleree.shop/`} target="_blank" rel="noreferrer">
+                            <AnchorWrapper href={data.url} target="_blank" rel="noreferrer">
                                 바로가기<Icon name="new_tab16" color={COLOR.main} size={16}/>
                             </AnchorWrapper>
                         </StoreName>
-                        <OrderTitle>{detail.buyer_name}님의 주문</OrderTitle>
+                        <OrderTitle>이동국님의 주문</OrderTitle>
                         <OrderDate>
-                            {format(parseISO(detail.created_at), 'M월 d일 H시 m분 s초')}
+                            {format(parseISO(data.created_at), 'M월 d일 H시 m분 s초')}
                         </OrderDate>
                     </div>
-                    <OrderTitle>{formattingPrice(defaultShippingFee + extraShippingFee + (price * detail.quantity))}원</OrderTitle>
+                    <OrderTitle>
+                        {(
+                            parseInt(data.default_shipping_fee) 
+                            + parseInt(data.extra_shipping_fee) 
+                            + (parseInt(price) * data.quantity)
+                        ).toString()
+                        .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원
+                    </OrderTitle>
                 </Header>
-                <ItemCard onClick={() => window.open(ProductHref, "_blank")}>
+                <ItemCard onClick={() => window.open(data.url, "_blank")}>
                     <Image style={backgroundImage}/>
-                    <ItemName>{detail.item_name}</ItemName>
-                    <Para>{detail.quantity}개</Para>
-                    <Price>{formattingPrice(price)}원</Price>
+                    <ItemName>{data.title}</ItemName>
+                    <Para>{data.quantity}개</Para>
+                    <Price>{formattingPrice(data.price)}원</Price>
                 </ItemCard>
                 <CardWrapper>
                     <Title>주문 정보</Title>
                     <CardInfo>
                         <Label>결제 상태</Label>
-                        <Financial status={detail.financial_status}>{FinancialStatus[detail.financial_status].text}</Financial>
+                        <Financial status={data.financial_status}>{FinancialStatus[data.financial_status].text}</Financial>
                     </CardInfo>
                     <CardInfo>
                         <Label>배송 상태</Label>
-                        <Fulfillment status={detail.fulfillment_status}>{FulfillmentStatus[detail.fulfillment_status].text}</Fulfillment>
+                        <Fulfillment status={data.fulfillment_status}>{FulfillmentStatus[data.fulfillment_status].text}</Fulfillment>
                     </CardInfo>
                     <CardInfo>
                         <Label>메모</Label>
-                        <Para>{detail.memo ? detail.memo : "-"}</Para>
+                        <Para>-</Para>
                     </CardInfo>
                     <CardInfo>
                         <Label>최근 수정 시간</Label>
-                        <Para>{detail.created_at !== detail.last_modified_at ? format(parseISO(detail.last_modified_at), 'M월 d일 H시 m분 s초') : "-"}</Para>
+                        <Para>{data.created_at !== data.last_modified_at ? format(parseISO(data.last_modified_at), 'M월 d일 H시 m분 s초') : "-"}</Para>
                     </CardInfo>
                 </CardWrapper>
                 <CardWrapper>
                     <Title>주문자</Title>
                     <CardInfo>
                         <Label>이름</Label>
-                        <Para>{detail.buyer_name}</Para>
+                        <Para>이동국</Para>
                     </CardInfo>
                     <CardInfo>
                         <Label>이메일</Label>
-                        <Para>{detail.buyer_email}</Para>
+                        <Para>leedongguk@kakao.com</Para>
                     </CardInfo>
                     <CardInfo>
                         <Label>휴대폰 번호</Label>
-                        <Para>{detail.buyer_cell_phone_number}</Para>
+                        <Para>010 1234 5678</Para>
                     </CardInfo>
                     <CardInfo>
                         <Label>배송지</Label>
-                        <Para>
-                            [{detail.zip_code}]
-                            {detail.address_line}
-                            {detail.address_detail_line && ", " + detail.address_detail_line}
-                        </Para>
+                        <Para>[01234]서울특별시 중구 세종대로 110</Para>
                     </CardInfo>
                 </CardWrapper>
                 <CardWrapper>
                     <Title>결제 정보</Title>
                     <CardInfo>
                         <Label>상품 합계</Label>
-                        <Para>{formattingPrice(price * detail.quantity)}원</Para>
+                        <Para>{formattingPrice(data.price * data.quantity)}원</Para>
                     </CardInfo>
                     <CardInfo>
                         <Label>배송비</Label>
@@ -242,27 +242,27 @@ function OrderDetail () {
                     </CardInfo>
                     <CardInfo>
                         <Label>결제 금액</Label>
-                        <Para>{formattingPrice(defaultShippingFee + extraShippingFee + (price * detail.quantity))}원</Para>
+                        <Para>{formattingPrice(defaultShippingFee + extraShippingFee + (price * data.quantity))}원</Para>
                     </CardInfo>
                     <CardInfo>
                         <Label>결제 방법</Label>
-                        <Para>{detail.payment_method === "CASH" ? "무통장 입금" : "카드 · 간편결제"}</Para>
+                        <Para>{data.payment_method === "CASH" ? "무통장 입금" : "카드 · 간편결제"}</Para>
                     </CardInfo>
                 </CardWrapper>
-                {detail.payment_method === "CASH" &&
+                {data.payment_method === "CASH" &&
                     <CardWrapper>
                         <Title>입금 계좌</Title>
                         <CardInfo>
                             <Label>예금주</Label>
-                            <Para>{detail.bank_account_holder}</Para>
+                            <Para>박세호</Para>
                         </CardInfo>
                         <CardInfo>
                             <Label>은행</Label>
-                            <Para>{detail.bank_name}</Para>
+                            <Para>국민은행</Para>
                         </CardInfo>
                         <CardInfo>
                             <Label>계좌번호</Label>
-                            <Para>{detail.bank_account_number}</Para>
+                            <Para>11011010 04 201134</Para>
                         </CardInfo>
                     </CardWrapper>
                 }

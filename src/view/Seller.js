@@ -143,7 +143,6 @@ function Seller ({history}) {
     const [isLoading, setIsLoading] = useState(true)
     const [selectNav, setSelectNav] = useState(0)
     const [sellerInfo] = useState(sellerDetailMockData)
-    const [coverUrl] = useState()
     const navs = [
         {
             title: "기본 정보",
@@ -173,13 +172,13 @@ function Seller ({history}) {
                 </Wrapper>
             </HeaderWrapper>
             <CoverWrapper>
-                <Cover url={coverUrl}/>
+                <Cover url={`${process.env.PUBLIC_URL}/images/Cover.jpg`}/>
             </CoverWrapper>
             {!isLoading ? 
                 <Wrapper>
                     <TitleWrapper>
                         <Title>{sellerInfo.store_name}</Title>
-                        <Button onClick={() => window.open(`https://${sellerInfo.identifier}.selleree.shop/`, "_blank")}>상점 바로가기<Icon name="new_tab16" size={16} color={COLOR.white}/></Button>
+                        <Button onClick={() => window.open("https://editor.selleree.shop/templates/10004/themes/2")}>상점 바로가기<Icon name="new_tab16" size={16} color={COLOR.white}/></Button>
                     </TitleWrapper>
                     <ContentsWrapper>
                         <Navs>
@@ -430,7 +429,7 @@ const EmptyArea = styled.div`
 function ProductList () {
     const [isLoading, setIsLoading] = useState(true)
     const [limit, setLimit] = useState(20)
-    const [productList] = useState(productsMockData)
+    const [productList] = useState(productsMockData.filter(item => item.store_name === "ROCODAILY"))
     useEffect(() => {
         setTimeout(() => setIsLoading(false), 1000);
     }, [])
@@ -460,7 +459,7 @@ function ProductList () {
 function OrderList () {
     const [isLoading, setIsLoading] = useState(true)
     const [limit, setLimit] = useState(20)
-    const [orderList] = useState(ordersMockData)
+    const [orderList] = useState(ordersMockData.filter(item => item.name === "ROCODAILY"))
     useEffect(() => {
         setTimeout(() => setIsLoading(false), 1000);
     }, [])

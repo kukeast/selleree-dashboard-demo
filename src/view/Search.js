@@ -301,8 +301,8 @@ function Search ({ callback }) {
                                 </ResultLabelWrapper>
                                 <ResultItemWrapper>
                                     {results.products.map(product => (
-                                        <ResultProduct key={product.item_id} href={`https://${product.store_id}.selleree.shop/products/${product.item_id}`} target="_blank" rel="noreferrer">
-                                            <Image url={product.url}/>
+                                        <ResultProduct key={product.item_id} href={product.url} target="_blank" rel="noreferrer">
+                                            <Image url={product.image_url}/>
                                             <TitleWrapper>
                                                 <Title>{product.item_name}</Title>
                                                 <Des>{product.price.slice(0,-3).toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원</Des>
