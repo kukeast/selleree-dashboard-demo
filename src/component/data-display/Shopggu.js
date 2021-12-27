@@ -39,7 +39,7 @@ function Shopggu ({ data, isLoading }) {
         )
     }else{
         return(
-            <Card onClick={() => window.open(`https://${data.store_name}.selleree.shop/`, "_blank")}>
+            <Card onClick={() => window.open(data.url, "_blank")}>
                 <TitleWrapper>
                     <Order>{data.order + 1}번째 발행</Order>
                     <Date>{format(parseISO(data.date), 'M월 d일 H시 m분')}</Date>
