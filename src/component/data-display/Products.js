@@ -31,7 +31,7 @@ function Products ({data, column, isLoading}) {
                     data.map(product => (
                         <Product
                             data={product}
-                            key={product.item_id}
+                            key={product.item_name}
                         />
                     ))
                 }

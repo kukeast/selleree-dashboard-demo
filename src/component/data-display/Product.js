@@ -80,7 +80,7 @@ function Product ({ data, isLoading }) {
         )
     }else{
         return(
-            <Wrapper href={`https://${data.store_id}.selleree.shop/products/${data.item_id}`} target="_blank" rel="noreferrer">
+            <Wrapper href={data.store_url} target="_blank" rel="noreferrer">
                 <Image url={data.url}/>
                 <StoreName>{data.store_name}</StoreName>
                 <ItemName>{data.item_name}</ItemName>
